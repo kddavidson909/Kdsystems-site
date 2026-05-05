@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenCut Landscaping — We Bring Your Landscape to Life</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #060a07;
+      --surface:  #0a0f0b;
+      --card:     #0f1510;
+      --border:   #1a2a1c;
+      --green:    #22c55e;
+      --green-d:  #16a34a;
+      --green-g:  rgba(34,197,94,0.1);
+      --green-gg: rgba(34,197,94,0.05);
+      --gold:     #fbbf24;
+      --gold-g:   rgba(251,191,36,0.1);
+      --text:     #eef4ee;
+      --muted:    #7a9a7e;
+      --subtle:   #2a3e2c;
+    }
+
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--green-d); border-radius: 3px; }
+
+    /* CREDENTIAL BAR */
+    .cred-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 9px 60px;
+      display: flex; justify-content: center; align-items: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .cred-item { display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--muted); }
+    .cred-item strong { color: var(--green); font-weight: 700; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 60px; height: 70px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(6,10,7,0.97);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 200;
+    }
+    .nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.5px; }
+    .nav-logo em { color: var(--green); font-style: normal; }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.88rem; color: var(--muted); align-items: center; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-consult { background: var(--green); color: #000 !important; padding: 9px 18px; border-radius: 7px; font-weight: 700; font-size: 0.88rem; transition: background 0.2s, box-shadow 0.2s; }
+    .nav-consult:hover { background: var(--green-d) !important; box-shadow: 0 4px 16px rgba(34,197,94,0.3); }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 60% 40%, rgba(34,197,94,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(251,191,36,0.05) 0%, transparent 40%),
+        linear-gradient(160deg, #060a07 0%, #0a1208 50%, #060a07 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, var(--border) 80px),
+                        repeating-linear-gradient(90deg, transparent, transparent 79px, var(--border) 80px);
+      opacity: 0.25;
+    }
+    .hero-content { max-width: 680px; position: relative; z-index: 1; }
+    .hero-reviews-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold-g);
+      border: 1px solid var(--gold);
+      padding: 7px 16px; border-radius: 6px;
+      margin-bottom: 28px;
+    }
+    .badge-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; }
+    .badge-text { font-size: 0.82rem; font-weight: 700; color: var(--gold); }
+    .hero h1 {
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 900; line-height: 1.0; letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+    .hero h1 em { color: var(--green); font-style: normal; }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 40px; line-height: 1.7; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-green { background: var(--green); color: #000; padding: 15px 30px; border-radius: 8px; font-weight: 700; font-size: 0.97rem; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
+    .btn-green:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,197,94,0.3); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 0.97rem; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--green); }
+    .hero-credentials { display: flex; flex-wrap: wrap; gap: 20px; }
+    .hcred { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--muted); }
+    .hcred .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+
+    /* PILLARS */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pillar {
+      padding: 60px 48px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar:hover { background: var(--card); }
+    .pillar-num { font-size: 4rem; font-weight: 900; color: var(--green); opacity: 0.15; position: absolute; top: 20px; right: 24px; line-height: 1; }
+    .pillar-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
+    .pillar h2 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 14px; }
+    .pillar h2 span { color: var(--green); }
+    .pillar p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .pillar-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .pillar-items li { font-size: 0.83rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .pillar-items li::before { content: '→'; color: var(--green); font-size: 0.8rem; flex-shrink: 0; }
+
+    /* STATS */
+    .stats { background: var(--green); display: flex; }
+    .stat-block { flex: 1; text-align: center; padding: 32px 20px; border-right: 1px solid rgba(0,0,0,0.15); }
+    .stat-block:last-child { border-right: none; }
+    .stat-num { font-size: 2.4rem; font-weight: 900; color: #000; display: block; letter-spacing: -1px; }
+    .stat-lbl { font-size: 0.78rem; font-weight: 700; color: rgba(0,0,0,0.65); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* SECTION SHARED */
+    .section-label { font-size: 0.72rem; font-weight: 800; color: var(--green); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 480px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .green-line { width: 44px; height: 3px; background: var(--green); margin: 14px auto 0; border-radius: 2px; }
+
+    /* SERVICES */
+    .services { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .svc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .svc-card:hover { transform: translateY(-3px); border-color: var(--green); }
+    .svc-icon { font-size: 1.6rem; }
+    .svc-card h3 { font-size: 0.9rem; font-weight: 700; }
+    .svc-card p { font-size: 0.8rem; color: var(--muted); }
+
+    /* PROJECTS */
+    .projects { padding: 90px 60px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,0,0,0.5); }
+    .project-thumb {
+      height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+    .thumb-patio  { background: linear-gradient(135deg, #0d2010 0%, #1a3d18 40%, #0d2a10 100%); }
+    .thumb-drive  { background: linear-gradient(135deg, #1a1a0e 0%, #2d2a14 40%, #1a1a0e 100%); }
+    .thumb-garden { background: linear-gradient(135deg, #0a1f0c 0%, #163318 40%, #0a1f0c 100%); }
+    .project-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(6,10,7,0.9) 0%, transparent 60%);
+    }
+    .project-info { padding: 22px; background: var(--card); }
+    .project-type { font-size: 0.72rem; font-weight: 800; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .project-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .project-info p { font-size: 0.83rem; color: var(--muted); }
+    .project-view { display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 700; color: var(--green); margin-top: 12px; }
+
+    /* AWARDS */
+    .awards { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 50px 60px; }
+    .awards-inner { text-align: center; }
+    .awards-label { font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+    .awards-row { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .award-badge {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      min-width: 110px;
+      transition: border-color 0.2s;
+    }
+    .award-badge:hover { border-color: var(--gold); }
+    .award-badge .award-icon { font-size: 1.8rem; }
+    .award-badge .award-name { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-align: center; }
+    .award-badge .award-detail { font-size: 0.68rem; color: var(--muted); text-align: center; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 90px 60px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+    .testi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .testi-card:hover { border-color: var(--green); transform: translateY(-3px); }
+    .testi-quote { font-size: 4rem; color: var(--green); opacity: 0.15; font-family: Georgia, serif; line-height: 0.8; margin-bottom: 14px; }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testi-text { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 22px; }
+    .testi-person { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--green-g); border: 1px solid var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .testi-name { font-size: 0.88rem; font-weight: 700; }
+    .testi-job { font-size: 0.78rem; color: var(--muted); }
+
+    /* CONSULTATION FORM */
+    .consult {
+      padding: 90px 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .consult-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .consult-left h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .consult-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+    .consult-perks { display: flex; flex-direction: column; gap: 12px; }
+    .consult-perk { display: flex; align-items: flex-start; gap: 12px; }
+    .perk-icon { width: 32px; height: 32px; background: var(--green-g); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+    .perk-text h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+    .perk-text p { font-size: 0.8rem; color: var(--muted); }
+    .consult-form { display: flex; flex-direction: column; gap: 14px; }
+    label { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-row { display: flex; gap: 14px; }
+    .form-row .form-group { flex: 1; }
+    input, textarea, select {
+      padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.9rem; font-family: inherit;
+      background: var(--bg); color: var(--text); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: var(--subtle); }
+    select option { background: var(--bg); }
+    input:focus, textarea:focus, select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(34,197,94,0.1); }
+    textarea { resize: vertical; min-height: 100px; }
+    .btn-submit { background: var(--green); color: #000; border: none; padding: 14px; border-radius: 8px; font-size: 0.97rem; font-weight: 800; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    .btn-submit:hover { background: var(--green-d); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 40px 60px 24px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--subtle); }
+    .back-link { color: var(--green); font-weight: 600; }
+    .footer-lic { font-size: 0.75rem; color: var(--subtle); }
+
+    @media (max-width: 900px) {
+      .pillars { grid-template-columns: 1fr; }
+      .pillar { border-right: none; border-bottom: 1px solid var(--border); }
+      .pillar:last-child { border-bottom: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .consult-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px; min-height: auto; }
+      .cred-bar { padding: 8px 16px; gap: 14px; }
+      .services, .projects, .testimonials, .consult, .awards { padding: 60px 20px; }
+      .footer-inner { padding: 32px 20px 20px; }
+      footer { padding: 0; }
+      .stats { flex-wrap: wrap; }
+      .stat-block { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.15); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cred-bar">
+    <div class="cred-item">⭐ <strong>500+</strong> Five-Star Reviews</div>
+    <div class="cred-item">🏆 <strong>30+</strong> Industry Awards</div>
+    <div class="cred-item">✅ Lic. #1036727 — Fully Licensed, Bonded & Insured</div>
+    <div class="cred-item">🎙️ Featured on ABC, Houzz, Angi</div>
+  </div>
+
+  <nav>
+    <div class="nav-logo">Green<em>Cut</em> Landscaping</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#consult">Contact</a></li>
+      <li><a href="#consult" class="nav-consult">Free Consultation</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-reviews-badge">
+        <span class="badge-stars">★★★★★</span>
+        <span class="badge-text">500+ Five-Star Reviews · One of the Area's Top-Rated Landscape Companies</span>
+      </div>
+      <h1>We Bring Your<br><em>Landscape</em><br>to Life.</h1>
+      <p class="hero-sub">From a simple lawn refresh to a full outdoor living transformation — GreenCut delivers stunning results, on time and on budget. Trusted by 1,000+ homeowners.</p>
+      <div class="hero-ctas">
+        <a href="#consult" class="btn-green">Schedule a Free Consultation</a>
+        <a href="#projects" class="btn-ghost">See Our Work</a>
+      </div>
+      <div class="hero-credentials">
+        <div class="hcred"><span class="dot"></span> 15+ Years in Business</div>
+        <div class="hcred"><span class="dot"></span> 1,000+ Projects Completed</div>
+        <div class="hcred"><span class="dot"></span> Licensed, Bonded & Insured</div>
+        <div class="hcred"><span class="dot"></span> Free Estimates — No Obligation</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars">
+    <div class="pillar">
+      <span class="pillar-num">01</span>
+      <span class="pillar-icon">✏️</span>
+      <h2><span>Design</span></h2>
+      <p>Every great outdoor space starts with a plan. We work with you to understand your vision and turn it into a detailed design that fits your property, budget, and lifestyle.</p>
+      <ul class="pillar-items">
+        <li>3D landscape renderings</li>
+        <li>Plant & material selection</li>
+        <li>Drainage & grading planning</li>
+        <li>Lighting design</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">02</span>
+      <span class="pillar-icon">⚒️</span>
+      <h2><span>Build</span></h2>
+      <p>Our crew builds with precision and care. We use high-quality materials, experienced installers, and a clean process that respects your property from day one to project completion.</p>
+      <ul class="pillar-items">
+        <li>Paver & hardscape installation</li>
+        <li>Planting & lawn installation</li>
+        <li>Irrigation systems</li>
+        <li>Retaining walls & grading</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">03</span>
+      <span class="pillar-icon">🔄</span>
+      <h2><span>Maintain</span></h2>
+      <p>A beautiful landscape only stays beautiful with consistent care. Our maintenance programs keep your property looking its best every week, every season, every year.</p>
+      <ul class="pillar-items">
+        <li>Weekly mowing & edging</li>
+        <li>Fertilization & weed control</li>
+        <li>Seasonal cleanups</li>
+        <li>Irrigation monitoring</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat-block"><span class="stat-num">500+</span><span class="stat-lbl">5-Star Reviews</span></div>
+    <div class="stat-block"><span class="stat-num">15</span><span class="stat-lbl">Years in Business</span></div>
+    <div class="stat-block"><span class="stat-num">1,000+</span><span class="stat-lbl">Projects Done</span></div>
+    <div class="stat-block"><span class="stat-num">30+</span><span class="stat-lbl">Awards Won</span></div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="section-header">
+      <div class="section-label">Full Service List</div>
+      <h2 class="section-title">Everything Your Property Needs</h2>
+      <div class="green-line"></div>
+      <p class="section-sub" style="margin-top:16px;">We're a full-service operation — one company, every service your landscape requires.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card"><span class="svc-icon">✂️</span><h3>Lawn Mowing</h3><p>Weekly or bi-weekly precision cuts with clean edging.</p></div>
+      <div class="svc-card"><span class="svc-icon">🌱</span><h3>Lawn Treatment</h3><p>Fertilization, overseeding, aeration, and weed control.</p></div>
+      <div class="svc-card"><span class="svc-icon">🧱</span><h3>Paver Installation</h3><p>Driveways, patios, walkways, and pool decks.</p></div>
+      <div class="svc-card"><span class="svc-icon">⛲</span><h3>Water Features</h3><p>Fountains, ponds, and decorative water elements.</p></div>
+      <div class="svc-card"><span class="svc-icon">🌳</span><h3>Tree & Shrub Trimming</h3><p>Precise pruning to keep your plants healthy and shaped.</p></div>
+      <div class="svc-card"><span class="svc-icon">🏡</span><h3>Pergolas & Structures</h3><p>Custom outdoor structures, shade sails, and trellises.</p></div>
+      <div class="svc-card"><span class="svc-icon">💧</span><h3>Irrigation Systems</h3><p>Smart zone installation, repair, and seasonal tune-ups.</p></div>
+      <div class="svc-card"><span class="svc-icon">🪨</span><h3>Decomposed Granite</h3><p>Low-maintenance pathways and accent areas.</p></div>
+      <div class="svc-card"><span class="svc-icon">🌿</span><h3>Native Planting</h3><p>Drought-tolerant, CA-friendly landscape solutions.</p></div>
+      <div class="svc-card"><span class="svc-icon">🚧</span><h3>Retaining Walls</h3><p>Block, stone, or timber walls for grading and drainage.</p></div>
+      <div class="svc-card"><span class="svc-icon">🍂</span><h3>Seasonal Cleanups</h3><p>Spring and fall cleanup and bed refresh service.</p></div>
+      <div class="svc-card"><span class="svc-icon">💡</span><h3>Landscape Lighting</h3><p>Low-voltage LED systems for safety and ambiance.</p></div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="section-header">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="green-line"></div>
+      <p class="section-sub" style="margin-top:16px;">A sample of recent design-build transformations for local homeowners.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-thumb thumb-patio">🏡</div>
+        <div class="project-info">
+          <div class="project-type">Patio & Hardscape</div>
+          <h3>Modern Paver Patio & Outdoor Kitchen</h3>
+          <p>Full backyard transformation with travertine pavers, built-in grill, and pergola. Delivered in 3 weeks.</p>
+          <div class="project-view">View Project →</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb thumb-drive">🚗</div>
+        <div class="project-info">
+          <div class="project-type">Driveway & Entry</div>
+          <h3>Stamped Concrete Driveway Replacement</h3>
+          <p>Old cracked driveway replaced with stamped concrete and custom lighting. Dramatic curb appeal upgrade.</p>
+          <div class="project-view">View Project →</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb thumb-garden">🌿</div>
+        <div class="project-info">
+          <div class="project-type">Native Garden Design</div>
+          <h3>Drought-Tolerant Front Yard Redesign</h3>
+          <p>Replaced thirsty lawn with a low-maintenance native garden. Reduced water bill by 60%.</p>
+          <div class="project-view">View Project →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="awards">
+    <div class="awards-inner">
+      <div class="awards-label">Recognition & Certifications</div>
+      <div class="awards-row">
+        <div class="award-badge"><span class="award-icon">🏆</span><span class="award-name">Best of Houzz</span><span class="award-detail">2022, 2023, 2024</span></div>
+        <div class="award-badge"><span class="award-icon">⭐</span><span class="award-name">Angi Top Pro</span><span class="award-detail">5 Consecutive Years</span></div>
+        <div class="award-badge"><span class="award-icon">🌿</span><span class="award-name">Nextdoor Fav</span><span class="award-detail">Neighborhood Pick</span></div>
+        <div class="award-badge"><span class="award-icon">📺</span><span class="award-name">Featured on ABC</span><span class="award-detail">Local News</span></div>
+        <div class="award-badge"><span class="award-icon">🏅</span><span class="award-name">Mayor's Award</span><span class="award-detail">Community Excellence</span></div>
+        <div class="award-badge"><span class="award-icon">✅</span><span class="award-name">Licensed & Bonded</span><span class="award-detail">Lic. #1036727</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="reviews">
+    <div class="section-header">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="green-line"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"GreenCut completely transformed our backyard. The design team actually listened to what we wanted — and the finished project blew us away. We use the patio every single weekend."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">👤</div>
+          <div><div class="testi-name">Lynn H.</div><div class="testi-job">Homeowner · Patio & Hardscape</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"They redesigned our entire front yard with native plants. Neighbors stop and ask about it weekly. Our water bill is down dramatically. The investment paid for itself faster than expected."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">👤</div>
+          <div><div class="testi-name">Mark & Susan T.</div><div class="testi-job">Homeowners · Native Garden Design</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"We've been on the maintenance program for 2 years. Consistent, reliable, and the crew is always respectful of the property. Best money we spend every month."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">👤</div>
+          <div><div class="testi-name">Dave K.</div><div class="testi-job">Homeowner · Weekly Maintenance</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="consult" id="consult">
+    <div class="consult-inner">
+      <div class="consult-left">
+        <div class="section-label">Free Consultation</div>
+        <h2>Let's Build Something Beautiful</h2>
+        <p>Tell us about your property and what you're envisioning. We'll schedule a free on-site consultation — no pressure, no obligation, just honest advice from a landscape expert.</p>
+        <div class="consult-perks">
+          <div class="consult-perk">
+            <div class="perk-icon">📍</div>
+            <div class="perk-text"><h4>On-Site Visit, No Cost</h4><p>A project manager visits your property and gives a full assessment.</p></div>
+          </div>
+          <div class="consult-perk">
+            <div class="perk-icon">📋</div>
+            <div class="perk-text"><h4>Detailed Written Estimate</h4><p>You get a clear, itemized quote — no vague numbers or hidden costs.</p></div>
+          </div>
+          <div class="consult-perk">
+            <div class="perk-icon">⏱️</div>
+            <div class="perk-text"><h4>Response Within 24 Hours</h4><p>We confirm your consultation within one business day.</p></div>
+          </div>
+        </div>
+      </div>
+      <form class="consult-form">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000" /></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="jane@email.com" /></div>
+        </div>
+        <div class="form-group">
+          <label>I'm interested in...</label>
+          <select>
+            <option>Design + Build Project</option>
+            <option>Ongoing Maintenance</option>
+            <option>Lawn Treatment Program</option>
+            <option>Just an Estimate for Now</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Tell us about your property</label><textarea placeholder="Approximate size, what you're hoping to change or add..."></textarea></div>
+        <button type="submit" class="btn-submit">Schedule My Free Consultation →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="back-link">← Back to Portfolio</a>
+      <span class="footer-lic">© 2026 GreenCut Landscaping · Lic. #1036727 · Licensed, Bonded & Insured</span>
+    </div>
+  </footer>
+
+</body>
+</html>

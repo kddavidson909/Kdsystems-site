@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FastFlow Plumbing — Here to Fix It. Today.</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #05080f;
+      --surface:  #080d18;
+      --card:     #0d1422;
+      --border:   #1a2540;
+      --blue:     #0ea5e9;
+      --blue-d:   #0284c7;
+      --blue-g:   rgba(14,165,233,0.12);
+      --blue-gg:  rgba(14,165,233,0.05);
+      --orange:   #f97316;
+      --orange-g: rgba(249,115,22,0.12);
+      --text:     #e8eef8;
+      --muted:    #7a90b8;
+      --subtle:   #2a3a55;
+      --white:    #ffffff;
+    }
+
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--blue-d); border-radius: 3px; }
+
+    /* PROMO BAR */
+    .promo-bar {
+      background: var(--orange);
+      color: #fff;
+      text-align: center;
+      padding: 9px 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .promo-bar span { background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 3px; margin-left: 8px; font-family: monospace; letter-spacing: 1px; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 60px;
+      height: 68px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,8,15,0.97);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 200;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .nav-logo-text { font-weight: 800; font-size: 1.1rem; }
+    .nav-logo-text span { color: var(--blue); }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.88rem; color: var(--muted); align-items: center; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-phone-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff !important;
+      padding: 9px 18px; border-radius: 7px;
+      font-weight: 700; font-size: 0.88rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .nav-phone-btn:hover { background: var(--blue-d) !important; box-shadow: 0 4px 16px rgba(14,165,233,0.3); }
+
+    /* HERO */
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 0;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(14,165,233,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(249,115,22,0.06) 0%, transparent 45%),
+        linear-gradient(160deg, #05080f 0%, #080e1c 50%, #05080f 100%);
+    }
+    .hero-bg-lines {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, var(--border) 60px),
+                        repeating-linear-gradient(90deg, transparent, transparent 59px, var(--border) 60px);
+      opacity: 0.2;
+    }
+
+    .hero-left {
+      padding: 80px 60px 80px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 22px;
+    }
+    .hero-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--blue); border-radius: 1px; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 .accent { color: var(--blue); }
+    .hero h1 .accent-o { color: var(--orange); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted); max-width: 460px;
+      margin-bottom: 36px; line-height: 1.7;
+    }
+    .hero-trust {
+      display: flex; flex-wrap: wrap; gap: 18px;
+      margin-bottom: 36px;
+    }
+    .trust-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .trust-pill .check { color: var(--blue); font-size: 0.9rem; font-weight: 700; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 700; font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { background: var(--blue-d); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(14,165,233,0.35); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--blue); background: var(--blue-gg); }
+
+    /* HERO RIGHT — Emergency Card */
+    .hero-right {
+      background: var(--card);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 60px 40px;
+      position: relative; z-index: 1;
+    }
+    .emergency-card-label {
+      font-size: 0.72rem; font-weight: 800; color: var(--orange);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .emergency-card-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .emergency-card-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+    .big-phone {
+      font-size: 1.9rem; font-weight: 900; color: var(--blue);
+      letter-spacing: -0.5px; display: block; margin-bottom: 6px;
+    }
+    .phone-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 28px; }
+    .call-btn {
+      display: block; text-align: center;
+      background: var(--orange); color: #fff;
+      padding: 14px; border-radius: 8px;
+      font-weight: 800; font-size: 1rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      margin-bottom: 16px;
+    }
+    .call-btn:hover { background: #ea6c0a; box-shadow: 0 6px 20px rgba(249,115,22,0.35); }
+    .schedule-btn {
+      display: block; text-align: center;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      transition: border-color 0.2s; margin-bottom: 28px;
+    }
+    .schedule-btn:hover { border-color: var(--blue); }
+    .card-trust-list { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .card-trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--muted); }
+    .card-trust-item .icon { font-size: 1rem; width: 26px; flex-shrink: 0; }
+
+    /* STATS RIBBON */
+    .stats-ribbon {
+      background: var(--blue);
+      padding: 0;
+      overflow: hidden;
+    }
+    .stats-inner {
+      display: flex;
+      max-width: 100%;
+    }
+    .stat-block {
+      flex: 1;
+      text-align: center;
+      padding: 28px 20px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num { font-size: 2.2rem; font-weight: 900; color: #fff; display: block; letter-spacing: -1px; }
+    .stat-lbl { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* SECTION SHARED */
+    .section-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 480px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .red-line { width: 44px; height: 3px; background: var(--blue); margin: 14px auto 0; border-radius: 2px; }
+
+    /* SERVICES */
+    .services {
+      padding: 90px 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .svc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .svc-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 12px 32px rgba(14,165,233,0.1); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon-wrap {
+      width: 52px; height: 52px;
+      background: var(--blue-g);
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+    .svc-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .svc-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .svc-link { font-size: 0.8rem; font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 4px; }
+    .svc-link::after { content: '→'; transition: transform 0.2s; }
+    .svc-card:hover .svc-link::after { transform: translateX(4px); }
+
+    /* COUPONS */
+    .coupons { padding: 90px 60px; }
+    .coupon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .coupon {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--card);
+    }
+    .coupon:hover { border-color: var(--blue); box-shadow: 0 0 32px var(--blue-g); }
+    .coupon-corner {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--orange); color: #fff;
+      font-size: 0.68rem; font-weight: 800;
+      padding: 4px 8px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .coupon-amount { font-size: 3.2rem; font-weight: 900; color: var(--blue); letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+    .coupon-amount span { font-size: 1.4rem; vertical-align: top; margin-top: 6px; display: inline-block; }
+    .coupon-service { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .coupon-terms { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; }
+    .coupon-code {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 10px 14px;
+      font-family: monospace; font-size: 0.88rem; font-weight: 700;
+      color: var(--blue); letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .coupon-code-label { font-family: 'Segoe UI', sans-serif; font-size: 0.72rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+    .coupon-cta { display: block; text-align: center; background: var(--blue); color: #fff; padding: 11px; border-radius: 7px; font-weight: 700; font-size: 0.88rem; transition: background 0.2s; }
+    .coupon-cta:hover { background: var(--blue-d); }
+
+    /* WHY US */
+    .why-us { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .why-item {
+      background: var(--card);
+      padding: 36px 28px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .why-item:hover { background: #111c2e; }
+    .why-icon { font-size: 2.4rem; display: block; margin-bottom: 14px; }
+    .why-item h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .why-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* REVIEWS */
+    .reviews { padding: 90px 60px; }
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .review-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .review-card::before { content: '"'; position: absolute; top: 14px; right: 20px; font-size: 5rem; line-height: 1; color: var(--blue); opacity: 0.15; font-family: Georgia, serif; pointer-events: none; }
+    .review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .review-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .reviewer-info { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-g); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .reviewer-name { font-size: 0.88rem; font-weight: 700; }
+    .reviewer-detail { font-size: 0.78rem; color: var(--muted); }
+
+    /* FAQ */
+    .faq { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+    details {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    details:hover, details[open] { border-color: var(--blue); }
+    summary {
+      padding: 20px 24px;
+      font-weight: 700; font-size: 0.97rem;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      list-style: none;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; color: var(--blue); font-size: 1.3rem; font-weight: 400; transition: transform 0.2s; flex-shrink: 0; }
+    details[open] summary::after { transform: rotate(45deg); }
+    .faq-answer { padding: 0 24px 20px; font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+
+    /* FLOATING CALL BUTTON */
+    .float-call {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--orange); color: #fff;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-weight: 800; font-size: 0.9rem;
+      box-shadow: 0 8px 28px rgba(249,115,22,0.4);
+      z-index: 1000;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .float-call:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(249,115,22,0.5); }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 60px 28px;
+    }
+    .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand p { font-size: 0.85rem; color: var(--muted); margin-top: 12px; line-height: 1.65; max-width: 240px; }
+    .footer-col h4 { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: var(--subtle); }
+    .back-link { color: var(--blue); font-weight: 600; }
+
+    @media (max-width: 1000px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { border-left: none; border-top: 1px solid var(--border); padding: 40px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-left { padding: 60px 24px; }
+      .services, .coupons, .why-us, .reviews, .faq { padding: 60px 20px; }
+      .stat-num { font-size: 1.8rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      footer { padding: 40px 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-bar">
+    Limited Time: Save $30 on Any Drain Cleaning Service — Use Code <span>DRAIN30</span>
+  </div>
+
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">🔧</div>
+      <div class="nav-logo-text">Fast<span>Flow</span> Plumbing</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#coupons">Specials</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="tel:5552803300" class="nav-phone-btn">📞 (555) 280-3300</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-lines"></div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">Licensed · Insured · Available 24/7</div>
+      <h1>We're Here to<br><span class="accent">Fix It.</span><br><span class="accent-o">Today.</span></h1>
+      <p class="hero-sub">When your pipes burst or your drains back up, you need someone fast, reliable, and honest. FastFlow has served this community for over a decade with flat-rate pricing and zero surprise charges.</p>
+      <div class="hero-trust">
+        <div class="trust-pill"><span class="check">✓</span> No After-Hours Upcharges</div>
+        <div class="trust-pill"><span class="check">✓</span> Free Onsite Estimates</div>
+        <div class="trust-pill"><span class="check">✓</span> 60-Min Response Guarantee</div>
+        <div class="trust-pill"><span class="check">✓</span> 4.9★ — 1,200+ Reviews</div>
+      </div>
+      <div class="hero-ctas">
+        <a href="tel:5552803300" class="btn-primary">📞 Call Now — We Answer 24/7</a>
+        <a href="#services" class="btn-ghost">View All Services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="emergency-card-label">🚨 Emergency Service</div>
+      <div class="emergency-card-title">Need a plumber right now?</div>
+      <div class="emergency-card-sub">Average on-site arrival: under 60 minutes</div>
+      <a href="tel:5552803300" class="big-phone">(555) 280-3300</a>
+      <div class="phone-note">Answered by a live technician — not a call center</div>
+      <a href="tel:5552803300" class="call-btn">📞 Call for Emergency Service</a>
+      <a href="#schedule" class="schedule-btn">Schedule Non-Emergency Online</a>
+      <div class="card-trust-list">
+        <div class="card-trust-item"><span class="icon">🛡️</span> Fully Licensed & Insured</div>
+        <div class="card-trust-item"><span class="icon">💵</span> Flat-Rate Upfront Pricing</div>
+        <div class="card-trust-item"><span class="icon">⭐</span> 100% Satisfaction Guarantee</div>
+        <div class="card-trust-item"><span class="icon">📅</span> Nights, Weekends & Holidays</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-ribbon">
+    <div class="stats-inner">
+      <div class="stat-block"><span class="stat-num">24/7</span><span class="stat-lbl">Always Available</span></div>
+      <div class="stat-block"><span class="stat-num">&lt;60</span><span class="stat-lbl">Min Response</span></div>
+      <div class="stat-block"><span class="stat-num">4.9★</span><span class="stat-lbl">Customer Rating</span></div>
+      <div class="stat-block"><span class="stat-num">12K+</span><span class="stat-lbl">Jobs Completed</span></div>
+      <div class="stat-block"><span class="stat-num">$0</span><span class="stat-lbl">Hidden Fees</span></div>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="section-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Full-Service Plumbing & Repair</h2>
+      <div class="red-line"></div>
+      <p class="section-sub" style="margin-top:16px;">From a dripping faucet to a burst main line — we handle it all, on your schedule.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🚨</div>
+        <h3>Emergency Plumbing</h3>
+        <p>Burst pipes, major leaks, flooding. We dispatch a licensed technician within the hour, any time of day or night.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🚿</div>
+        <h3>Drain Cleaning & Clearing</h3>
+        <p>Slow drains, full blockages, root intrusions. We use professional hydro-jetting equipment to restore full flow.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🌡️</div>
+        <h3>Water Heater Service</h3>
+        <p>Repair, flush, or full replacement — we stock same-day units so you're not left without hot water overnight.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🔍</div>
+        <h3>Leak Detection</h3>
+        <p>Hidden leaks cause thousands in damage. We use non-invasive tech to locate them before they become a disaster.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🏗️</div>
+        <h3>Sewer Line Repair</h3>
+        <p>Trenchless repair available. We fix damaged sewer lines with minimal disruption to your yard or foundation.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🔩</div>
+        <h3>Fixture Installation</h3>
+        <p>Faucets, toilets, garbage disposals, and more — installed correctly the first time, backed by a labor guarantee.</p>
+        <div class="svc-link">Learn More</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="coupons" id="coupons">
+    <div class="section-header">
+      <div class="section-label">Special Offers</div>
+      <h2 class="section-title">Current Promotions</h2>
+      <div class="red-line"></div>
+      <p class="section-sub" style="margin-top:16px;">Mention these at booking — one coupon per visit. Cannot be combined.</p>
+    </div>
+    <div class="coupon-grid">
+      <div class="coupon">
+        <div class="coupon-corner">Limited Time</div>
+        <div class="coupon-amount"><span>$</span>30</div>
+        <div class="coupon-service">Off Drain Cleaning</div>
+        <div class="coupon-terms">Any residential drain clearing service. Valid Mon–Fri.</div>
+        <div class="coupon-code"><span class="coupon-code-label">Code:</span> DRAIN30</div>
+        <a href="tel:5552803300" class="coupon-cta">Call to Redeem</a>
+      </div>
+      <div class="coupon">
+        <div class="coupon-corner">Popular</div>
+        <div class="coupon-amount"><span>$</span>50</div>
+        <div class="coupon-service">Off Water Heater Install</div>
+        <div class="coupon-terms">New unit installation or full replacement. All brands.</div>
+        <div class="coupon-code"><span class="coupon-code-label">Code:</span> HEAT50</div>
+        <a href="tel:5552803300" class="coupon-cta">Call to Redeem</a>
+      </div>
+      <div class="coupon">
+        <div class="coupon-corner">Always On</div>
+        <div class="coupon-amount">FREE</div>
+        <div class="coupon-service">Onsite Estimate</div>
+        <div class="coupon-terms">No obligation quote on any job. Know the price before we start.</div>
+        <div class="coupon-code"><span class="coupon-code-label">Code:</span> FREEQUOTE</div>
+        <a href="tel:5552803300" class="coupon-cta">Schedule Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <div class="section-header">
+      <div class="section-label">Why FastFlow</div>
+      <h2 class="section-title">The Right Team for Any Plumbing Job</h2>
+      <div class="red-line"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-icon">⚡</span>
+        <h3>60-Minute Response</h3>
+        <p>We guarantee on-site arrival within 60 minutes for all emergency calls in our service area.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">💵</span>
+        <h3>Flat-Rate Pricing</h3>
+        <p>You get a firm price before we start. No hourly games, no weekend surcharges, no surprises on the invoice.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">🛡️</span>
+        <h3>Licensed & Insured</h3>
+        <p>Every tech is state-certified and background-checked. Your home is protected from first call to final fix.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">🔁</span>
+        <h3>Satisfaction Guarantee</h3>
+        <p>If you're not 100% happy with our work, we come back and make it right. No questions asked.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="section-header">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">1,200+ Happy Customers</h2>
+      <div class="red-line"></div>
+      <p class="section-sub" style="margin-top:16px;">Rated 4.9 stars across Google, Yelp, and HomeAdvisor.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Pipe burst at midnight on a Saturday. FastFlow showed up in 40 minutes, fixed it cleanly, and the price was exactly what they quoted over the phone. Absolute lifesavers."</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">👤</div>
+          <div><div class="reviewer-name">Tom W.</div><div class="reviewer-detail">Homeowner · Emergency Repair</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Used them for a full bathroom remodel. Professional, on schedule, and the final bill was to the penny what they quoted. Already booked them for our kitchen next month."</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">👤</div>
+          <div><div class="reviewer-name">Maria G.</div><div class="reviewer-detail">Homeowner · Remodel Plumbing</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Had a mysterious slow drain for months. Three other plumbers couldn't find it. FastFlow's tech found a root blockage in 20 minutes with a camera. Fixed same day."</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">👤</div>
+          <div><div class="reviewer-name">Chris B.</div><div class="reviewer-detail">Homeowner · Drain Cleaning</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common Questions</h2>
+      <div class="red-line"></div>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Do you charge extra for nights, weekends, or holidays?</summary>
+        <div class="faq-answer">No. FastFlow charges the same flat rates 24/7, 365 days a year. The price you're quoted at 2pm on a Tuesday is the same price you'd get at 2am on Christmas Eve.</div>
+      </details>
+      <details>
+        <summary>How quickly can you get to my home in an emergency?</summary>
+        <div class="faq-answer">We guarantee on-site arrival within 60 minutes for emergency calls within our service area. Most jobs, we arrive faster. We'll give you an ETA when you call.</div>
+      </details>
+      <details>
+        <summary>Do you offer free estimates?</summary>
+        <div class="faq-answer">Yes — every job starts with a free onsite estimate. A licensed technician will assess the situation, explain exactly what's needed, and give you a firm price before any work begins.</div>
+      </details>
+      <details>
+        <summary>Are your technicians licensed and background-checked?</summary>
+        <div class="faq-answer">Every FastFlow technician is state-licensed, fully insured, and has passed a thorough background check. You'll know who's coming to your home before they arrive.</div>
+      </details>
+      <details>
+        <summary>What areas do you service?</summary>
+        <div class="faq-answer">We serve the greater metro area and surrounding suburbs. Call us at (555) 280-3300 and we can confirm coverage for your address in under a minute.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo-text" style="font-size:1.1rem">Fast<span style="color:var(--blue)">Flow</span> Plumbing</div>
+        <p>Licensed, insured, and ready 24/7. Serving homeowners and businesses across the metro area for over a decade.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Emergency Repairs</a></li>
+          <li><a href="#">Drain Cleaning</a></li>
+          <li><a href="#">Water Heaters</a></li>
+          <li><a href="#">Leak Detection</a></li>
+          <li><a href="#">Sewer Repair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#coupons">Specials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:5552803300">(555) 280-3300</a></li>
+          <li><a href="#">Schedule Online</a></li>
+          <li><a href="#">Service Area</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="index.html" class="back-link">← Back to Portfolio</a>
+      <span>© 2026 FastFlow Plumbing · Lic. #FF-29841 · All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <a href="tel:5552803300" class="float-call">📞 Call Now</a>
+
+</body>
+</html>

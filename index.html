@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kevin Davidson — Modern Websites. Smarter Systems.</title>
+  <style>
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:        #0d0d0f;
+      --surface:   #141416;
+      --card:      #1a1a1d;
+      --border:    #2a2a2f;
+      --red:       #dc2626;
+      --red-dark:  #b91c1c;
+      --red-glow:  rgba(220, 38, 38, 0.12);
+      --red-glow2: rgba(220, 38, 38, 0.05);
+      --text:      #f0eff4;
+      --muted:     #9ca3af;
+      --subtle:    #4b5563;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
+
+    /* ===== NAV ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 64px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(13, 13, 15, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      background: var(--red);
+      color: #fff !important;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: background 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-cta:hover {
+      background: var(--red-dark) !important;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 110px 24px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle grid background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    /* Red glow orb */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(220,38,38,0.18) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      max-width: 800px;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 .dot {
+      color: var(--red);
+    }
+
+    .hero h2 {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 44px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220,38,38,0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--red);
+      background: var(--red-glow);
+    }
+
+    /* ===== SECTION SHARED ===== */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 60px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      padding: 100px 64px;
+      text-align: center;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--red);
+      border-radius: 10px;
+      padding: 36px 28px;
+      max-width: 280px;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+      border-top-color: var(--red);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: 1px solid var(--red);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio {
+      padding: 100px 64px;
+      text-align: center;
+    }
+
+    .portfolio-grid {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 60px;
+    }
+
+    .portfolio-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 310px;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .portfolio-item:hover .portfolio-info h3 {
+      color: var(--red);
+    }
+
+    .view-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--red);
+      letter-spacing: 0.3px;
+    }
+
+    .portfolio-thumb {
+      width: 100%;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .portfolio-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .portfolio-item:hover .portfolio-thumb img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(13,13,15,0.55) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .thumb-green  { border-bottom: 2px solid #22c55e; }
+    .thumb-blue   { border-bottom: 2px solid #3b82f6; }
+    .thumb-orange { border-bottom: 2px solid #f97316; }
+
+    .portfolio-info {
+      padding: 20px 22px;
+    }
+
+    .portfolio-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .portfolio-info h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .portfolio-info p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 100px 64px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 2px solid var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 40px var(--red-glow);
+    }
+
+    .about-text {
+      max-width: 520px;
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      margin-bottom: 16px;
+      line-height: 1.75;
+    }
+
+    .about-text p:last-of-type {
+      margin-bottom: 28px;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 100px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(220,38,38,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-form {
+      max-width: 540px;
+      margin: 52px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+      position: relative;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+    }
+
+    input, textarea, select {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 0.93rem;
+      font-family: inherit;
+      background: var(--card);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--subtle);
+    }
+
+    select option {
+      background: var(--card);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px var(--red-glow);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .btn-submit {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 7px;
+      font-size: 0.97rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220,38,38,0.3);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.82rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+    }
+
+    footer span {
+      color: var(--red);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .services,
+      .portfolio,
+      .about,
+      .contact {
+        padding: 70px 24px;
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .about {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Kevin <span>Davidson</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Available for New Projects</div>
+    <h1>Modern Websites<span class="dot">.</span><br>Smarter Systems<span class="dot">.</span></h1>
+    <h2>Custom websites and simple automation that help small businesses get more customers—without the tech headache.</h2>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#work" class="btn-secondary">See My Work</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Services</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">🌐</span>
+        <h3>Landing Pages & Websites</h3>
+        <p>Fast, professional sites designed to convert visitors into customers. Mobile-first, clean, and delivered in days — not weeks.</p>
+        <span class="card-tag">Most Popular</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚙️</span>
+        <h3>Business Automation</h3>
+        <p>Connect your tools, automate follow-ups, streamline workflows. Simple systems that save you hours every week without complex software.</p>
+        <span class="card-tag">High Value</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔗</span>
+        <h3>CRM & System Integrations</h3>
+        <p>Get your website, email, calendar, and payment systems talking to each other. Less manual data entry, fewer things falling through the cracks.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤖</span>
+        <h3>AI-Powered Tools</h3>
+        <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more.</p>
+        <span class="card-tag">New</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="work">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Example Projects</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
+    <div class="portfolio-grid">
+      <a class="portfolio-item" href="greencut.html">
+        <div class="portfolio-thumb thumb-green">
+          <img src="https://images.pexels.com/photos/6728925/pexels-photo-6728925.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Professional landscaping project" />
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Landscaping</div>
+          <h3>GreenCut Landscaping</h3>
+          <p>Lead-gen page with services, gallery, and instant quote form.</p>
+          <span class="view-link">View Project →</span>
+        </div>
+      </a>
+      <a class="portfolio-item" href="fastflow.html">
+        <div class="portfolio-thumb thumb-blue">
+          <img src="https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=600&h=400&fit=crop&q=80" alt="Professional plumbing service" />
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Plumbing</div>
+          <h3>FastFlow Plumbing</h3>
+          <p>Emergency CTA-focused page with trust signals and reviews.</p>
+          <span class="view-link">View Project →</span>
+        </div>
+      </a>
+      <a class="portfolio-item" href="peakfitness.html">
+        <div class="portfolio-thumb thumb-orange">
+          <img src="https://images.pexels.com/photos/4716816/pexels-photo-4716816.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Modern gym and fitness studio" />
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Fitness</div>
+          <h3>Peak Fitness Studio</h3>
+          <p>Class schedule, pricing tiers, and free trial signup flow.</p>
+          <span class="view-link">View Project →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-avatar">⚙️</div>
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2>Built Different.<br>For Businesses That Work Hard.</h2>
+      <p>I help small businesses upgrade their online presence with modern websites and smarter systems.</p>
+      <p>Coming from a background in industrial maintenance, I've spent years fixing complex systems, troubleshooting problems, and keeping things running efficiently. That same mindset now goes into the way I build websites and automation — practical, reliable, and built to actually work.</p>
+      <p>I focus on helping small businesses and freelancers compete at a higher level by creating tools that bring in customers, save time, and simplify day-to-day operations. The goal is simple: give you the kind of systems that used to only be available to bigger companies.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Let's Talk</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's Build Something</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
+    <form class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="John Smith" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="service">What do you need?</label>
+        <select id="service">
+          <option value="">Select a service...</option>
+          <option>Landing Page</option>
+          <option>Full Website</option>
+          <option>Business Automation</option>
+          <option>CRM / System Integration</option>
+          <option>AI-Powered Tool</option>
+          <option>Not sure — let's talk</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Tell me about your business</label>
+        <textarea id="message" placeholder="What does your business do? What problem are you trying to solve?"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message →</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Kevin Davidson &nbsp;·&nbsp; <span>kd.davidson909@gmail.com</span> &nbsp;·&nbsp; Built with intent.</p>
+  </footer>
+
+</body>
+</html>

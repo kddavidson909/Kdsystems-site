@@ -740,16 +740,16 @@
       <div class="form-row">
         <div class="form-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="John Smith" />
+          <input type="text" id="name" name="name" placeholder="John Smith" />
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="john@example.com" />
+          <input type="email" id="email" name="email" placeholder="john@example.com" />
         </div>
       </div>
       <div class="form-group">
         <label for="service">What do you need?</label>
-        <select id="service">
+        <select id="service" name="service">
           <option value="">Select a service...</option>
           <option>Landing Page</option>
           <option>Full Website</option>
@@ -761,7 +761,7 @@
       </div>
       <div class="form-group">
         <label for="message">Tell me about your business</label>
-        <textarea id="message" placeholder="What does your business do? What problem are you trying to solve?"></textarea>
+        <textarea id="message" name="message" placeholder="What does your business do? What problem are you trying to solve?"></textarea>
       </div>
       <button type="submit" class="btn-submit">Send Message →</button>
     </form>

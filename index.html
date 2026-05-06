@@ -439,17 +439,20 @@
     }
 
     .about-avatar {
-      width: 160px;
-      height: 160px;
-      border-radius: 10px;
-      background: var(--card);
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
       border: 2px solid var(--red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
       flex-shrink: 0;
       box-shadow: 0 0 40px var(--red-glow);
+      overflow: hidden;
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .about-text {
@@ -718,7 +721,7 @@
 
   <!-- ABOUT -->
   <section class="about" id="about">
-    <div class="about-avatar">⚙️</div>
+    <div class="about-avatar"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
     <div class="about-text">
       <div class="section-label">About Me</div>
       <h2>Built Different.<br>For Businesses That Work Hard.</h2>

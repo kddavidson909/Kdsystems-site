@@ -1,62 +1,73 @@
-# KD Systems — Portfolio Site
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This is Kevin Davidson's personal freelance landing page (`kdsystems.co`). Live site for selling landing-page and automation services to small businesses. Built from scratch as Kevin's first web project — he's self-teaching HTML/CSS via AI-assisted development.
+Kevin Davidson's personal freelance landing page (`kdsystems.co`) plus 3 demo project pages used as portfolio samples. Built with pure HTML + CSS — no frameworks, no build step, no JavaScript libraries.
 
-The repo also contains 3 demo project pages (landscaping, plumbing, fitness studio) used as portfolio samples to show prospects.
+## Development Workflow
 
-## Files
+There is no build step. To preview changes, open the HTML file directly in a browser. Deployment is automatic:
 
-- `index.html` — main portfolio/landing page
-- `greencut.html` — landscaping demo (green theme)
-- `fastflow.html` — plumbing demo (blue theme)
-- `peakfitness.html` — fitness studio demo (orange theme)
-- `headshot.jpg` — Kevin's photo for the about section
+```
+git add . && git commit -m "..." && git push
+```
 
-## Tech & Style
+Netlify auto-deploys from `main` within ~30 seconds. If push is rejected with "non-fast-forward," `git push origin main --force` is safe (personal repo).
 
-- **Pure HTML + CSS only.** No frameworks, no build step, no JavaScript libraries. Don't suggest React, Tailwind, etc.
-- Inline `<style>` blocks per file (no separate CSS files)
-- Dark theme everywhere: black background, red accent on the main site (`#dc2626`); each demo page uses its own accent color
-- Mobile-first responsive via CSS media queries
-- Native HTML where possible (e.g., `<details>` for FAQ accordions — no JS)
+## File Structure & Architecture
 
-## Brand
+Each page is fully self-contained — all CSS lives in an inline `<style>` block in the `<head>`. There are no shared stylesheets.
 
-- **Name:** KD Systems
-- **Domain:** kdsystems.co
-- **Email:** kevin@kdsystems.co
-- **Tagline:** Modern Websites. Smarter Systems.
-- **Positioning:** Industrial-maintenance background; practical, reliable systems for small businesses
+| File | Purpose | Accent color |
+|---|---|---|
+| `index.html` | Main portfolio/landing page | Red `#dc2626` |
+| `greencut.html` | Landscaping demo | Green `#22c55e` |
+| `fastflow.html` | Plumbing demo | Blue `#0ea5e9` |
+| `peakfitness.html` | Fitness studio demo | Orange `#ff5500` |
 
-## Deployment
+### CSS Variable Convention
 
-- Hosted on **Netlify** (auto-deploys from GitHub `main` branch)
-- Repo: `github.com/kddavidson909/Kdsystems-site`
-- DNS managed by Netlify (nameservers pointed there from Namecheap)
-- Free Netlify SSL handles HTTPS
+Every file opens with a `:root` block defining the full color palette for that page. All colors are referenced via `var(--name)` throughout — never hardcoded inline. The standard variable names used across all files are:
 
-**Workflow:** edit locally → `git add . && git commit -m "..." && git push` → Netlify rebuilds in ~30s.
+```css
+:root {
+  --bg, --surface, --card, --border   /* background layers (darkest → lightest) */
+  --[accent], --[accent]-d            /* primary accent + darker shade */
+  --[accent]-g, --[accent]-gg         /* glow/alpha versions for shadows/glows */
+  --text, --muted, --subtle           /* text hierarchy */
+}
+```
 
-If push gets rejected with "non-fast-forward," use `git push origin main --force` (it's a personal repo, safe).
+When adding a new page, define all these variables in `:root` first and use them exclusively.
+
+### Section Structure
+
+`index.html` sections (in order): nav → hero → services → portfolio → about → contact → footer
+
+Demo pages follow a similar pattern but add industry-specific elements like a credential bar (greencut), promo bar (fastflow, peakfitness), or sticky CTA panel (fastflow hero uses a 2-column grid with a form panel on the right).
+
+### Responsive Design
+
+Mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile: nav links hide, section padding drops from `64px` to `24px`, multi-column layouts stack vertically.
 
 ## Contact Form
 
-- Uses **Web3Forms** (free, no submission limit) — submissions email straight to `kevin@kdsystems.co`
-- Access key is in the form's hidden input
-- All form fields require `name` attributes or Web3Forms rejects the submission
+The form in `index.html` posts to Web3Forms (`https://api.web3forms.com/submit`). The access key is stored in a `<input type="hidden" name="access_key">` field. All form fields **must** have `name` attributes or Web3Forms rejects the submission.
 
-## Email Setup
+## Brand & Style Rules
 
-- `kevin@kdsystems.co` runs through **ImprovMX** (free forwarding) into Kevin's personal Gmail
-- Sending uses Gmail "Send mail as" with an app password — replies show the kdsystems.co address
-- MX records and SPF TXT live in Netlify DNS
+- **Background layers:** `--bg` (body), `--surface` (alternate sections), `--card` (cards/inputs)
+- **Accent on main site:** `#dc2626` (red) — each demo uses its own accent
+- **Typography:** `'Segoe UI', system-ui, sans-serif` everywhere; no Google Fonts loaded
+- **Interactive elements:** use CSS `transition` on hover; no JavaScript event listeners
+- **Accordions/disclosure:** use native `<details>`/`<summary>` — no JS toggles
+- **No JS** — if a feature needs interactivity, use native HTML elements or suggest a free third-party service
 
-## How Kevin Wants to Work
+## Owner Preferences
 
-- **Build first, learn as we go.** Don't lecture on theory. Ship code, then explain the parts he encounters.
-- **Speed over perfection.** Don't over-polish; get to working output fast.
-- **No backend.** This is static HTML. If a feature needs server logic, suggest a free third-party service (Web3Forms, ImprovMX, etc.) instead of building one.
-- **Practical references.** When designing demo pages, fetch real competitor sites (e.g., Rooter Hero, Flores Artscape) and adapt their structure rather than inventing layouts.
-- He's working in **PowerShell on Windows** — give Windows-friendly commands.
+- Ship working code fast; skip theory explanations unless asked
+- No backend — static HTML only; for form/email needs use free services (Web3Forms, ImprovMX)
+- When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure
+- Commands should be Windows/PowerShell-friendly

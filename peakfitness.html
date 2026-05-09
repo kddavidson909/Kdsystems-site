@@ -3,292 +3,385 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peak Fitness Studio — Every Workout. One Membership.</title>
+  <title>Whisk &amp; Bloom Bakery — Baked Fresh. Every Morning.</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:       #080808;
-      --surface:  #0d0d0d;
-      --card:     #141414;
-      --border:   #222222;
-      --orange:   #ff5500;
-      --orange-d: #e04a00;
-      --orange-g: rgba(255,85,0,0.1);
-      --orange-gg:rgba(255,85,0,0.05);
-      --yellow:   #facc15;
-      --yellow-g: rgba(250,204,21,0.1);
-      --text:     #f5f5f5;
-      --muted:    #888888;
-      --subtle:   #333333;
+      --bg:        #fdf9f5;
+      --surface:   #ffffff;
+      --card:      #ffffff;
+      --border:    #e8ede8;
+      --teal:      #5dbfa0;
+      --teal-d:    #4aad8e;
+      --teal-g:    rgba(93,191,160,0.12);
+      --teal-gg:   rgba(93,191,160,0.06);
+      --pink:      #f48fb1;
+      --pink-g:    rgba(244,143,177,0.12);
+      --text:      #2e3a2e;
+      --muted:     #7a8a7a;
+      --subtle:    #b0bab0;
     }
 
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
     a { text-decoration: none; color: inherit; }
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-thumb { background: var(--orange-d); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
 
     /* OFFER BAR */
     .offer-bar {
-      background: var(--orange);
-      color: #fff; text-align: center;
+      background: var(--teal);
+      color: #fdf9f5;
+      text-align: center;
       padding: 10px 20px;
-      font-size: 0.88rem; font-weight: 700; letter-spacing: 0.3px;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.2px;
     }
-    .offer-bar a { color: #fff; text-decoration: underline; margin-left: 10px; }
+    .offer-bar a { color: #fdf9f5; text-decoration: underline; margin-left: 10px; font-weight: 700; }
 
     /* NAV */
     nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0 60px; height: 68px;
+      padding: 0 60px; height: 80px;
       border-bottom: 1px solid var(--border);
-      background: rgba(8,8,8,0.97);
-      backdrop-filter: blur(12px);
+      background: #ffffff;
       position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     }
-    .nav-logo { font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; }
-    .nav-logo em { color: var(--orange); font-style: normal; }
+    .nav-logo { display: flex; align-items: center; }
     .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.88rem; color: var(--muted); align-items: center; }
     .nav-links a:hover { color: var(--text); }
-    .nav-trial { background: var(--orange); color: #fff !important; padding: 9px 18px; border-radius: 7px; font-weight: 700; font-size: 0.88rem; transition: background 0.2s, box-shadow 0.2s; }
-    .nav-trial:hover { background: var(--orange-d) !important; box-shadow: 0 4px 16px rgba(255,85,0,0.35); }
+    .nav-trial {
+      background: var(--teal); color: #fff !important;
+      padding: 9px 18px; border-radius: 7px;
+      font-weight: 700; font-size: 0.88rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .nav-trial:hover { background: var(--teal-d) !important; box-shadow: 0 4px 16px rgba(93,191,160,0.30); }
 
     /* HERO */
     .hero {
-      min-height: 92vh;
-      display: flex; flex-direction: column; justify-content: center;
+      min-height: 88vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 80px 60px;
+      text-align: center;
+      background: linear-gradient(170deg, #fdf9f5 0%, #f5f5ed 60%, #fdf9f5 100%);
       position: relative; overflow: hidden;
     }
-    .hero-bg {
+    .hero::before {
+      content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 70% 50%, rgba(255,85,0,0.12) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(250,204,21,0.04) 0%, transparent 40%),
-        linear-gradient(170deg, #080808 0%, #0f0a08 50%, #080808 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(93,191,160,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(244,143,177,0.07) 0%, transparent 50%);
+      pointer-events: none;
     }
-    .hero-deco {
-      position: absolute;
-      right: 60px; top: 50%; transform: translateY(-50%);
-      font-size: 22vw; font-weight: 900; line-height: 1;
-      color: var(--orange); opacity: 0.04;
-      text-transform: uppercase;
-      pointer-events: none; z-index: 0;
-      letter-spacing: -10px;
-      user-select: none;
+    .hero-logo {
+      position: relative; z-index: 1;
+      margin-bottom: 28px;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 700px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--orange); color: var(--orange);
-      background: var(--orange-gg);
-      font-size: 0.78rem; font-weight: 800;
-      padding: 6px 14px; border-radius: 4px;
-      text-transform: uppercase; letter-spacing: 1.5px;
-      margin-bottom: 24px;
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 18px;
     }
     .hero h1 {
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 900; line-height: 0.95; letter-spacing: -3px;
-      text-transform: uppercase; margin-bottom: 14px;
+      font-size: clamp(2.8rem, 6.5vw, 5.8rem);
+      font-weight: 900; line-height: 1.0; letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 20px;
     }
-    .hero h1 .line2 { color: var(--orange); display: block; }
-    .hero h1 .line3 { color: var(--yellow); display: block; font-size: 60%; letter-spacing: -1px; }
-    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 40px; line-height: 1.7; }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
-    .btn-fire { background: var(--orange); color: #fff; padding: 15px 30px; border-radius: 8px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
-    .btn-fire:hover { background: var(--orange-d); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,85,0,0.4); }
-    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1rem; transition: border-color 0.2s; }
-    .btn-ghost:hover { border-color: var(--orange); }
-    .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; }
-    .htrust { font-size: 0.83rem; color: var(--muted); display: flex; align-items: center; gap: 7px; }
-    .htrust .spark { color: var(--orange); }
+    .hero h1 .accent { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 520px; margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 44px; }
+    .btn-primary {
+      background: var(--teal); color: #fff;
+      padding: 15px 30px; border-radius: 8px;
+      font-weight: 700; font-size: 1rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { background: var(--teal-d); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(93,191,160,0.28); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 15px 30px; border-radius: 8px;
+      font-weight: 600; font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .htrust {
+      font-size: 0.82rem; color: var(--muted);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .htrust .spark { color: var(--teal); font-size: 0.95rem; }
 
     /* STATS */
-    .stats { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .stat-block { text-align: center; padding: 32px 20px; border-right: 1px solid var(--border); }
+    .stats {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+    }
+    .stat-block {
+      text-align: center; padding: 32px 20px;
+      border-right: 1px solid var(--border);
+    }
     .stat-block:last-child { border-right: none; }
-    .stat-num { font-size: 2.4rem; font-weight: 900; color: var(--orange); display: block; letter-spacing: -1px; }
-    .stat-lbl { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--teal); display: block; letter-spacing: -1px; }
+    .stat-lbl { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
 
     /* SECTION SHARED */
-    .section-label { font-size: 0.72rem; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .section-label { font-size: 0.72rem; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; letter-spacing: -0.5px; color: var(--text); margin-bottom: 10px; }
     .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 480px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 56px; }
-    .orange-line { width: 44px; height: 3px; background: var(--orange); margin: 14px auto 0; border-radius: 2px; }
+    .teal-line { width: 44px; height: 3px; background: var(--teal); margin: 14px auto 0; border-radius: 2px; }
 
-    /* AMENITIES */
-    .amenities { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    /* OFFERINGS */
+    .amenities {
+      padding: 90px 60px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
     .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .amenity {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 30px 22px;
       text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .amenity:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,85,0,0.1); }
-    .amenity-icon { font-size: 2.2rem; display: block; margin-bottom: 12px; }
-    .amenity h3 { font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 7px; }
-    .amenity p { font-size: 0.8rem; color: var(--muted); }
+    .amenity:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(93,191,160,0.15);
+    }
+    .amenity-icon { font-size: 2.2rem; display: block; margin-bottom: 14px; }
+    .amenity h3 { font-size: 0.9rem; font-weight: 800; color: var(--text); letter-spacing: 0.3px; margin-bottom: 8px; }
+    .amenity p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 
-    /* PROGRAMS */
-    .programs { padding: 90px 60px; }
-    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    /* MENU HIGHLIGHTS */
+    .programs { padding: 90px 60px; background: #ffffff; }
+    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .prog-card {
       border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border);
-      transition: transform 0.2s, border-color 0.2s;
-      position: relative;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
-    .prog-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+    .prog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(93,191,160,0.15);
+      border-color: var(--teal);
+    }
+    .prog-top-border { height: 5px; }
+    .border-bread   { background: linear-gradient(90deg, #c8a06a, #e2bf91); }
+    .border-pastry  { background: linear-gradient(90deg, #f4c97a, #f7dea6); }
+    .border-cake    { background: linear-gradient(90deg, #f48fb1, #f9b8ce); }
+    .border-pie     { background: linear-gradient(90deg, #e07a5f, #ed9f8a); }
+    .border-cookie  { background: linear-gradient(90deg, #a07040, #c49060); }
+    .border-savory  { background: linear-gradient(90deg, #7aab7a, #9ec89e); }
     .prog-thumb {
-      height: 200px;
+      height: 120px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      position: relative;
+      font-size: 3.5rem;
+      background: var(--bg);
     }
-    .prog-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,8,8,0.9) 0%, transparent 60%); }
-    .thumb-strength { background: linear-gradient(135deg, #1a0800, #2d1000); border-bottom: 2px solid var(--orange); }
-    .thumb-hiit     { background: linear-gradient(135deg, #1a0808, #2d0808); border-bottom: 2px solid #ef4444; }
-    .thumb-boxing   { background: linear-gradient(135deg, #120814, #1e0c1e); border-bottom: 2px solid #a855f7; }
-    .thumb-cardio   { background: linear-gradient(135deg, #081420, #0c1e30); border-bottom: 2px solid #3b82f6; }
-    .thumb-yoga     { background: linear-gradient(135deg, #0a1a10, #0f2810); border-bottom: 2px solid #22c55e; }
-    .thumb-spin     { background: linear-gradient(135deg, #1a1400, #2a2000); border-bottom: 2px solid var(--yellow); }
-    .prog-info { padding: 20px; background: var(--card); }
-    .prog-tag { font-size: 0.7rem; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .prog-info h3 { font-size: 0.97rem; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
-    .prog-info p { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; }
-    .prog-meta { display: flex; gap: 14px; }
-    .prog-badge { font-size: 0.72rem; font-weight: 700; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; }
+    .prog-info { padding: 22px; }
+    .prog-tag { font-size: 0.7rem; font-weight: 800; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .prog-info h3 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 7px; }
+    .prog-info p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .prog-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .prog-badge {
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 3px 9px; border-radius: 4px;
+    }
 
-    /* PRICING */
-    .pricing { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin: 0 auto; }
+    /* ORDER OPTIONS */
+    .pricing {
+      padding: 90px 60px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 960px; margin: 0 auto; }
     .plan {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 36px 28px;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 38px 28px;
       text-align: center;
-      transition: transform 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
     }
-    .plan:hover { transform: translateY(-5px); }
-    .plan.featured { border-color: var(--orange); }
+    .plan:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(93,191,160,0.15); }
+    .plan.featured { border-color: var(--teal); border-width: 2px; }
     .plan.featured::before {
-      content: 'MOST POPULAR';
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--orange); color: #fff;
+      content: 'BEST VALUE';
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--teal); color: #fff;
       font-size: 0.68rem; font-weight: 800;
       padding: 4px 14px; border-radius: 10px; letter-spacing: 1px; white-space: nowrap;
     }
-    .plan-name { font-size: 0.78rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
-    .plan-price { font-size: 3rem; font-weight: 900; line-height: 1; letter-spacing: -1px; }
+    .plan-name { font-size: 0.78rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+    .plan-price { font-size: 3rem; font-weight: 900; line-height: 1; letter-spacing: -1px; color: var(--text); }
     .plan-price sub { font-size: 1rem; font-weight: 400; color: var(--muted); }
-    .plan-tagline { font-size: 0.83rem; color: var(--muted); margin: 12px 0 24px; }
+    .plan-tagline { font-size: 0.83rem; color: var(--muted); margin: 12px 0 26px; }
     .plan-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
-    .plan-features li { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 9px; }
-    .plan-features li::before { content: '✓'; color: var(--orange); font-weight: 900; flex-shrink: 0; }
-    .plan-features li.dim { opacity: 0.4; }
-    .plan-features li.dim::before { content: '✗'; color: var(--muted); }
-    .btn-plan { display: block; background: var(--orange); color: #fff; padding: 13px; border-radius: 8px; font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s, box-shadow 0.2s; }
-    .btn-plan:hover { background: var(--orange-d); box-shadow: 0 6px 20px rgba(255,85,0,0.3); }
-    .btn-plan-outline { display: block; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 13px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.5px; transition: border-color 0.2s; }
-    .btn-plan-outline:hover { border-color: var(--orange); }
+    .plan-features li { font-size: 0.85rem; color: var(--text); display: flex; align-items: center; gap: 9px; }
+    .plan-features li::before { content: '✓'; color: var(--teal); font-weight: 900; flex-shrink: 0; }
+    .plan-features li.dim { color: var(--muted); opacity: 0.55; }
+    .plan-features li.dim::before { content: '✗'; color: var(--subtle); }
+    .btn-plan {
+      display: block; background: var(--teal); color: #fff;
+      padding: 13px; border-radius: 8px;
+      font-weight: 700; font-size: 0.9rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-plan:hover { background: var(--teal-d); box-shadow: 0 6px 20px rgba(93,191,160,0.28); }
+    .btn-plan-outline {
+      display: block; background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 13px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-plan-outline:hover { border-color: var(--teal); color: var(--teal); }
 
-    /* MOTIVATIONAL SPLIT */
+    /* REVIEWS SPLIT */
     .motivation {
-      padding: 0;
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: 480px;
     }
     .moto-left {
       padding: 80px 60px;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(255,85,0,0.15) 0%, transparent 60%),
-        var(--bg);
+      background: var(--teal-gg);
+      border-right: 1px solid var(--border);
       display: flex; flex-direction: column; justify-content: center;
     }
-    .moto-left h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px; }
-    .moto-left h2 em { color: var(--orange); font-style: normal; }
-    .moto-left p { font-size: 0.97rem; color: var(--muted); max-width: 380px; line-height: 1.7; margin-bottom: 28px; }
+    .moto-left h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900; letter-spacing: -1px; line-height: 1.1;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .moto-left h2 em { color: var(--teal); font-style: normal; }
+    .moto-left p { font-size: 0.97rem; color: var(--muted); max-width: 380px; line-height: 1.75; margin-bottom: 28px; }
     .moto-right {
       padding: 80px 60px;
-      background: var(--surface);
-      border-left: 1px solid var(--border);
+      background: #ffffff;
       display: flex; flex-direction: column; justify-content: center;
-      gap: 20px;
+      gap: 18px;
     }
     .transform-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--orange);
-      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 12px;
       padding: 20px 22px;
-      transition: border-color 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s;
     }
-    .transform-card:hover { border-color: var(--orange); }
-    .transform-stars { color: var(--yellow); font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 8px; }
-    .transform-text { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
-    .transform-person { font-size: 0.8rem; font-weight: 700; }
+    .transform-card:hover { box-shadow: 0 8px 24px rgba(93,191,160,0.15); }
+    .transform-stars { color: var(--pink); font-size: 0.82rem; letter-spacing: 1px; margin-bottom: 9px; }
+    .transform-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+    .transform-person { font-size: 0.8rem; font-weight: 700; color: var(--text); }
     .transform-person span { font-weight: 400; color: var(--muted); }
 
-    /* FREE TRIAL FORM */
-    .trial { padding: 90px 60px; }
+    /* ORDER FORM */
+    .trial { padding: 90px 60px; background: var(--bg); }
     .trial-inner {
       display: grid; grid-template-columns: 1fr 480px;
       gap: 80px; max-width: 1000px; margin: 0 auto;
       align-items: center;
     }
-    .trial-left h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 16px; }
-    .trial-left h2 em { color: var(--orange); font-style: normal; display: block; }
-    .trial-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 380px; }
-    .trial-features { display: flex; flex-direction: column; gap: 10px; }
+    .trial-left h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900; letter-spacing: -1px;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .trial-left h2 em { color: var(--teal); font-style: normal; display: block; }
+    .trial-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; margin-bottom: 28px; max-width: 380px; }
+    .trial-features { display: flex; flex-direction: column; gap: 11px; }
     .trial-feature { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--muted); }
-    .trial-feature .check { color: var(--orange); font-weight: 900; font-size: 0.9rem; }
+    .trial-feature .check { color: var(--teal); font-weight: 900; font-size: 0.9rem; flex-shrink: 0; }
     .trial-form {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--orange);
-      border-radius: 14px;
-      padding: 36px;
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--teal);
+      border-radius: 16px;
+      padding: 38px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       display: flex; flex-direction: column; gap: 14px;
     }
-    .trial-form-title { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .trial-form-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; }
+    .trial-form-title { font-size: 1.1rem; font-weight: 800; color: var(--text); letter-spacing: 0.2px; margin-bottom: 2px; }
+    .trial-form-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
     label { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-row { display: flex; gap: 12px; }
     .form-row .form-group { flex: 1; }
-    input, select {
-      padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px;
+    input, select, textarea {
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
       font-size: 0.9rem; font-family: inherit;
-      background: var(--bg); color: var(--text); outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+      background: var(--bg); color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
     }
-    input::placeholder { color: var(--subtle); }
-    select option { background: var(--bg); }
-    input:focus, select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,85,0,0.1); }
-    .btn-submit { background: var(--orange); color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 0.97rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
-    .btn-submit:hover { background: var(--orange-d); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,85,0,0.3); }
+    input::placeholder, textarea::placeholder { color: var(--subtle); }
+    select option { background: #fff; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(93,191,160,0.12);
+    }
+    textarea { resize: vertical; min-height: 90px; }
+    .btn-submit {
+      background: var(--teal); color: #fff; border: none;
+      padding: 14px; border-radius: 8px;
+      font-size: 0.97rem; font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-submit:hover { background: var(--teal-d); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(93,191,160,0.28); }
     .no-cc { font-size: 0.75rem; color: var(--muted); text-align: center; }
 
     /* FOOTER */
-    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 60px 24px; }
+    footer {
+      background: #fdf9f5;
+      border-top: 1px solid var(--border);
+      padding: 48px 60px 24px;
+    }
     .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
-    .footer-brand-name { font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-    .footer-brand-name em { color: var(--orange); font-style: normal; }
-    .footer-brand p { font-size: 0.83rem; color: var(--muted); margin-top: 10px; line-height: 1.65; max-width: 220px; }
-    .footer-col h4 { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; color: var(--text); }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .footer-brand-name { display: block; margin-bottom: 12px; }
+    .footer-brand p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; max-width: 220px; }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; color: var(--text); }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .footer-col ul a { font-size: 0.83rem; color: var(--muted); transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--orange); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.78rem; color: var(--subtle); }
-    .back-link { color: var(--orange); font-weight: 600; }
+    .footer-col ul a:hover { color: var(--teal); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .back-link { color: var(--teal); font-weight: 600; }
+    .back-link:hover { color: var(--teal-d); }
 
+    /* RESPONSIVE */
     @media (max-width: 1000px) {
       .amenities-grid { grid-template-columns: repeat(2, 1fr); }
       .programs-grid { grid-template-columns: repeat(2, 1fr); }
@@ -303,8 +396,7 @@
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .hero { padding: 60px 20px; min-height: auto; }
-      .hero h1 { letter-spacing: -2px; }
-      .hero-deco { display: none; }
+      .hero h1 { letter-spacing: -1.5px; }
       .amenities, .programs, .pricing, .trial { padding: 60px 20px; }
       .moto-left, .moto-right { padding: 60px 20px; }
       footer { padding: 40px 20px 20px; }
@@ -315,232 +407,277 @@
 </head>
 <body>
 
+  <!-- OFFER BAR -->
   <div class="offer-bar">
-    🔥 FREE WEEK TRIAL — No credit card. No commitment. Just show up. <a href="#trial">Claim It Now</a>
+    🥐 Free local delivery on custom orders over $50 this week. <a href="#order">Order Now</a>
   </div>
 
+  <!-- NAV -->
   <nav>
-    <div class="nav-logo">Peak <em>Fitness</em></div>
+    <div class="nav-logo">
+      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:68px; display:block;" />
+    </div>
     <ul class="nav-links">
-      <li><a href="#amenities">Amenities</a></li>
-      <li><a href="#programs">Classes</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#trial">Free Trial</a></li>
-      <li><a href="#trial" class="nav-trial">Start Free Week</a></li>
+      <li><a href="#offerings">Menu</a></li>
+      <li><a href="#order">Custom Orders</a></li>
+      <li><a href="#options">About</a></li>
+      <li><a href="#order" class="nav-trial">Order Online</a></li>
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-deco">PEAK</div>
+    <div class="hero-logo">
+      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:96px; display:block;" />
+    </div>
     <div class="hero-content">
-      <div class="hero-badge">Now Open — Summer 2026 Enrollment</div>
-      <h1>
-        Every<br>
-        <span class="line2">Workout.</span>
-        <span class="line3">One Membership.</span>
-      </h1>
-      <p class="hero-sub">Peak Fitness is the only studio in the area where serious people come to get serious results. Strength, HIIT, boxing, cardio — all under one roof, all in your plan.</p>
+      <span class="hero-eyebrow">Open Mon–Sat · 6am to 3pm</span>
+      <h1>Baked Fresh.<br><span class="accent">Every Morning.</span></h1>
+      <p class="hero-sub">Your neighborhood artisan bakery — sourdough loaves, buttery croissants, custom cakes, and seasonal pastries made entirely from scratch before the sun comes up.</p>
       <div class="hero-ctas">
-        <a href="#trial" class="btn-fire">Claim Your Free Week</a>
-        <a href="#programs" class="btn-ghost">Explore Classes</a>
+        <a href="#order" class="btn-primary">Order a Custom Cake</a>
+        <a href="#menu" class="btn-outline">View Our Menu</a>
       </div>
       <div class="hero-trust">
-        <div class="htrust"><span class="spark">⚡</span> 800+ Active Members</div>
-        <div class="htrust"><span class="spark">⚡</span> 15+ Classes Per Week</div>
-        <div class="htrust"><span class="spark">⚡</span> 8 Certified Coaches</div>
-        <div class="htrust"><span class="spark">⚡</span> No Long-Term Contract</div>
+        <div class="htrust"><span class="spark">✦</span> 200+ Items Baked Daily</div>
+        <div class="htrust"><span class="spark">✦</span> Locally Sourced Ingredients</div>
+        <div class="htrust"><span class="spark">✦</span> Scratch-Made Every Morning</div>
+        <div class="htrust"><span class="spark">✦</span> No Preservatives, Ever</div>
       </div>
     </div>
   </section>
 
+  <!-- STATS STRIP -->
   <div class="stats">
-    <div class="stat-block"><span class="stat-num">800+</span><span class="stat-lbl">Members</span></div>
-    <div class="stat-block"><span class="stat-num">15+</span><span class="stat-lbl">Classes/Week</span></div>
-    <div class="stat-block"><span class="stat-num">8</span><span class="stat-lbl">Coaches</span></div>
-    <div class="stat-block"><span class="stat-num">5am</span><span class="stat-lbl">Opens Daily</span></div>
-    <div class="stat-block"><span class="stat-num">Free</span><span class="stat-lbl">First Week</span></div>
+    <div class="stat-block"><span class="stat-num">200+</span><span class="stat-lbl">Items/Day</span></div>
+    <div class="stat-block"><span class="stat-num">6am</span><span class="stat-lbl">Opens at 6am</span></div>
+    <div class="stat-block"><span class="stat-num">30+</span><span class="stat-lbl">Varieties</span></div>
+    <div class="stat-block"><span class="stat-num">100%</span><span class="stat-lbl">Scratch-Made</span></div>
+    <div class="stat-block"><span class="stat-num">Custom</span><span class="stat-lbl">Orders Welcome</span></div>
   </div>
 
-  <section class="amenities" id="amenities">
+  <!-- WHAT WE OFFER -->
+  <section class="amenities" id="offerings">
     <div class="section-header">
-      <div class="section-label">Facilities</div>
-      <h2 class="section-title">World-Class Amenities</h2>
-      <div class="orange-line"></div>
-      <p class="section-sub" style="margin-top:16px;">Everything you need to train hard, recover right, and come back tomorrow.</p>
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Everything In Our Bakery</h2>
+      <div class="teal-line"></div>
+      <p class="section-sub" style="margin-top:16px;">From your morning loaf to a custom wedding cake — made in-house, every day.</p>
     </div>
     <div class="amenities-grid">
-      <div class="amenity"><span class="amenity-icon">🏋️</span><h3>Free Weights</h3><p>Full dumbbell rack up to 150lbs, barbells, and an Olympic platform.</p></div>
-      <div class="amenity"><span class="amenity-icon">🚴</span><h3>Cardio Floor</h3><p>60+ machines — treadmills, rowers, assault bikes, stair climbers.</p></div>
-      <div class="amenity"><span class="amenity-icon">🥊</span><h3>Boxing Ring</h3><p>Full-size ring and heavy bag area for boxing and kickboxing classes.</p></div>
-      <div class="amenity"><span class="amenity-icon">♨️</span><h3>Sauna & Steam</h3><p>Dry sauna and steam room for post-workout recovery.</p></div>
-      <div class="amenity"><span class="amenity-icon">🧘</span><h3>Yoga Studio</h3><p>Dedicated hardwood-floor studio for yoga, Pilates, and stretch classes.</p></div>
-      <div class="amenity"><span class="amenity-icon">📱</span><h3>Member App</h3><p>Book classes, track workouts, and view schedules from your phone.</p></div>
-      <div class="amenity"><span class="amenity-icon">🛁</span><h3>Locker Rooms</h3><p>Clean, spacious facilities with showers and day-use lockers.</p></div>
-      <div class="amenity"><span class="amenity-icon">🧑‍💼</span><h3>Personal Training</h3><p>1-on-1 sessions with certified coaches — customized for your goals.</p></div>
+      <div class="amenity">
+        <span class="amenity-icon">🍞</span>
+        <h3>Artisan Sourdough</h3>
+        <p>Long-fermented, naturally leavened loaves baked fresh each morning. Plain, seeded, and seasonal varieties.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">🥐</span>
+        <h3>Croissants &amp; Pastries</h3>
+        <p>Buttery, flaky layers made with real butter and seasonal fillings. Pain au chocolat, danish, and more.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">🎂</span>
+        <h3>Custom Cakes</h3>
+        <p>From birthday tiers to wedding cakes — designed, baked, and decorated to order in-house.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">☕</span>
+        <h3>Specialty Coffee</h3>
+        <p>Locally roasted espresso and drip, pulled in-house. Pairs perfectly with everything we make.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">🥧</span>
+        <h3>Seasonal Pies</h3>
+        <p>Rotating pie selection built around what's in season at local farms. Sweet and savory options.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">📱</span>
+        <h3>Online Pre-Orders</h3>
+        <p>Reserve your loaf or pastries online for same-day pickup — skip the line, grab and go.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">🎁</span>
+        <h3>Gift Boxes</h3>
+        <p>Curated bread and pastry boxes, beautifully packaged. Perfect for gifting or any special occasion.</p>
+      </div>
+      <div class="amenity">
+        <span class="amenity-icon">🏢</span>
+        <h3>Corporate Orders</h3>
+        <p>Catering-size orders for offices, meetings, and breakfast events. Weekly standing orders available.</p>
+      </div>
     </div>
   </section>
 
-  <section class="programs" id="programs">
+  <!-- MENU HIGHLIGHTS -->
+  <section class="programs" id="menu">
     <div class="section-header">
-      <div class="section-label">Group Classes</div>
-      <h2 class="section-title">Find Your Workout</h2>
-      <div class="orange-line"></div>
-      <p class="section-sub" style="margin-top:16px;">15+ classes per week across 6 disciplines. Something for every goal and fitness level.</p>
+      <div class="section-label">Fresh Daily</div>
+      <h2 class="section-title">Menu Highlights</h2>
+      <div class="teal-line"></div>
+      <p class="section-sub" style="margin-top:16px;">30+ varieties rotating with the season. Something new to try every week.</p>
     </div>
     <div class="programs-grid">
       <div class="prog-card">
-        <div class="prog-thumb thumb-strength">🏋️</div>
+        <div class="prog-top-border border-bread"></div>
+        <div class="prog-thumb">🍞</div>
         <div class="prog-info">
-          <div class="prog-tag">Strength</div>
-          <h3>Barbell Club</h3>
-          <p>Structured strength programming built around squat, bench, and deadlift. All skill levels.</p>
-          <div class="prog-meta"><span class="prog-badge">All Levels</span><span class="prog-badge">60 min</span></div>
+          <div class="prog-tag">Breads</div>
+          <h3>Artisan Loaves</h3>
+          <p>Signature sourdoughs, whole wheat, rye, seeded, and olive — baked in a stone deck oven every morning.</p>
+          <div class="prog-meta"><span class="prog-badge">Baked Daily</span><span class="prog-badge">From $9</span></div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-thumb thumb-hiit">🔥</div>
+        <div class="prog-top-border border-pastry"></div>
+        <div class="prog-thumb">🥐</div>
         <div class="prog-info">
-          <div class="prog-tag">Conditioning</div>
-          <h3>HIIT Circuit</h3>
-          <p>High-intensity intervals designed to torch calories and build cardiovascular capacity.</p>
-          <div class="prog-meta"><span class="prog-badge">Intermediate</span><span class="prog-badge">45 min</span></div>
+          <div class="prog-tag">Pastries</div>
+          <h3>Morning Pastries</h3>
+          <p>Croissants, pain au chocolat, morning buns, almond danish, and seasonal fruit turnovers.</p>
+          <div class="prog-meta"><span class="prog-badge">Baked Daily</span><span class="prog-badge">From $4</span></div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-thumb thumb-boxing">🥊</div>
+        <div class="prog-top-border border-cake"></div>
+        <div class="prog-thumb">🎂</div>
         <div class="prog-info">
-          <div class="prog-tag">Combat</div>
-          <h3>Boxing Fundamentals</h3>
-          <p>Learn real technique from certified coaches. Full-body workout with zero prior experience needed.</p>
-          <div class="prog-meta"><span class="prog-badge">Beginner-Friendly</span><span class="prog-badge">60 min</span></div>
+          <div class="prog-tag">Custom Orders</div>
+          <h3>Celebration Cakes</h3>
+          <p>Fully custom cakes designed and decorated in-house. Birthdays, weddings, corporate — any occasion.</p>
+          <div class="prog-meta"><span class="prog-badge">48hr Notice</span><span class="prog-badge">Custom Quote</span></div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-thumb thumb-cardio">🚴</div>
+        <div class="prog-top-border border-pie"></div>
+        <div class="prog-thumb">🥧</div>
         <div class="prog-info">
-          <div class="prog-tag">Cardio</div>
-          <h3>Indoor Cycling</h3>
-          <p>Music-driven ride class that builds endurance and burns serious calories. Clip in and go.</p>
-          <div class="prog-meta"><span class="prog-badge">All Levels</span><span class="prog-badge">45 min</span></div>
+          <div class="prog-tag">Seasonal</div>
+          <h3>Rotating Pies</h3>
+          <p>Sweet and savory pies built around what's fresh from local farms. Selection changes weekly.</p>
+          <div class="prog-meta"><span class="prog-badge">Seasonal</span><span class="prog-badge">From $18</span></div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-thumb thumb-yoga">🧘</div>
+        <div class="prog-top-border border-cookie"></div>
+        <div class="prog-thumb">🍪</div>
         <div class="prog-info">
-          <div class="prog-tag">Recovery</div>
-          <h3>Mobility & Yoga</h3>
-          <p>Move better, recover faster. Essential for serious athletes and anyone who sits at a desk.</p>
-          <div class="prog-meta"><span class="prog-badge">All Levels</span><span class="prog-badge">60 min</span></div>
+          <div class="prog-tag">Sweets</div>
+          <h3>Cookies &amp; Bars</h3>
+          <p>Brown butter chocolate chip, shortbread, lemon bars, brownies, and whatever's in the case today.</p>
+          <div class="prog-meta"><span class="prog-badge">Baked Daily</span><span class="prog-badge">From $3</span></div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-thumb thumb-spin">⚡</div>
+        <div class="prog-top-border border-savory"></div>
+        <div class="prog-thumb">🥖</div>
         <div class="prog-info">
-          <div class="prog-tag">Athletic</div>
-          <h3>Athletic Performance</h3>
-          <p>Speed, agility, and power training modeled after pro athlete conditioning protocols.</p>
-          <div class="prog-meta"><span class="prog-badge">Advanced</span><span class="prog-badge">60 min</span></div>
+          <div class="prog-tag">Savory</div>
+          <h3>Savory Bakes</h3>
+          <p>Rosemary focaccia, cheddar pull-apart rolls, and rotating quiche for a savory morning option.</p>
+          <div class="prog-meta"><span class="prog-badge">Baked Daily</span><span class="prog-badge">From $6</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="pricing" id="pricing">
+  <!-- ORDER OPTIONS -->
+  <section class="pricing" id="options">
     <div class="section-header">
-      <div class="section-label">Membership</div>
-      <h2 class="section-title">Simple, Honest Pricing</h2>
-      <div class="orange-line"></div>
-      <p class="section-sub" style="margin-top:16px;">No initiation fees. No annual contracts. Cancel anytime with 30 days notice.</p>
+      <div class="section-label">How To Order</div>
+      <h2 class="section-title">Order Options</h2>
+      <div class="teal-line"></div>
+      <p class="section-sub" style="margin-top:16px;">Walk in, subscribe, or place a custom order. We make it easy.</p>
     </div>
     <div class="pricing-grid">
       <div class="plan">
-        <div class="plan-name">Gym Access</div>
-        <div class="plan-price">$39<sub>/mo</sub></div>
-        <div class="plan-tagline">Open floor, no group classes</div>
+        <div class="plan-name">Walk-In Pickup</div>
+        <div class="plan-price" style="font-size:2rem; padding-top:6px;">In Store</div>
+        <div class="plan-tagline">First come, first served</div>
         <ul class="plan-features">
-          <li>Full gym floor access</li>
-          <li>Locker room & showers</li>
-          <li>Member app access</li>
-          <li class="dim">Group classes</li>
-          <li class="dim">Sauna & steam room</li>
-          <li class="dim">Coach check-ins</li>
+          <li>Full in-store selection</li>
+          <li>Specialty coffee drinks</li>
+          <li>Seasonal specials</li>
+          <li class="dim">Guaranteed stock</li>
+          <li class="dim">Pre-order discount</li>
+          <li class="dim">Delivery option</li>
         </ul>
-        <a href="#trial" class="btn-plan-outline">Start Free Week</a>
+        <a href="#order" class="btn-plan-outline">Pre-Order Online</a>
       </div>
       <div class="plan featured">
-        <div class="plan-name">All-Access</div>
-        <div class="plan-price">$69<sub>/mo</sub></div>
-        <div class="plan-tagline">Everything, no limits</div>
+        <div class="plan-name">Weekly Bread Box</div>
+        <div class="plan-price">$38<sub>/wk</sub></div>
+        <div class="plan-tagline">Fresh loaf + 4 pastries, weekly</div>
         <ul class="plan-features">
-          <li>Full gym floor access</li>
-          <li>Unlimited group classes</li>
-          <li>Sauna & steam room</li>
-          <li>Locker room & showers</li>
-          <li>1 coach check-in/month</li>
-          <li>Nutrition resource library</li>
+          <li>1 artisan loaf (your choice)</li>
+          <li>4 pastries (baker's pick)</li>
+          <li>Pickup or local delivery</li>
+          <li>Priority early-morning stock</li>
+          <li>Seasonal rotating items</li>
+          <li>Pause or cancel anytime</li>
         </ul>
-        <a href="#trial" class="btn-plan">Start Free Week</a>
+        <a href="#order" class="btn-plan">Subscribe Now</a>
       </div>
       <div class="plan">
-        <div class="plan-name">Elite</div>
-        <div class="plan-price">$119<sub>/mo</sub></div>
-        <div class="plan-tagline">All-Access + coaching</div>
+        <div class="plan-name">Catering &amp; Events</div>
+        <div class="plan-price" style="font-size:2rem; padding-top:6px;">Custom</div>
+        <div class="plan-tagline">Offices, weddings, events</div>
         <ul class="plan-features">
-          <li>Everything in All-Access</li>
-          <li>4 personal training sessions</li>
-          <li>Custom program design</li>
-          <li>Priority class booking</li>
-          <li>Monthly goal review</li>
-          <li>Guest pass included</li>
+          <li>Pastry &amp; bread trays</li>
+          <li>Custom cakes &amp; desserts</li>
+          <li>Corporate standing orders</li>
+          <li>Event day delivery</li>
+          <li>Menu consultation included</li>
+          <li>Flexible order sizes</li>
         </ul>
-        <a href="#trial" class="btn-plan-outline">Start Free Week</a>
+        <a href="#order" class="btn-plan-outline">Get a Quote</a>
       </div>
     </div>
   </section>
 
+  <!-- PHILOSOPHY + REVIEWS SPLIT -->
   <section class="motivation">
     <div class="moto-left">
-      <div class="section-label">Member Results</div>
-      <h2>Find Your<br><em>Strength</em></h2>
-      <p>Our members don't just work out — they transform. From first-timers who've never touched a barbell to competitive athletes fine-tuning their edge, Peak is where real results happen.</p>
-      <a href="#trial" class="btn-fire" style="display:inline-block; width:fit-content;">Join for Free This Week</a>
+      <div class="section-label">Our Philosophy</div>
+      <h2>Every Loaf.<br><em>From Scratch.</em></h2>
+      <p>We don't use mixes, shortcuts, or preservatives. Every item on the shelf was made by hand this morning — with local flour, real butter, and time. That's it. That's the whole secret.</p>
+      <a href="#order" class="btn-primary" style="display:inline-block; width:fit-content;">Place a Custom Order</a>
     </div>
     <div class="moto-right">
       <div class="transform-card">
         <div class="transform-stars">★★★★★</div>
-        <p class="transform-text">"I joined not knowing what I was doing. The coaches made me feel comfortable from day one. Six months later I'm stronger than I've ever been and I actually enjoy working out."</p>
-        <div class="transform-person">Jessica M. <span>— Member since 2025</span></div>
+        <p class="transform-text">"The sourdough completely changed my morning routine. I walk in at 6:30am on my way to work and it's still warm. I've tried every loaf on the board and they're all genuinely exceptional."</p>
+        <div class="transform-person">Sarah K. <span>— Weekly regular</span></div>
       </div>
       <div class="transform-card">
         <div class="transform-stars">★★★★★</div>
-        <p class="transform-text">"The class variety is insane. I never get bored. I do boxing Monday, HIIT Wednesday, lift Thursday and Friday. Best decision I've made for my health."</p>
-        <div class="transform-person">Carlos R. <span>— All-Access Member</span></div>
+        <p class="transform-text">"Ordered a custom cake for my daughter's birthday with 5 days notice and it was absolutely stunning. Everyone at the party asked where it came from. Worth every penny."</p>
+        <div class="transform-person">Marcus T. <span>— Custom order customer</span></div>
       </div>
       <div class="transform-card">
         <div class="transform-stars">★★★★★</div>
-        <p class="transform-text">"After years of jumping gym memberships I finally found one I stick with. The coaching is actually personalized and the community keeps me accountable."</p>
-        <div class="transform-person">Tanya B. <span>— Elite Member</span></div>
+        <p class="transform-text">"We set up a weekly bread box delivery for our office team and it's become the highlight of Friday mornings. The team looks forward to it every week. Highly recommend."</p>
+        <div class="transform-person">Priya M. <span>— Corporate subscription</span></div>
       </div>
     </div>
   </section>
 
-  <section class="trial" id="trial">
+  <!-- CUSTOM ORDER FORM -->
+  <section class="trial" id="order">
     <div class="trial-inner">
       <div class="trial-left">
-        <div class="section-label">Free Trial</div>
-        <h2>Your First<br><em>Week Is Free</em></h2>
-        <p>Try any class, use every amenity, meet the coaches. One full week, completely free — no card required, no pressure, no strings.</p>
+        <div class="section-label">Custom Orders</div>
+        <h2>Tell Us What<br><em>You're After</em></h2>
+        <p>Fill this out and we'll reach out within 24 hours to confirm details, pricing, and pickup or delivery timing.</p>
         <div class="trial-features">
-          <div class="trial-feature"><span class="check">✓</span> Access to all classes & gym floor</div>
-          <div class="trial-feature"><span class="check">✓</span> Free intro session with a coach</div>
-          <div class="trial-feature"><span class="check">✓</span> No credit card required</div>
-          <div class="trial-feature"><span class="check">✓</span> Cancel anytime — zero pressure</div>
+          <div class="trial-feature"><span class="check">✓</span> Custom cakes (48hr minimum notice)</div>
+          <div class="trial-feature"><span class="check">✓</span> Weekly bread box subscriptions</div>
+          <div class="trial-feature"><span class="check">✓</span> Catering trays for events &amp; offices</div>
+          <div class="trial-feature"><span class="check">✓</span> Large pickup orders &amp; gift boxes</div>
         </div>
       </div>
       <div class="trial-form">
-        <div class="trial-form-title">Claim Your Free Week</div>
-        <div class="trial-form-sub">Fill this out and we'll reach out to confirm your start date.</div>
+        <div class="trial-form-title">Send an Order Request</div>
+        <div class="trial-form-sub">We'll follow up within 24 hours to confirm details.</div>
         <div class="form-row">
           <div class="form-group"><label>First Name</label><input type="text" placeholder="Alex" /></div>
           <div class="form-group"><label>Last Name</label><input type="text" placeholder="Johnson" /></div>
@@ -550,58 +687,65 @@
           <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000" /></div>
         </div>
         <div class="form-group">
-          <label>I'm most interested in...</label>
+          <label>Order Type</label>
           <select>
-            <option>I want to try everything</option>
-            <option>Strength Training</option>
-            <option>HIIT & Conditioning</option>
-            <option>Boxing / Combat</option>
-            <option>Cardio & Cycling</option>
-            <option>Personal Training</option>
+            <option>Custom Cake</option>
+            <option>Weekly Bread Box</option>
+            <option>Catering / Event Order</option>
+            <option>Large Pickup Order</option>
+            <option>Gift Box</option>
+            <option>Other / Not Sure Yet</option>
           </select>
         </div>
-        <button class="btn-submit">Start My Free Week →</button>
-        <p class="no-cc">No credit card. No contract. Show up and train.</p>
+        <div class="form-group">
+          <label>Tell us more (date needed, size, flavors, etc.)</label>
+          <textarea placeholder="E.g. Birthday cake for 20 people, needed by June 14th. Chocolate sponge with vanilla buttercream preferred."></textarea>
+        </div>
+        <button class="btn-submit">Send My Order Request →</button>
+        <p class="no-cc">We respond within 24 hours. No payment required to inquire.</p>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-brand-name">Peak <em>Fitness</em></div>
-        <p>Real training, real coaches, real results. Open 7 days a week, 5am–11pm.</p>
+        <span class="footer-brand-name">
+          <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:80px; display:block;" />
+        </span>
+        <p>Scratch-made, locally sourced, open every morning. Mon–Sat, 6am–3pm.</p>
       </div>
       <div class="footer-col">
-        <h4>Train</h4>
+        <h4>Menu</h4>
         <ul>
-          <li><a href="#">Classes & Schedule</a></li>
-          <li><a href="#">Personal Training</a></li>
-          <li><a href="#">Amenities</a></li>
-          <li><a href="#">Member App</a></li>
+          <li><a href="#">Artisan Breads</a></li>
+          <li><a href="#">Morning Pastries</a></li>
+          <li><a href="#">Seasonal Pies</a></li>
+          <li><a href="#">Cookies &amp; Bars</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Membership</h4>
+        <h4>Order</h4>
         <ul>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Free Trial</a></li>
-          <li><a href="#">Corporate Plans</a></li>
-          <li><a href="#">Student Discount</a></li>
+          <li><a href="#">Pre-Order Online</a></li>
+          <li><a href="#">Weekly Bread Box</a></li>
+          <li><a href="#">Custom Cakes</a></li>
+          <li><a href="#">Catering &amp; Events</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Studio</h4>
+        <h4>Bakery</h4>
         <ul>
-          <li><a href="#">Hours & Location</a></li>
-          <li><a href="#">Meet the Coaches</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Hours &amp; Location</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <a href="index.html" class="back-link">← Back to Portfolio</a>
-      <span>© 2026 Peak Fitness Studio · Open 7 Days · 5am–11pm</span>
+      <span>© 2026 Whisk &amp; Bloom Bakery · Mon–Sat 6am–3pm</span>
     </div>
   </footer>
 

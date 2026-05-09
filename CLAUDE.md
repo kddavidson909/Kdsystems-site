@@ -4,14 +4,14 @@
 
 This is Kevin Davidson's personal freelance landing page (`kdsystems.co`). Live site for selling landing-page and automation services to small businesses. Built from scratch as Kevin's first web project — he's self-teaching HTML/CSS via AI-assisted development.
 
-The repo also contains 3 demo project pages (landscaping, plumbing, fitness studio) used as portfolio samples to show prospects.
+The repo also contains 3 demo project pages (landscaping, plumbing, bakery) used as portfolio samples to show prospects.
 
 ## Files
 
 - `index.html` — main portfolio/landing page
 - `greencut.html` — landscaping demo (green theme)
 - `fastflow.html` — plumbing demo (blue theme)
-- `peakfitness.html` — fitness studio demo (orange theme)
+- `peakfitness.html` — bakery demo, Hearth Bakery (orange theme)
 - `headshot.jpg` — Kevin's photo for the about section
 
 ## Tech & Style

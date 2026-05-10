@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Whisk &amp; Bloom Bakery — Baked Fresh. Every Morning.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
   <style>
     @font-face {
       font-family: 'BlackberryJam';
@@ -388,6 +389,37 @@
     .back-link { color: var(--teal); font-weight: 600; }
     .back-link:hover { color: var(--teal-d); }
 
+    /* PROJECT OUTCOMES STRIP */
+    .project-outcomes {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: #fdf3e3;
+      border-top: 1px solid #e8d8c0;
+      border-bottom: 1px solid #e8d8c0;
+    }
+    .outcome {
+      text-align: center; padding: 32px 20px;
+      border-right: 1px solid #e8d8c0;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .outcome:last-child { border-right: none; }
+    .outcome-number {
+      font-size: 2.4rem; font-weight: 900;
+      color: #c8843a; letter-spacing: -1px;
+      display: block; line-height: 1; margin-bottom: 8px;
+    }
+    .outcome-label {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* TABLER ICON COLOURS */
+    .amenity-icon .ti { color: #c8843a; }
+    .prog-thumb .ti { color: #c8843a; }
+    .offer-bar .ti { color: #fdf9f5; }
+
+    /* SPARK DOT — replaces ✦ */
+    .htrust .spark { display: inline-block; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; margin-bottom: 2px; }
+
     /* RESPONSIVE */
     @media (max-width: 1000px) {
       .amenities-grid { grid-template-columns: repeat(2, 1fr); }
@@ -398,6 +430,7 @@
       .trial-inner { grid-template-columns: 1fr; gap: 48px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .stats { grid-template-columns: repeat(3, 1fr); }
+      .project-outcomes { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -416,7 +449,7 @@
 
   <!-- OFFER BAR -->
   <div class="offer-bar">
-    🥐 Free local delivery on custom orders over $50 this week. <a href="#order">Order Now</a>
+    Free local delivery on custom orders over $50 this week. <a href="#order">Order Now</a>
   </div>
 
   <!-- NAV -->
@@ -446,10 +479,10 @@
         <a href="#menu" class="btn-outline">View Our Menu</a>
       </div>
       <div class="hero-trust">
-        <div class="htrust"><span class="spark">✦</span> 200+ Items Baked Daily</div>
-        <div class="htrust"><span class="spark">✦</span> Locally Sourced Ingredients</div>
-        <div class="htrust"><span class="spark">✦</span> Scratch-Made Every Morning</div>
-        <div class="htrust"><span class="spark">✦</span> No Preservatives, Ever</div>
+        <div class="htrust"><span class="spark" aria-hidden="true"></span> 200+ Items Baked Daily</div>
+        <div class="htrust"><span class="spark" aria-hidden="true"></span> Locally Sourced Ingredients</div>
+        <div class="htrust"><span class="spark" aria-hidden="true"></span> Scratch-Made Every Morning</div>
+        <div class="htrust"><span class="spark" aria-hidden="true"></span> No Preservatives, Ever</div>
       </div>
     </div>
   </section>
@@ -463,6 +496,26 @@
     <div class="stat-block"><span class="stat-num">Custom</span><span class="stat-lbl">Orders Welcome</span></div>
   </div>
 
+  <!-- PROJECT OUTCOMES -->
+  <div class="project-outcomes">
+    <div class="outcome">
+      <span class="outcome-number">3</span>
+      <span class="outcome-label">Conversion paths</span>
+    </div>
+    <div class="outcome">
+      <span class="outcome-number">24hr</span>
+      <span class="outcome-label">Inquiry response promise</span>
+    </div>
+    <div class="outcome">
+      <span class="outcome-number">0</span>
+      <span class="outcome-label">Phone calls needed to order</span>
+    </div>
+    <div class="outcome">
+      <span class="outcome-number">100%</span>
+      <span class="outcome-label">Mobile-first build</span>
+    </div>
+  </div>
+
   <!-- WHAT WE OFFER -->
   <section class="amenities" id="offerings">
     <div class="section-header">
@@ -473,42 +526,42 @@
     </div>
     <div class="amenities-grid">
       <div class="amenity">
-        <span class="amenity-icon">🍞</span>
+        <span class="amenity-icon"><i class="ti ti-bread" aria-hidden="true"></i></span>
         <h3>Artisan Sourdough</h3>
         <p>Long-fermented, naturally leavened loaves baked fresh each morning. Plain, seeded, and seasonal varieties.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">🥐</span>
+        <span class="amenity-icon"><i class="ti ti-croissant" aria-hidden="true"></i></span>
         <h3>Croissants &amp; Pastries</h3>
         <p>Buttery, flaky layers made with real butter and seasonal fillings. Pain au chocolat, danish, and more.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">🎂</span>
+        <span class="amenity-icon"><i class="ti ti-cake" aria-hidden="true"></i></span>
         <h3>Custom Cakes</h3>
         <p>From birthday tiers to wedding cakes — designed, baked, and decorated to order in-house.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">☕</span>
+        <span class="amenity-icon"><i class="ti ti-coffee" aria-hidden="true"></i></span>
         <h3>Specialty Coffee</h3>
         <p>Locally roasted espresso and drip, pulled in-house. Pairs perfectly with everything we make.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">🥧</span>
+        <span class="amenity-icon"><i class="ti ti-pie" aria-hidden="true"></i></span>
         <h3>Seasonal Pies</h3>
         <p>Rotating pie selection built around what's in season at local farms. Sweet and savory options.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">📱</span>
+        <span class="amenity-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></span>
         <h3>Online Pre-Orders</h3>
         <p>Reserve your loaf or pastries online for same-day pickup — skip the line, grab and go.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">🎁</span>
+        <span class="amenity-icon"><i class="ti ti-gift" aria-hidden="true"></i></span>
         <h3>Gift Boxes</h3>
         <p>Curated bread and pastry boxes, beautifully packaged. Perfect for gifting or any special occasion.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon">🏢</span>
+        <span class="amenity-icon"><i class="ti ti-building" aria-hidden="true"></i></span>
         <h3>Corporate Orders</h3>
         <p>Catering-size orders for offices, meetings, and breakfast events. Weekly standing orders available.</p>
       </div>
@@ -526,7 +579,7 @@
     <div class="programs-grid">
       <div class="prog-card">
         <div class="prog-top-border border-bread"></div>
-        <div class="prog-thumb">🍞</div>
+        <div class="prog-thumb"><i class="ti ti-bread" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Breads</div>
           <h3>Artisan Loaves</h3>
@@ -536,7 +589,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-pastry"></div>
-        <div class="prog-thumb">🥐</div>
+        <div class="prog-thumb"><i class="ti ti-croissant" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Pastries</div>
           <h3>Morning Pastries</h3>
@@ -546,7 +599,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-cake"></div>
-        <div class="prog-thumb">🎂</div>
+        <div class="prog-thumb"><i class="ti ti-cake" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Custom Orders</div>
           <h3>Celebration Cakes</h3>
@@ -556,7 +609,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-pie"></div>
-        <div class="prog-thumb">🥧</div>
+        <div class="prog-thumb"><i class="ti ti-pie" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Seasonal</div>
           <h3>Rotating Pies</h3>
@@ -566,7 +619,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-cookie"></div>
-        <div class="prog-thumb">🍪</div>
+        <div class="prog-thumb"><i class="ti ti-cookie" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Sweets</div>
           <h3>Cookies &amp; Bars</h3>
@@ -576,7 +629,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-savory"></div>
-        <div class="prog-thumb">🥖</div>
+        <div class="prog-thumb"><i class="ti ti-bread" aria-hidden="true"></i></div>
         <div class="prog-info">
           <div class="prog-tag">Savory</div>
           <h3>Savory Bakes</h3>
@@ -676,10 +729,10 @@
         <h2>Tell Us What<br><em>You're After</em></h2>
         <p>Fill this out and we'll reach out within 24 hours to confirm details, pricing, and pickup or delivery timing.</p>
         <div class="trial-features">
-          <div class="trial-feature"><span class="check">✓</span> Custom cakes (48hr minimum notice)</div>
-          <div class="trial-feature"><span class="check">✓</span> Weekly bread box subscriptions</div>
-          <div class="trial-feature"><span class="check">✓</span> Catering trays for events &amp; offices</div>
-          <div class="trial-feature"><span class="check">✓</span> Large pickup orders &amp; gift boxes</div>
+          <div class="trial-feature"><i class="ti ti-check" aria-hidden="true"></i> Custom cakes (48hr minimum notice)</div>
+          <div class="trial-feature"><i class="ti ti-check" aria-hidden="true"></i> Weekly bread box subscriptions</div>
+          <div class="trial-feature"><i class="ti ti-check" aria-hidden="true"></i> Catering trays for events &amp; offices</div>
+          <div class="trial-feature"><i class="ti ti-check" aria-hidden="true"></i> Large pickup orders &amp; gift boxes</div>
         </div>
       </div>
       <div class="trial-form">

@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KD Systems — Modern Websites. Smarter Systems.</title>
+  <title>KD Systems — Modern Websites Smarter Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&display=swap" rel="stylesheet">
   <style>
 
     /* ===== RESET & BASE ===== */
@@ -18,10 +20,10 @@
       --surface:   #141416;
       --card:      #1a1a1d;
       --border:    #2a2a2f;
-      --red:       #dc2626;
-      --red-dark:  #b91c1c;
-      --red-glow:  rgba(220, 38, 38, 0.12);
-      --red-glow2: rgba(220, 38, 38, 0.05);
+      --red:       #b91c1c;
+      --red-dark:  #991b1b;
+      --red-glow:  rgba(185, 28, 28, 0.12);
+      --red-glow2: rgba(185, 28, 28, 0.05);
       --text:      #f0eff4;
       --muted:     #9ca3af;
       --subtle:    #4b5563;
@@ -59,14 +61,30 @@
     }
 
     .nav-logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.5px;
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 1.25rem;
       color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      line-height: 1;
     }
 
-    .nav-logo span {
+    .logo-kd {
+      font-weight: 800;
+      letter-spacing: -0.5px;
       color: var(--red);
+    }
+
+    .logo-sep {
+      font-weight: 300;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    .logo-systems {
+      font-weight: 300;
+      letter-spacing: 0.5px;
     }
 
     .nav-links {
@@ -623,7 +641,9 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">KD<span>Systems</span></a>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-kd">KD</span><span class="logo-sep">/</span><span class="logo-systems">Systems</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
@@ -635,7 +655,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-tag">Available for New Projects</div>
-    <h1>Modern Websites<span class="dot">.</span><br>Smarter Systems<span class="dot">.</span></h1>
+    <h1>Modern Websites<br>Smarter Systems</h1>
     <h2>Custom websites and simple automation that help small businesses get more customers—without the tech headache.</h2>
     <div class="hero-buttons">
       <a href="#contact" class="btn-primary">Get a Free Quote</a>
@@ -683,36 +703,14 @@
     <div class="divider"></div>
     <p class="section-subtitle" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
     <div class="portfolio-grid">
-      <a class="portfolio-item" href="greencut.html">
-        <div class="portfolio-thumb thumb-green">
-          <img src="https://images.pexels.com/photos/6728925/pexels-photo-6728925.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Professional landscaping project" />
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-tag">Landscaping</div>
-          <h3>GreenCut Landscaping</h3>
-          <p>Lead-gen page with services, gallery, and instant quote form.</p>
-          <span class="view-link">View Project →</span>
-        </div>
-      </a>
-      <a class="portfolio-item" href="fastflow.html">
-        <div class="portfolio-thumb thumb-blue">
-          <img src="https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=600&h=400&fit=crop&q=80" alt="Professional plumbing service" />
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-tag">Plumbing</div>
-          <h3>FastFlow Plumbing</h3>
-          <p>Emergency CTA-focused page with trust signals and reviews.</p>
-          <span class="view-link">View Project →</span>
-        </div>
-      </a>
-      <a class="portfolio-item" href="peakfitness.html">
+      <a class="portfolio-item" href="whisknbloom.html">
         <div class="portfolio-thumb thumb-orange">
-          <img src="https://images.pexels.com/photos/4716816/pexels-photo-4716816.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Modern gym and fitness studio" />
+          <img src="https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Artisan bakery with fresh bread and pastries" />
         </div>
         <div class="portfolio-info">
-          <div class="portfolio-tag">Fitness</div>
-          <h3>Peak Fitness Studio</h3>
-          <p>Class schedule, pricing tiers, and free trial signup flow.</p>
+          <div class="portfolio-tag">Demo — Bakery</div>
+          <h3>Whisk &amp; Bloom Bakery</h3>
+          <p>Menu highlights, order options, and custom cake inquiry form.</p>
           <span class="view-link">View Project →</span>
         </div>
       </a>

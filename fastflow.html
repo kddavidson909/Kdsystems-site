@@ -3,624 +3,671 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FastFlow Plumbing — Here to Fix It. Today.</title>
+  <title>Prairie Plumbing — Here When It Matters.</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:       #05080f;
-      --surface:  #080d18;
-      --card:     #0d1422;
-      --border:   #1a2540;
-      --blue:     #0ea5e9;
-      --blue-d:   #0284c7;
-      --blue-g:   rgba(14,165,233,0.12);
-      --blue-gg:  rgba(14,165,233,0.05);
-      --orange:   #f97316;
-      --orange-g: rgba(249,115,22,0.12);
-      --text:     #e8eef8;
-      --muted:    #7a90b8;
-      --subtle:   #2a3a55;
-      --white:    #ffffff;
+      --bg:        #f8fafc;
+      --surface:   #ffffff;
+      --card:      #ffffff;
+      --border:    #e2e8f0;
+      --blue:      #1a56db;
+      --blue-d:    #1a40a8;
+      --blue-tint: #eff6ff;
+      --red:       #dc2626;
+      --text:      #0f172a;
+      --muted:     #64748b;
+      --navy:      #0f172a;
+      --white:     #ffffff;
     }
 
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-thumb { background: var(--blue-d); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
-    /* PROMO BAR */
-    .promo-bar {
-      background: var(--orange);
+    /* EMERGENCY BAR */
+    .emergency-bar {
+      background: var(--red);
       color: #fff;
       text-align: center;
-      padding: 9px 20px;
-      font-size: 0.88rem;
+      padding: 10px 20px;
+      font-size: 0.9rem;
       font-weight: 700;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.1px;
     }
-    .promo-bar span { background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 3px; margin-left: 8px; font-family: monospace; letter-spacing: 1px; }
+    .emergency-bar a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 800;
+    }
+    .emergency-bar a:hover { opacity: 0.88; }
 
     /* NAV */
     nav {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 60px;
-      height: 68px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(5,8,15,0.97);
-      backdrop-filter: blur(12px);
+      height: 120px;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
       position: sticky; top: 0; z-index: 200;
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .nav-logo-icon { width: 36px; height: 36px; background: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    .nav-logo-text { font-weight: 800; font-size: 1.1rem; }
-    .nav-logo-text span { color: var(--blue); }
-    .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.88rem; color: var(--muted); align-items: center; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.9rem; color: var(--muted); align-items: center; }
+    .nav-links a { color: var(--muted); font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-phone-btn {
-      display: flex; align-items: center; gap: 8px;
+    .nav-cta-btn {
       background: var(--blue); color: #fff !important;
-      padding: 9px 18px; border-radius: 7px;
+      padding: 9px 20px; border-radius: 7px;
       font-weight: 700; font-size: 0.88rem;
       transition: background 0.2s, box-shadow 0.2s;
     }
-    .nav-phone-btn:hover { background: var(--blue-d) !important; box-shadow: 0 4px 16px rgba(14,165,233,0.3); }
+    .nav-cta-btn:hover { background: var(--blue-d) !important; box-shadow: 0 4px 16px rgba(26,86,219,0.25); }
 
     /* HERO */
     .hero {
-      min-height: 88vh;
+      min-height: 86vh;
       display: grid;
       grid-template-columns: 1fr 400px;
       gap: 0;
       align-items: stretch;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg);
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(14,165,233,0.08) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 20%, rgba(249,115,22,0.06) 0%, transparent 45%),
-        linear-gradient(160deg, #05080f 0%, #080e1c 50%, #05080f 100%);
-    }
-    .hero-bg-lines {
-      position: absolute; inset: 0;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, var(--border) 60px),
-                        repeating-linear-gradient(90deg, transparent, transparent 59px, var(--border) 60px);
-      opacity: 0.2;
-    }
-
     .hero-left {
-      padding: 80px 60px 80px 60px;
+      padding: 80px 60px;
       display: flex; flex-direction: column; justify-content: center;
-      position: relative; z-index: 1;
     }
-    .hero-eyebrow {
+    .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.78rem; font-weight: 700; color: var(--blue);
-      text-transform: uppercase; letter-spacing: 1.5px;
-      margin-bottom: 22px;
+      background: var(--blue-tint);
+      border: 1px solid #bfdbfe;
+      color: var(--blue);
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+      width: fit-content;
     }
-    .hero-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--blue); border-radius: 1px; }
     .hero h1 {
-      font-size: clamp(2.6rem, 4.5vw, 4rem);
-      font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -1.5px;
+      color: var(--text);
       margin-bottom: 20px;
     }
     .hero h1 .accent { color: var(--blue); }
-    .hero h1 .accent-o { color: var(--orange); }
     .hero-sub {
-      font-size: 1.05rem; color: var(--muted); max-width: 460px;
-      margin-bottom: 36px; line-height: 1.7;
+      font-size: 1.05rem; color: var(--muted); max-width: 480px;
+      margin-bottom: 36px; line-height: 1.75;
     }
-    .hero-trust {
-      display: flex; flex-wrap: wrap; gap: 18px;
-      margin-bottom: 36px;
-    }
-    .trust-pill {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.82rem; color: var(--muted);
-    }
-    .trust-pill .check { color: var(--blue); font-size: 0.9rem; font-weight: 700; }
     .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       background: var(--blue); color: #fff;
       padding: 14px 28px; border-radius: 8px;
       font-weight: 700; font-size: 0.95rem;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-block;
     }
-    .btn-primary:hover { background: var(--blue-d); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(14,165,233,0.35); }
-    .btn-ghost {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-      padding: 14px 28px; border-radius: 8px;
-      font-weight: 600; font-size: 0.95rem;
-      transition: border-color 0.2s, background 0.2s;
+    .btn-primary:hover { background: var(--blue-d); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,86,219,0.22); }
+    .btn-outline {
+      background: transparent; color: var(--blue);
+      border: 2px solid var(--blue);
+      padding: 13px 28px; border-radius: 8px;
+      font-weight: 700; font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
     }
-    .btn-ghost:hover { border-color: var(--blue); background: var(--blue-gg); }
+    .btn-outline:hover { background: var(--blue-tint); }
 
-    /* HERO RIGHT — Emergency Card */
+    /* HERO RIGHT — Phone Card */
     .hero-right {
-      background: var(--card);
+      background: var(--white);
       border-left: 1px solid var(--border);
       display: flex; flex-direction: column; justify-content: center;
-      padding: 60px 40px;
-      position: relative; z-index: 1;
+      padding: 60px 44px;
     }
-    .emergency-card-label {
-      font-size: 0.72rem; font-weight: 800; color: var(--orange);
+    .phone-card {
+      border: 2px solid var(--blue);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(26,86,219,0.10);
+    }
+    .phone-card-label {
+      font-size: 0.75rem; font-weight: 800; color: var(--blue);
       text-transform: uppercase; letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-    .emergency-card-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
-    .emergency-card-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
-    .big-phone {
-      font-size: 1.9rem; font-weight: 900; color: var(--blue);
-      letter-spacing: -0.5px; display: block; margin-bottom: 6px;
-    }
-    .phone-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 28px; }
-    .call-btn {
-      display: block; text-align: center;
-      background: var(--orange); color: #fff;
-      padding: 14px; border-radius: 8px;
-      font-weight: 800; font-size: 1rem;
-      transition: background 0.2s, box-shadow 0.2s;
       margin-bottom: 16px;
     }
-    .call-btn:hover { background: #ea6c0a; box-shadow: 0 6px 20px rgba(249,115,22,0.35); }
-    .schedule-btn {
-      display: block; text-align: center;
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-      padding: 12px; border-radius: 8px;
-      font-weight: 600; font-size: 0.9rem;
-      transition: border-color 0.2s; margin-bottom: 28px;
+    .big-phone {
+      font-size: 1.95rem; font-weight: 900; color: var(--text);
+      letter-spacing: -0.5px; display: block;
+      margin-bottom: 6px;
+      line-height: 1.1;
     }
-    .schedule-btn:hover { border-color: var(--blue); }
-    .card-trust-list { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .card-trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--muted); }
-    .card-trust-item .icon { font-size: 1rem; width: 26px; flex-shrink: 0; }
+    .phone-avail {
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .card-trust-list {
+      display: flex; flex-direction: column; gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+    .card-trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; color: var(--text); font-weight: 600;
+    }
+    .card-trust-item .check-icon {
+      width: 22px; height: 22px;
+      background: var(--blue-tint);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 0.72rem; font-weight: 900;
+      flex-shrink: 0;
+    }
 
-    /* STATS RIBBON */
-    .stats-ribbon {
-      background: var(--blue);
-      padding: 0;
-      overflow: hidden;
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 60px;
     }
-    .stats-inner {
-      display: flex;
-      max-width: 100%;
+    .trust-bar-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      max-width: 1100px; margin: 0 auto;
     }
-    .stat-block {
-      flex: 1;
-      text-align: center;
-      padding: 28px 20px;
-      border-right: 1px solid rgba(255,255,255,0.2);
+    .trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; font-weight: 700; color: var(--text);
     }
-    .stat-block:last-child { border-right: none; }
-    .stat-num { font-size: 2.2rem; font-weight: 900; color: #fff; display: block; letter-spacing: -1px; }
-    .stat-lbl { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.5px; }
+    .trust-item .t-check {
+      color: var(--blue); font-weight: 900; font-size: 1rem;
+    }
 
-    /* SECTION SHARED */
-    .section-label { font-size: 0.72rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
-    .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 480px; margin: 0 auto; }
+    /* SHARED SECTION STYLES */
+    .section-label {
+      font-size: 0.72rem; font-weight: 800; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900;
+      letter-spacing: -0.5px; color: var(--text); margin-bottom: 10px;
+    }
+    .section-sub { font-size: 0.97rem; color: var(--muted); max-width: 500px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 56px; }
-    .red-line { width: 44px; height: 3px; background: var(--blue); margin: 14px auto 0; border-radius: 2px; }
+    .blue-rule { width: 44px; height: 3px; background: var(--blue); margin: 14px auto 0; border-radius: 2px; }
 
     /* SERVICES */
     .services {
       padding: 90px 60px;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: var(--bg);
     }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
     .svc-card {
       background: var(--card);
       border: 1px solid var(--border);
+      border-top: 3px solid var(--blue);
       border-radius: 12px;
-      padding: 28px;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
     }
-    .svc-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
+    .svc-card:hover {
+      box-shadow: 0 8px 28px rgba(26,86,219,0.12);
+      border-color: var(--blue);
+      transform: translateY(-3px);
     }
-    .svc-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 12px 32px rgba(14,165,233,0.1); }
-    .svc-card:hover::after { transform: scaleX(1); }
-    .svc-icon-wrap {
-      width: 52px; height: 52px;
-      background: var(--blue-g);
-      border: 1px solid rgba(14,165,233,0.2);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 18px;
-    }
-    .svc-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
-    .svc-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
-    .svc-link { font-size: 0.8rem; font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 4px; }
-    .svc-link::after { content: '→'; transition: transform 0.2s; }
-    .svc-card:hover .svc-link::after { transform: translateX(4px); }
+    .svc-icon { font-size: 2rem; display: block; margin-bottom: 14px; }
+    .svc-card h3 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .svc-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
 
-    /* COUPONS */
-    .coupons { padding: 90px 60px; }
-    .coupon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .coupon {
-      border: 2px dashed var(--border);
-      border-radius: 12px;
-      padding: 32px 28px;
-      position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      background: var(--card);
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 90px 60px;
+      background: var(--blue-tint);
+      border-top: 1px solid #bfdbfe;
+      border-bottom: 1px solid #bfdbfe;
     }
-    .coupon:hover { border-color: var(--blue); box-shadow: 0 0 32px var(--blue-g); }
-    .coupon-corner {
-      position: absolute; top: 16px; right: 16px;
-      background: var(--orange); color: #fff;
-      font-size: 0.68rem; font-weight: 800;
-      padding: 4px 8px; border-radius: 4px;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .coupon-amount { font-size: 3.2rem; font-weight: 900; color: var(--blue); letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
-    .coupon-amount span { font-size: 1.4rem; vertical-align: top; margin-top: 6px; display: inline-block; }
-    .coupon-service { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-    .coupon-terms { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; }
-    .coupon-code {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 7px; padding: 10px 14px;
-      font-family: monospace; font-size: 0.88rem; font-weight: 700;
-      color: var(--blue); letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .coupon-code-label { font-family: 'Segoe UI', sans-serif; font-size: 0.72rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
-    .coupon-cta { display: block; text-align: center; background: var(--blue); color: #fff; padding: 11px; border-radius: 7px; font-weight: 700; font-size: 0.88rem; transition: background 0.2s; }
-    .coupon-cta:hover { background: var(--blue-d); }
-
-    /* WHY US */
-    .why-us { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .why-grid {
+    .steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
-    .why-item {
-      background: var(--card);
+    .step-card {
+      background: var(--white);
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
       padding: 36px 28px;
       text-align: center;
-      transition: background 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
-    .why-item:hover { background: #111c2e; }
-    .why-icon { font-size: 2.4rem; display: block; margin-bottom: 14px; }
-    .why-item h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
-    .why-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .step-num {
+      width: 52px; height: 52px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 900;
+      margin: 0 auto 20px;
+    }
+    .step-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .step-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
 
     /* REVIEWS */
-    .reviews { padding: 90px 60px; }
-    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .reviews {
+      padding: 90px 60px;
+      background: var(--white);
+    }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .review-card {
-      background: var(--card);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
       position: relative;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .review-card:hover { border-color: var(--blue); transform: translateY(-3px); }
-    .review-card::before { content: '"'; position: absolute; top: 14px; right: 20px; font-size: 5rem; line-height: 1; color: var(--blue); opacity: 0.15; font-family: Georgia, serif; pointer-events: none; }
+    .review-card:hover { box-shadow: 0 8px 28px rgba(26,86,219,0.12); transform: translateY(-3px); }
+    .review-card::before {
+      content: '\201C';
+      position: absolute; top: 16px; right: 20px;
+      font-size: 5rem; line-height: 1;
+      color: var(--blue); opacity: 0.12;
+      font-family: Georgia, serif; pointer-events: none;
+    }
     .review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 14px; }
-    .review-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .review-text { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 22px; }
     .reviewer-info { display: flex; align-items: center; gap: 12px; }
-    .reviewer-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-g); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .reviewer-name { font-size: 0.88rem; font-weight: 700; }
+    .reviewer-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--blue-tint); border: 2px solid #bfdbfe;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .reviewer-name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
     .reviewer-detail { font-size: 0.78rem; color: var(--muted); }
 
     /* FAQ */
-    .faq { padding: 90px 60px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .faq {
+      padding: 90px 60px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
     .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
     details {
-      background: var(--card);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    details:hover, details[open] { border-color: var(--blue); }
+    details:hover, details[open] { border-color: var(--blue); box-shadow: 0 2px 12px rgba(26,86,219,0.08); }
     summary {
       padding: 20px 24px;
-      font-weight: 700; font-size: 0.97rem;
+      font-weight: 700; font-size: 0.97rem; color: var(--text);
       cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
       list-style: none;
       user-select: none;
     }
     summary::-webkit-details-marker { display: none; }
-    summary::after { content: '+'; color: var(--blue); font-size: 1.3rem; font-weight: 400; transition: transform 0.2s; flex-shrink: 0; }
-    details[open] summary::after { transform: rotate(45deg); }
-    .faq-answer { padding: 0 24px 20px; font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
-
-    /* FLOATING CALL BUTTON */
-    .float-call {
-      position: fixed; bottom: 28px; right: 28px;
-      background: var(--orange); color: #fff;
-      padding: 14px 22px;
-      border-radius: 50px;
-      font-weight: 800; font-size: 0.9rem;
-      box-shadow: 0 8px 28px rgba(249,115,22,0.4);
-      z-index: 1000;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex; align-items: center; gap: 8px;
+    summary::after {
+      content: '+';
+      color: var(--blue); font-size: 1.3rem; font-weight: 400;
+      transition: transform 0.2s; flex-shrink: 0;
     }
-    .float-call:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(249,115,22,0.5); }
+    details[open] summary::after { transform: rotate(45deg); }
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 0.9rem; color: var(--muted); line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 90px 60px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: start;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .contact-left h2 {
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+      font-weight: 900; color: var(--text);
+      margin-bottom: 16px; letter-spacing: -0.5px;
+    }
+    .contact-left p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .contact-meta { display: flex; flex-direction: column; gap: 14px; }
+    .contact-meta-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.9rem; color: var(--text);
+    }
+    .contact-meta-icon {
+      font-size: 1.1rem; flex-shrink: 0; margin-top: 1px;
+    }
+    .contact-meta-item strong { display: block; font-weight: 700; }
+    .contact-meta-item span { color: var(--muted); font-size: 0.85rem; }
+    .service-area-note {
+      margin-top: 24px; padding: 14px 18px;
+      background: var(--blue-tint); border: 1px solid #bfdbfe;
+      border-radius: 8px; font-size: 0.85rem; color: var(--blue); font-weight: 600;
+    }
+
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue);
+      border-radius: 14px;
+      padding: 36px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .form-card h3 { font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,86,219,0.10);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.2s, box-shadow 0.2s;
+      margin-top: 6px;
+    }
+    .form-submit:hover { background: var(--blue-d); box-shadow: 0 6px 20px rgba(26,86,219,0.22); }
 
     /* FOOTER */
     footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 48px 60px 28px;
+      background: var(--navy);
+      color: #e2e8f0;
+      padding: 56px 60px 28px;
     }
-    .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .footer-brand p { font-size: 0.85rem; color: var(--muted); margin-top: 12px; line-height: 1.65; max-width: 240px; }
-    .footer-col h4 { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .footer-col ul li a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
-    .footer-col ul li a:hover { color: var(--blue); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: var(--subtle); }
-    .back-link { color: var(--blue); font-weight: 600; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 44px;
+    }
+    .footer-brand p {
+      font-size: 0.85rem; color: #94a3b8;
+      margin-top: 16px; line-height: 1.7; max-width: 240px;
+    }
+    .footer-col h4 {
+      font-size: 0.78rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: #e2e8f0; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul li a {
+      font-size: 0.87rem; color: #94a3b8;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 0.8rem; color: #64748b;
+    }
+    .back-link { color: #60a5fa; font-weight: 600; transition: color 0.2s; }
+    .back-link:hover { color: #93c5fd; }
 
+    /* RESPONSIVE */
     @media (max-width: 1000px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { border-left: none; border-top: 1px solid var(--border); padding: 40px 24px; }
+      .hero-right { border-left: none; border-top: 1px solid var(--border); padding: 40px 28px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .review-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .hero-left { padding: 60px 24px; }
-      .services, .coupons, .why-us, .reviews, .faq { padding: 60px 20px; }
-      .stat-num { font-size: 1.8rem; }
-      .footer-top { grid-template-columns: 1fr; }
+      .hero-left { padding: 56px 20px; }
+      .hero-right { padding: 40px 20px; }
+      .trust-bar { padding: 20px; }
+      .services { padding: 60px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .how-it-works { padding: 60px 20px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .reviews { padding: 60px 20px; }
+      .review-grid { grid-template-columns: 1fr; }
+      .faq { padding: 60px 20px; }
+      .contact { padding: 60px 20px; }
+      .form-row { grid-template-columns: 1fr; }
       footer { padding: 40px 20px 24px; }
+      .footer-top { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="promo-bar">
-    Limited Time: Save $30 on Any Drain Cleaning Service — Use Code <span>DRAIN30</span>
+  <!-- EMERGENCY BAR -->
+  <div class="emergency-bar">
+    24/7 EMERGENCY SERVICE &mdash; Burst pipe? No heat? Call now.&nbsp;&nbsp;<a href="tel:5554720100">(555) 947-2100</a>
   </div>
 
+  <!-- NAV -->
   <nav>
     <div class="nav-logo">
-      <div class="nav-logo-icon">🔧</div>
-      <div class="nav-logo-text">Fast<span>Flow</span> Plumbing</div>
+      <img src="Prarie_Plumbing_logo.svg" alt="Prairie Plumbing" style="height:110px; width:auto; filter:invert(0) brightness(0);" />
     </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#coupons">Specials</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="tel:5552803300" class="nav-phone-btn">📞 (555) 280-3300</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="tel:5554720100" class="nav-cta-btn">Call Now</a></li>
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-bg-lines"></div>
     <div class="hero-left">
-      <div class="hero-eyebrow">Licensed · Insured · Available 24/7</div>
-      <h1>We're Here to<br><span class="accent">Fix It.</span><br><span class="accent-o">Today.</span></h1>
-      <p class="hero-sub">When your pipes burst or your drains back up, you need someone fast, reliable, and honest. FastFlow has served this community for over a decade with flat-rate pricing and zero surprise charges.</p>
-      <div class="hero-trust">
-        <div class="trust-pill"><span class="check">✓</span> No After-Hours Upcharges</div>
-        <div class="trust-pill"><span class="check">✓</span> Free Onsite Estimates</div>
-        <div class="trust-pill"><span class="check">✓</span> 60-Min Response Guarantee</div>
-        <div class="trust-pill"><span class="check">✓</span> 4.9★ — 1,200+ Reviews</div>
-      </div>
+      <div class="hero-badge">Licensed &amp; Insured Since 2008</div>
+      <h1>Prairie Plumbing &mdash;<br><span class="accent">Here When It Matters.</span></h1>
+      <p class="hero-sub">When your pipes burst or your drains back up, you need someone fast, reliable, and honest. We serve this community with flat-rate pricing and zero surprise charges — day or night.</p>
       <div class="hero-ctas">
-        <a href="tel:5552803300" class="btn-primary">📞 Call Now — We Answer 24/7</a>
-        <a href="#services" class="btn-ghost">View All Services</a>
+        <a href="#contact" class="btn-primary">Get a Free Quote</a>
+        <a href="#services" class="btn-outline">See Our Services</a>
       </div>
     </div>
     <div class="hero-right">
-      <div class="emergency-card-label">🚨 Emergency Service</div>
-      <div class="emergency-card-title">Need a plumber right now?</div>
-      <div class="emergency-card-sub">Average on-site arrival: under 60 minutes</div>
-      <a href="tel:5552803300" class="big-phone">(555) 280-3300</a>
-      <div class="phone-note">Answered by a live technician — not a call center</div>
-      <a href="tel:5552803300" class="call-btn">📞 Call for Emergency Service</a>
-      <a href="#schedule" class="schedule-btn">Schedule Non-Emergency Online</a>
-      <div class="card-trust-list">
-        <div class="card-trust-item"><span class="icon">🛡️</span> Fully Licensed & Insured</div>
-        <div class="card-trust-item"><span class="icon">💵</span> Flat-Rate Upfront Pricing</div>
-        <div class="card-trust-item"><span class="icon">⭐</span> 100% Satisfaction Guarantee</div>
-        <div class="card-trust-item"><span class="icon">📅</span> Nights, Weekends & Holidays</div>
+      <div class="phone-card">
+        <div class="phone-card-label">&#128222; Call Us Any Time</div>
+        <a href="tel:5554720100" class="big-phone">(555) 947-2100</a>
+        <div class="phone-avail">Available 24/7 &mdash; Live Answer, Not a Call Center</div>
+        <div class="card-trust-list">
+          <div class="card-trust-item">
+            <div class="check-icon">&#10003;</div>
+            Licensed &amp; Insured
+          </div>
+          <div class="card-trust-item">
+            <div class="check-icon">&#10003;</div>
+            Flat-Rate Pricing
+          </div>
+          <div class="card-trust-item">
+            <div class="check-icon">&#10003;</div>
+            No Surprise Fees &mdash; Ever
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="stats-ribbon">
-    <div class="stats-inner">
-      <div class="stat-block"><span class="stat-num">24/7</span><span class="stat-lbl">Always Available</span></div>
-      <div class="stat-block"><span class="stat-num">&lt;60</span><span class="stat-lbl">Min Response</span></div>
-      <div class="stat-block"><span class="stat-num">4.9★</span><span class="stat-lbl">Customer Rating</span></div>
-      <div class="stat-block"><span class="stat-num">12K+</span><span class="stat-lbl">Jobs Completed</span></div>
-      <div class="stat-block"><span class="stat-num">$0</span><span class="stat-lbl">Hidden Fees</span></div>
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item"><span class="t-check">&#10003;</span> Flat-Rate Pricing</div>
+      <div class="trust-item"><span class="t-check">&#10003;</span> Same-Day Service</div>
+      <div class="trust-item"><span class="t-check">&#10003;</span> Licensed &amp; Insured</div>
+      <div class="trust-item"><span class="t-check">&#10003;</span> Background-Checked Techs</div>
+      <div class="trust-item"><span class="t-check">&#10003;</span> No Surprise Fees</div>
     </div>
   </div>
 
+  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="section-header">
       <div class="section-label">What We Do</div>
-      <h2 class="section-title">Full-Service Plumbing & Repair</h2>
-      <div class="red-line"></div>
+      <h2 class="section-title">What We Fix</h2>
+      <div class="blue-rule"></div>
       <p class="section-sub" style="margin-top:16px;">From a dripping faucet to a burst main line — we handle it all, on your schedule.</p>
     </div>
     <div class="services-grid">
       <div class="svc-card">
-        <div class="svc-icon-wrap">🚨</div>
-        <h3>Emergency Plumbing</h3>
+        <span class="svc-icon">&#128680;</span>
+        <h3>Emergency Repairs</h3>
         <p>Burst pipes, major leaks, flooding. We dispatch a licensed technician within the hour, any time of day or night.</p>
-        <div class="svc-link">Learn More</div>
       </div>
       <div class="svc-card">
-        <div class="svc-icon-wrap">🚿</div>
-        <h3>Drain Cleaning & Clearing</h3>
-        <p>Slow drains, full blockages, root intrusions. We use professional hydro-jetting equipment to restore full flow.</p>
-        <div class="svc-link">Learn More</div>
+        <span class="svc-icon">&#128295;</span>
+        <h3>Drain Cleaning</h3>
+        <p>Slow drains, full blockages, root intrusions. We use professional hydro-jetting equipment to restore full flow fast.</p>
       </div>
       <div class="svc-card">
-        <div class="svc-icon-wrap">🌡️</div>
-        <h3>Water Heater Service</h3>
-        <p>Repair, flush, or full replacement — we stock same-day units so you're not left without hot water overnight.</p>
-        <div class="svc-link">Learn More</div>
+        <span class="svc-icon">&#128293;</span>
+        <h3>Water Heaters</h3>
+        <p>Repair, flush, or full replacement — we stock same-day units so you're never left without hot water overnight.</p>
       </div>
       <div class="svc-card">
-        <div class="svc-icon-wrap">🔍</div>
+        <span class="svc-icon">&#128297;</span>
+        <h3>Pipe Repair &amp; Repiping</h3>
+        <p>Corroded, cracked, or outdated pipes replaced with care. Trenchless options available for minimal disruption.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">&#128167;</span>
         <h3>Leak Detection</h3>
         <p>Hidden leaks cause thousands in damage. We use non-invasive tech to locate them before they become a disaster.</p>
-        <div class="svc-link">Learn More</div>
       </div>
       <div class="svc-card">
-        <div class="svc-icon-wrap">🏗️</div>
-        <h3>Sewer Line Repair</h3>
-        <p>Trenchless repair available. We fix damaged sewer lines with minimal disruption to your yard or foundation.</p>
-        <div class="svc-link">Learn More</div>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon-wrap">🔩</div>
+        <span class="svc-icon">&#129691;</span>
         <h3>Fixture Installation</h3>
-        <p>Faucets, toilets, garbage disposals, and more — installed correctly the first time, backed by a labor guarantee.</p>
-        <div class="svc-link">Learn More</div>
+        <p>Faucets, toilets, garbage disposals — installed correctly the first time, backed by a full labor guarantee.</p>
       </div>
     </div>
   </section>
 
-  <section class="coupons" id="coupons">
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
     <div class="section-header">
-      <div class="section-label">Special Offers</div>
-      <h2 class="section-title">Current Promotions</h2>
-      <div class="red-line"></div>
-      <p class="section-sub" style="margin-top:16px;">Mention these at booking — one coupon per visit. Cannot be combined.</p>
+      <div class="section-label">Our Process</div>
+      <h2 class="section-title">Simple as 1-2-3</h2>
+      <div class="blue-rule"></div>
+      <p class="section-sub" style="margin-top:16px;">Getting your plumbing fixed shouldn't be complicated. Here's how easy it is.</p>
     </div>
-    <div class="coupon-grid">
-      <div class="coupon">
-        <div class="coupon-corner">Limited Time</div>
-        <div class="coupon-amount"><span>$</span>30</div>
-        <div class="coupon-service">Off Drain Cleaning</div>
-        <div class="coupon-terms">Any residential drain clearing service. Valid Mon–Fri.</div>
-        <div class="coupon-code"><span class="coupon-code-label">Code:</span> DRAIN30</div>
-        <a href="tel:5552803300" class="coupon-cta">Call to Redeem</a>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Call or Book Online</h3>
+        <p>Reach a live technician 24/7 at (555) 947-2100, or fill out our quick online form. We'll confirm your appointment fast.</p>
       </div>
-      <div class="coupon">
-        <div class="coupon-corner">Popular</div>
-        <div class="coupon-amount"><span>$</span>50</div>
-        <div class="coupon-service">Off Water Heater Install</div>
-        <div class="coupon-terms">New unit installation or full replacement. All brands.</div>
-        <div class="coupon-code"><span class="coupon-code-label">Code:</span> HEAT50</div>
-        <a href="tel:5552803300" class="coupon-cta">Call to Redeem</a>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>We Arrive On Time</h3>
+        <p>Your technician shows up in a marked vehicle, on schedule, and walks you through the problem and the price before any work starts.</p>
       </div>
-      <div class="coupon">
-        <div class="coupon-corner">Always On</div>
-        <div class="coupon-amount">FREE</div>
-        <div class="coupon-service">Onsite Estimate</div>
-        <div class="coupon-terms">No obligation quote on any job. Know the price before we start.</div>
-        <div class="coupon-code"><span class="coupon-code-label">Code:</span> FREEQUOTE</div>
-        <a href="tel:5552803300" class="coupon-cta">Schedule Now</a>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Job Done Right</h3>
+        <p>We fix it right the first time or we come back at no charge. You get a clean worksite and a clear invoice — no surprises.</p>
       </div>
     </div>
   </section>
 
-  <section class="why-us">
-    <div class="section-header">
-      <div class="section-label">Why FastFlow</div>
-      <h2 class="section-title">The Right Team for Any Plumbing Job</h2>
-      <div class="red-line"></div>
-    </div>
-    <div class="why-grid">
-      <div class="why-item">
-        <span class="why-icon">⚡</span>
-        <h3>60-Minute Response</h3>
-        <p>We guarantee on-site arrival within 60 minutes for all emergency calls in our service area.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">💵</span>
-        <h3>Flat-Rate Pricing</h3>
-        <p>You get a firm price before we start. No hourly games, no weekend surcharges, no surprises on the invoice.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">🛡️</span>
-        <h3>Licensed & Insured</h3>
-        <p>Every tech is state-certified and background-checked. Your home is protected from first call to final fix.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">🔁</span>
-        <h3>Satisfaction Guarantee</h3>
-        <p>If you're not 100% happy with our work, we come back and make it right. No questions asked.</p>
-      </div>
-    </div>
-  </section>
-
+  <!-- REVIEWS -->
   <section class="reviews" id="reviews">
     <div class="section-header">
-      <div class="section-label">Reviews</div>
-      <h2 class="section-title">1,200+ Happy Customers</h2>
-      <div class="red-line"></div>
-      <p class="section-sub" style="margin-top:16px;">Rated 4.9 stars across Google, Yelp, and HomeAdvisor.</p>
+      <div class="section-label">Customer Reviews</div>
+      <h2 class="section-title">What Homeowners Say</h2>
+      <div class="blue-rule"></div>
+      <p class="section-sub" style="margin-top:16px;">Rated 4.9 stars across Google, Yelp, and HomeAdvisor. Over 1,200 happy customers.</p>
     </div>
     <div class="review-grid">
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Pipe burst at midnight on a Saturday. FastFlow showed up in 40 minutes, fixed it cleanly, and the price was exactly what they quoted over the phone. Absolute lifesavers."</p>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Pipe burst at midnight on a Saturday. Prairie Plumbing showed up in 40 minutes, fixed it cleanly, and the price was exactly what they quoted over the phone. Absolute lifesavers."</p>
         <div class="reviewer-info">
-          <div class="reviewer-avatar">👤</div>
-          <div><div class="reviewer-name">Tom W.</div><div class="reviewer-detail">Homeowner · Emergency Repair</div></div>
+          <div class="reviewer-avatar">&#128100;</div>
+          <div>
+            <div class="reviewer-name">Tom W.</div>
+            <div class="reviewer-detail">Homeowner &middot; Emergency Repair</div>
+          </div>
         </div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="review-text">"Used them for a full bathroom remodel. Professional, on schedule, and the final bill was to the penny what they quoted. Already booked them for our kitchen next month."</p>
         <div class="reviewer-info">
-          <div class="reviewer-avatar">👤</div>
-          <div><div class="reviewer-name">Maria G.</div><div class="reviewer-detail">Homeowner · Remodel Plumbing</div></div>
+          <div class="reviewer-avatar">&#128100;</div>
+          <div>
+            <div class="reviewer-name">Maria G.</div>
+            <div class="reviewer-detail">Homeowner &middot; Remodel Plumbing</div>
+          </div>
         </div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Had a mysterious slow drain for months. Three other plumbers couldn't find it. FastFlow's tech found a root blockage in 20 minutes with a camera. Fixed same day."</p>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Had a mysterious slow drain for months. Three other plumbers couldn't find it. Prairie Plumbing's tech found a root blockage in 20 minutes with a camera. Fixed same day."</p>
         <div class="reviewer-info">
-          <div class="reviewer-avatar">👤</div>
-          <div><div class="reviewer-name">Chris B.</div><div class="reviewer-detail">Homeowner · Drain Cleaning</div></div>
+          <div class="reviewer-avatar">&#128100;</div>
+          <div>
+            <div class="reviewer-name">Chris B.</div>
+            <div class="reviewer-detail">Homeowner &middot; Drain Cleaning</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="section-header">
       <div class="section-label">FAQ</div>
       <h2 class="section-title">Common Questions</h2>
-      <div class="red-line"></div>
+      <div class="blue-rule"></div>
     </div>
     <div class="faq-list">
       <details>
         <summary>Do you charge extra for nights, weekends, or holidays?</summary>
-        <div class="faq-answer">No. FastFlow charges the same flat rates 24/7, 365 days a year. The price you're quoted at 2pm on a Tuesday is the same price you'd get at 2am on Christmas Eve.</div>
+        <div class="faq-answer">No. Prairie Plumbing charges the same flat rates 24/7, 365 days a year. The price you're quoted at 2pm on a Tuesday is the same price you'd get at 2am on Christmas Eve.</div>
       </details>
       <details>
         <summary>How quickly can you get to my home in an emergency?</summary>
@@ -632,56 +679,132 @@
       </details>
       <details>
         <summary>Are your technicians licensed and background-checked?</summary>
-        <div class="faq-answer">Every FastFlow technician is state-licensed, fully insured, and has passed a thorough background check. You'll know who's coming to your home before they arrive.</div>
+        <div class="faq-answer">Every Prairie Plumbing technician is state-licensed, fully insured, and has passed a thorough background check. You'll know who's coming to your home before they arrive.</div>
       </details>
       <details>
         <summary>What areas do you service?</summary>
-        <div class="faq-answer">We serve the greater metro area and surrounding suburbs. Call us at (555) 280-3300 and we can confirm coverage for your address in under a minute.</div>
+        <div class="faq-answer">We serve the greater metro area and surrounding suburbs. Call us at (555) 947-2100 and we can confirm coverage for your address in under a minute.</div>
       </details>
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-label">Free Estimates</div>
+        <h2>Get a Free Quote</h2>
+        <p>Fill out the form and we'll get back to you within the hour. For emergencies, call us directly — we answer 24/7.</p>
+        <div class="contact-meta">
+          <div class="contact-meta-item">
+            <span class="contact-meta-icon">&#128222;</span>
+            <div>
+              <strong>(555) 947-2100</strong>
+              <span>Available 24 hours a day, 7 days a week</span>
+            </div>
+          </div>
+          <div class="contact-meta-item">
+            <span class="contact-meta-icon">&#128205;</span>
+            <div>
+              <strong>1842 Clearwater Drive, Suite 4</strong>
+              <span>Prairie Heights, IL 60148</span>
+            </div>
+          </div>
+          <div class="contact-meta-item">
+            <span class="contact-meta-icon">&#128336;</span>
+            <div>
+              <strong>Mon &ndash; Sat: 7am &ndash; 8pm</strong>
+              <span>Emergency service available around the clock</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-area-note">
+          &#128205; We serve the greater metro area including Prairie Heights, Elmwood Park, Riverton, and surrounding suburbs.
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="form-card">
+          <h3>Request a Free Estimate</h3>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-name">Full Name</label>
+                <input type="text" id="f-name" placeholder="Jane Smith" />
+              </div>
+              <div class="form-group">
+                <label for="f-phone">Phone Number</label>
+                <input type="tel" id="f-phone" placeholder="(555) 000-0000" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email Address</label>
+              <input type="email" id="f-email" placeholder="jane@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="f-service">Service Type</label>
+              <select id="f-service">
+                <option value="">Select a service...</option>
+                <option>Emergency Repair</option>
+                <option>Drain Cleaning</option>
+                <option>Water Heater</option>
+                <option>Pipe Repair / Repiping</option>
+                <option>Leak Detection</option>
+                <option>Fixture Installation</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-message">Describe the Issue</label>
+              <textarea id="f-message" placeholder="Tell us a bit about what's going on..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send My Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="nav-logo-text" style="font-size:1.1rem">Fast<span style="color:var(--blue)">Flow</span> Plumbing</div>
+        <img src="Prarie_Plumbing_logo.svg" alt="Prairie Plumbing" style="height:110px; width:auto; filter:invert(1); display:block;" />
         <p>Licensed, insured, and ready 24/7. Serving homeowners and businesses across the metro area for over a decade.</p>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="#">Emergency Repairs</a></li>
-          <li><a href="#">Drain Cleaning</a></li>
-          <li><a href="#">Water Heaters</a></li>
-          <li><a href="#">Leak Detection</a></li>
-          <li><a href="#">Sewer Repair</a></li>
+          <li><a href="#services">Emergency Repairs</a></li>
+          <li><a href="#services">Drain Cleaning</a></li>
+          <li><a href="#services">Water Heaters</a></li>
+          <li><a href="#services">Leak Detection</a></li>
+          <li><a href="#services">Fixture Installation</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
           <li><a href="#">About Us</a></li>
-          <li><a href="#">Reviews</a></li>
-          <li><a href="#coupons">Specials</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:5552803300">(555) 280-3300</a></li>
-          <li><a href="#">Schedule Online</a></li>
+          <li><a href="tel:5554720100">(555) 947-2100</a></li>
+          <li><a href="#contact">Free Estimate</a></li>
           <li><a href="#">Service Area</a></li>
+          <li><a href="#">Emergency Line</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <a href="index.html" class="back-link">← Back to Portfolio</a>
-      <span>© 2026 FastFlow Plumbing · Lic. #FF-29841 · All Rights Reserved</span>
+      <a href="index.html" class="back-link">&#8592; Back to Portfolio</a>
+      <span>&copy; 2026 Prairie Plumbing &middot; Lic. #PP-29841 &middot; All Rights Reserved</span>
     </div>
   </footer>
-
-  <a href="tel:5552803300" class="float-call">📞 Call Now</a>
 
 </body>
 </html>

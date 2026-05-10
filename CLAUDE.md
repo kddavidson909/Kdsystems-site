@@ -20,37 +20,39 @@ Netlify auto-deploys from `main` within ~30 seconds. If push is rejected with "n
 
 Each page is fully self-contained — all CSS lives in an inline `<style>` block in the `<head>`. There are no shared stylesheets.
 
-| File | Purpose | Accent color |
+| File | Purpose | Theme |
 |---|---|---|
-| `index.html` | Main portfolio/landing page | Red `#dc2626` |
-| `greencut.html` | Landscaping demo | Green `#22c55e` |
-| `fastflow.html` | Plumbing demo | Blue `#0ea5e9` |
-| `peakfitness.html` | Fitness studio demo | Orange `#ff5500` |
+| `index.html` | Main portfolio/landing page | Dark, red `#dc2626` accent |
+| `greencut.html` | Green Haven Landscaping demo | Dark green, Georgia serif font |
+| `fastflow.html` | Prairie Plumbing demo | Light, blue `#1a56db` accent |
+| `whisknbloom.html` | Whisk & Bloom Bakery demo | Light, teal `#5dbfa0`, custom BlackberryJam font |
+
+Logo SVG files in the repo: `green_haven_logo_landscape.svg`, `Prarie_Plumbing_logo.svg`, `Whisk_bloom_bakery_logo.svg`, `KD_sys_logo.html`. The custom font is `Blackberryjamfont.ttf` (loaded via `@font-face` in `whisknbloom.html`).
 
 ### CSS Variable Convention
 
-Every file opens with a `:root` block defining the full color palette for that page. All colors are referenced via `var(--name)` throughout — never hardcoded inline. The standard variable names used across all files are:
+Every file opens with a `:root` block defining the full color palette for that page. All colors are referenced via `var(--name)` throughout — never hardcoded inline. Standard variable names used across all files:
 
 ```css
 :root {
-  --bg, --surface, --card, --border   /* background layers (darkest → lightest) */
+  --bg, --surface, --card, --border   /* background layers */
   --[accent], --[accent]-d            /* primary accent + darker shade */
-  --[accent]-g, --[accent]-gg         /* glow/alpha versions for shadows/glows */
+  --[accent]-g, --[accent]-gg         /* glow/alpha versions for shadows */
   --text, --muted, --subtle           /* text hierarchy */
 }
 ```
 
-When adding a new page, define all these variables in `:root` first and use them exclusively.
+Note: `fastflow.html` and `whisknbloom.html` use **light themes** (white/off-white backgrounds); `index.html` and `greencut.html` use dark themes.
 
 ### Section Structure
 
 `index.html` sections (in order): nav → hero → services → portfolio → about → contact → footer
 
-Demo pages follow a similar pattern but add industry-specific elements like a credential bar (greencut), promo bar (fastflow, peakfitness), or sticky CTA panel (fastflow hero uses a 2-column grid with a form panel on the right).
+Demo pages follow a similar pattern but add industry-specific elements (offer bar, credential bar, emergency CTA bar). `fastflow.html` hero uses a 2-column grid with a form panel on the right.
 
 ### Responsive Design
 
-Mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile: nav links hide, section padding drops from `64px` to `24px`, multi-column layouts stack vertically.
+Mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile: nav links hide, section padding drops, multi-column layouts stack vertically.
 
 ## Contact Form
 
@@ -58,9 +60,7 @@ The form in `index.html` posts to Web3Forms (`https://api.web3forms.com/submit`)
 
 ## Brand & Style Rules
 
-- **Background layers:** `--bg` (body), `--surface` (alternate sections), `--card` (cards/inputs)
-- **Accent on main site:** `#dc2626` (red) — each demo uses its own accent
-- **Typography:** `'Segoe UI', system-ui, sans-serif` everywhere; no Google Fonts loaded
+- **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages except `greencut.html` (Georgia serif) and `whisknbloom.html` (BlackberryJam display font for headlines)
 - **Interactive elements:** use CSS `transition` on hover; no JavaScript event listeners
 - **Accordions/disclosure:** use native `<details>`/`<summary>` — no JS toggles
 - **No JS** — if a feature needs interactivity, use native HTML elements or suggest a free third-party service

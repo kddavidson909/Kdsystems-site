@@ -607,6 +607,23 @@
       color: var(--red);
     }
 
+    /* ===== FADE-IN ON SCROLL ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @supports (animation-timeline: view()) {
+      .fade-in {
+        animation: fadeInUp 0.55s ease both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 30%;
+      }
+      .fade-in.d1 { animation-range-start: entry 9%; }
+      .fade-in.d2 { animation-range-start: entry 13%; }
+      .fade-in.d3 { animation-range-start: entry 17%; }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       nav {
@@ -665,29 +682,29 @@
 
   <!-- SERVICES -->
   <section class="services" id="services">
-    <div class="section-label">What I Do</div>
-    <h2 class="section-title">Services</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
+    <div class="section-label fade-in">What I Do</div>
+    <h2 class="section-title fade-in">Services</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
     <div class="cards">
-      <div class="card">
+      <div class="card fade-in">
         <span class="card-icon">🌐</span>
         <h3>Landing Pages & Websites</h3>
         <p>Fast, professional sites designed to convert visitors into customers. Mobile-first, clean, and delivered in days — not weeks.</p>
         <span class="card-tag">Most Popular</span>
       </div>
-      <div class="card">
+      <div class="card fade-in d1">
         <span class="card-icon">⚙️</span>
         <h3>Business Automation</h3>
         <p>Connect your tools, automate follow-ups, streamline workflows. Simple systems that save you hours every week without complex software.</p>
         <span class="card-tag">High Value</span>
       </div>
-      <div class="card">
+      <div class="card fade-in d2">
         <span class="card-icon">🔗</span>
         <h3>CRM & System Integrations</h3>
         <p>Get your website, email, calendar, and payment systems talking to each other. Less manual data entry, fewer things falling through the cracks.</p>
       </div>
-      <div class="card">
+      <div class="card fade-in d3">
         <span class="card-icon">🤖</span>
         <h3>AI-Powered Tools</h3>
         <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more.</p>
@@ -698,12 +715,12 @@
 
   <!-- PORTFOLIO -->
   <section class="portfolio" id="work">
-    <div class="section-label">Portfolio</div>
-    <h2 class="section-title">Example Projects</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
+    <div class="section-label fade-in">Portfolio</div>
+    <h2 class="section-title fade-in">Example Projects</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
     <div class="portfolio-grid">
-      <a class="portfolio-item" href="whisknbloom.html">
+      <a class="portfolio-item fade-in" href="whisknbloom.html">
         <div class="portfolio-thumb thumb-orange">
           <img src="https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Artisan bakery with fresh bread and pastries" />
         </div>
@@ -719,8 +736,8 @@
 
   <!-- ABOUT -->
   <section class="about" id="about">
-    <div class="about-avatar"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
-    <div class="about-text">
+    <div class="about-avatar fade-in"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
+    <div class="about-text fade-in d1">
       <div class="section-label">About Me</div>
       <h2>Built Different.<br>For Businesses That Work Hard.</h2>
       <p>I help small businesses upgrade their online presence with modern websites and smarter systems.</p>
@@ -732,11 +749,11 @@
 
   <!-- CONTACT -->
   <section class="contact" id="contact">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Let's Build Something</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
-    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+    <div class="section-label fade-in">Contact</div>
+    <h2 class="section-title fade-in">Let's Build Something</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
+    <form class="contact-form fade-in" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="df380811-ebc2-4a47-a6b1-389af7d8aadb" />
       <div class="form-row">
         <div class="form-group">

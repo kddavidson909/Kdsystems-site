@@ -4,11 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Whisk &amp; Bloom Bakery — Baked Fresh. Every Morning.</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
   <style>
     @font-face {
       font-family: 'BlackberryJam';
       src: url('Blackberryjamfont.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Deerhouse';
+      src: url('deerhouse.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
     }
@@ -95,7 +101,7 @@
       margin-bottom: 18px;
     }
     .hero h1 {
-      font-family: 'BlackberryJam', serif;
+      font-family: 'Deerhouse', serif;
       font-size: clamp(2.8rem, 6.5vw, 5.8rem);
       font-weight: normal; line-height: 1.0; letter-spacing: -2px;
       color: var(--text);
@@ -462,7 +468,7 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">
-      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:68px; display:block;" />
+      <a href="whisknbloom.html" class="nav-trial">Home</a>
     </div>
     <ul class="nav-links">
       <li><a href="#offerings">Menu</a></li>
@@ -475,7 +481,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-logo">
-      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:96px; display:block;" />
+      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:461px; display:block;" />
     </div>
     <div class="hero-content">
       <span class="hero-eyebrow">Open Mon–Sat · 6am to 3pm</span>
@@ -538,7 +544,7 @@
         <p>Long-fermented, naturally leavened loaves baked fresh each morning. Plain, seeded, and seasonal varieties.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon"><i class="ti ti-croissant" aria-hidden="true"></i></span>
+        <span class="amenity-icon"><i class="ti ti-bread" aria-hidden="true"></i></span>
         <h3>Croissants &amp; Pastries</h3>
         <p>Buttery, flaky layers made with real butter and seasonal fillings. Pain au chocolat, danish, and more.</p>
       </div>
@@ -553,7 +559,7 @@
         <p>Locally roasted espresso and drip, pulled in-house. Pairs perfectly with everything we make.</p>
       </div>
       <div class="amenity">
-        <span class="amenity-icon"><i class="ti ti-pie" aria-hidden="true"></i></span>
+        <span class="amenity-icon"><i class="ti ti-cookie" aria-hidden="true"></i></span>
         <h3>Seasonal Pies</h3>
         <p>Rotating pie selection built around what's in season at local farms. Sweet and savory options.</p>
       </div>
@@ -586,7 +592,7 @@
     <div class="programs-grid">
       <div class="prog-card">
         <div class="prog-top-border border-bread"></div>
-        <div class="prog-thumb"><i class="ti ti-bread" aria-hidden="true"></i></div>
+        <div class="prog-thumb"><img src="breadloaf.svg" alt="Artisan bread loaves" /></div>
         <div class="prog-info">
           <div class="prog-tag">Breads</div>
           <h3>Artisan Loaves</h3>
@@ -606,7 +612,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-cake"></div>
-        <div class="prog-thumb"><i class="ti ti-cake" aria-hidden="true"></i></div>
+        <div class="prog-thumb"><img src="cake.svg" alt="Custom celebration cakes" /></div>
         <div class="prog-info">
           <div class="prog-tag">Custom Orders</div>
           <h3>Celebration Cakes</h3>
@@ -616,7 +622,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-pie"></div>
-        <div class="prog-thumb"><i class="ti ti-pie" aria-hidden="true"></i></div>
+        <div class="prog-thumb"><img src="pies.svg" alt="Seasonal rotating pies" /></div>
         <div class="prog-info">
           <div class="prog-tag">Seasonal</div>
           <h3>Rotating Pies</h3>
@@ -626,7 +632,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-cookie"></div>
-        <div class="prog-thumb"><i class="ti ti-cookie" aria-hidden="true"></i></div>
+        <div class="prog-thumb"><img src="cookiesbrownies.svg" alt="Cookies and brownies" /></div>
         <div class="prog-info">
           <div class="prog-tag">Sweets</div>
           <h3>Cookies &amp; Bars</h3>
@@ -636,7 +642,7 @@
       </div>
       <div class="prog-card">
         <div class="prog-top-border border-savory"></div>
-        <div class="prog-thumb"><i class="ti ti-bread" aria-hidden="true"></i></div>
+        <div class="prog-thumb"><img src="savorybread.svg" alt="Savory bakes" /></div>
         <div class="prog-info">
           <div class="prog-tag">Savory</div>
           <h3>Savory Bakes</h3>

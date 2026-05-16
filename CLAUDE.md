@@ -1,62 +1,73 @@
-# KD Systems — Portfolio Site
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This is Kevin Davidson's personal freelance landing page (`kdsystems.co`). Live site for selling landing-page and automation services to small businesses. Built from scratch as Kevin's first web project — he's self-teaching HTML/CSS via AI-assisted development.
+Kevin Davidson's personal freelance landing page (`kdsystems.co`) plus 3 demo project pages used as portfolio samples. Built with pure HTML + CSS — no frameworks, no build step, no JavaScript libraries.
 
-The repo also contains 3 demo project pages (landscaping, plumbing, bakery) used as portfolio samples to show prospects.
+## Development Workflow
 
-## Files
+There is no build step. To preview changes, open the HTML file directly in a browser. Deployment is automatic:
 
-- `index.html` — main portfolio/landing page
-- `greencut.html` — landscaping demo (green theme)
-- `fastflow.html` — plumbing demo (blue theme)
-- `peakfitness.html` — bakery demo, Hearth Bakery (orange theme)
-- `headshot.jpg` — Kevin's photo for the about section
+```
+git add . && git commit -m "..." && git push
+```
 
-## Tech & Style
+Netlify auto-deploys from `main` within ~30 seconds. If push is rejected with "non-fast-forward," `git push origin main --force` is safe (personal repo).
 
-- **Pure HTML + CSS only.** No frameworks, no build step, no JavaScript libraries. Don't suggest React, Tailwind, etc.
-- Inline `<style>` blocks per file (no separate CSS files)
-- Dark theme everywhere: black background, red accent on the main site (`#dc2626`); each demo page uses its own accent color
-- Mobile-first responsive via CSS media queries
-- Native HTML where possible (e.g., `<details>` for FAQ accordions — no JS)
+## File Structure & Architecture
 
-## Brand
+Each page is fully self-contained — all CSS lives in an inline `<style>` block in the `<head>`. There are no shared stylesheets.
 
-- **Name:** KD Systems
-- **Domain:** kdsystems.co
-- **Email:** kevin@kdsystems.co
-- **Tagline:** Modern Websites. Smarter Systems.
-- **Positioning:** Industrial-maintenance background; practical, reliable systems for small businesses
+| File | Purpose | Theme |
+|---|---|---|
+| `index.html` | Main portfolio/landing page | Dark, red `#dc2626` accent |
+| `greencut.html` | Green Haven Landscaping demo | Dark green, Georgia serif font |
+| `fastflow.html` | Prairie Plumbing demo | Light, blue `#1a56db` accent |
+| `whisknbloom.html` | Whisk & Bloom Bakery demo | Light, teal `#5dbfa0`, custom BlackberryJam font |
 
-## Deployment
+Logo SVG files in the repo: `green_haven_logo_landscape.svg`, `Prarie_Plumbing_logo.svg`, `Whisk_bloom_bakery_logo.svg`, `KD_sys_logo.html`. The custom font is `Blackberryjamfont.ttf` (loaded via `@font-face` in `whisknbloom.html`).
 
-- Hosted on **Netlify** (auto-deploys from GitHub `main` branch)
-- Repo: `github.com/kddavidson909/Kdsystems-site`
-- DNS managed by Netlify (nameservers pointed there from Namecheap)
-- Free Netlify SSL handles HTTPS
+### CSS Variable Convention
 
-**Workflow:** edit locally → `git add . && git commit -m "..." && git push` → Netlify rebuilds in ~30s.
+Every file opens with a `:root` block defining the full color palette for that page. All colors are referenced via `var(--name)` throughout — never hardcoded inline. Standard variable names used across all files:
 
-If push gets rejected with "non-fast-forward," use `git push origin main --force` (it's a personal repo, safe).
+```css
+:root {
+  --bg, --surface, --card, --border   /* background layers */
+  --[accent], --[accent]-d            /* primary accent + darker shade */
+  --[accent]-g, --[accent]-gg         /* glow/alpha versions for shadows */
+  --text, --muted, --subtle           /* text hierarchy */
+}
+```
+
+Note: `fastflow.html` and `whisknbloom.html` use **light themes** (white/off-white backgrounds); `index.html` and `greencut.html` use dark themes.
+
+### Section Structure
+
+`index.html` sections (in order): nav → hero → services → portfolio → about → contact → footer
+
+Demo pages follow a similar pattern but add industry-specific elements (offer bar, credential bar, emergency CTA bar). `fastflow.html` hero uses a 2-column grid with a form panel on the right.
+
+### Responsive Design
+
+Mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile: nav links hide, section padding drops, multi-column layouts stack vertically.
 
 ## Contact Form
 
-- Uses **Web3Forms** (free, no submission limit) — submissions email straight to `kevin@kdsystems.co`
-- Access key is in the form's hidden input
-- All form fields require `name` attributes or Web3Forms rejects the submission
+The form in `index.html` posts to Web3Forms (`https://api.web3forms.com/submit`). The access key is stored in a `<input type="hidden" name="access_key">` field. All form fields **must** have `name` attributes or Web3Forms rejects the submission.
 
-## Email Setup
+## Brand & Style Rules
 
-- `kevin@kdsystems.co` runs through **ImprovMX** (free forwarding) into Kevin's personal Gmail
-- Sending uses Gmail "Send mail as" with an app password — replies show the kdsystems.co address
-- MX records and SPF TXT live in Netlify DNS
+- **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages except `greencut.html` (Georgia serif) and `whisknbloom.html` (BlackberryJam display font for headlines)
+- **Interactive elements:** use CSS `transition` on hover; no JavaScript event listeners
+- **Accordions/disclosure:** use native `<details>`/`<summary>` — no JS toggles
+- **No JS** — if a feature needs interactivity, use native HTML elements or suggest a free third-party service
 
-## How Kevin Wants to Work
+## Owner Preferences
 
-- **Build first, learn as we go.** Don't lecture on theory. Ship code, then explain the parts he encounters.
-- **Speed over perfection.** Don't over-polish; get to working output fast.
-- **No backend.** This is static HTML. If a feature needs server logic, suggest a free third-party service (Web3Forms, ImprovMX, etc.) instead of building one.
-- **Practical references.** When designing demo pages, fetch real competitor sites (e.g., Rooter Hero, Flores Artscape) and adapt their structure rather than inventing layouts.
-- He's working in **PowerShell on Windows** — give Windows-friendly commands.
+- Ship working code fast; skip theory explanations unless asked
+- No backend — static HTML only; for form/email needs use free services (Web3Forms, ImprovMX)
+- When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure
+- Commands should be Windows/PowerShell-friendly

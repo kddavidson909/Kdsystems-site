@@ -41,6 +41,23 @@
       color: inherit;
     }
 
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: #000;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0 0 4px 4px;
+      font-size: 0.875rem;
+      z-index: 9999;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
     /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -553,7 +570,6 @@
       background: var(--card);
       color: var(--text);
       transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
       width: 100%;
     }
 
@@ -607,6 +623,39 @@
       color: var(--red);
     }
 
+    /* ===== FADE-IN ON SCROLL ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @supports (animation-timeline: view()) {
+      .fade-in {
+        animation: fadeInUp 0.55s ease both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 30%;
+      }
+      .fade-in.d1 { animation-range-start: entry 9%; }
+      .fade-in.d2 { animation-range-start: entry 13%; }
+      .fade-in.d3 { animation-range-start: entry 17%; }
+    }
+
+    /* ===== FOCUS & TOUCH TARGETS ===== */
+    :focus-visible {
+      outline: 2px solid #dc2626;
+      outline-offset: 2px;
+    }
+
+    nav a,
+    .btn-primary,
+    .btn-secondary,
+    .btn-submit,
+    input[type="submit"] {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       nav {
@@ -639,6 +688,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">
@@ -653,7 +704,7 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="main-content">
     <div class="hero-tag">Available for New Projects</div>
     <h1>Modern Websites<br>Smarter Systems</h1>
     <h2>Custom websites and simple automation that help small businesses get more customers—without the tech headache.</h2>
@@ -665,30 +716,30 @@
 
   <!-- SERVICES -->
   <section class="services" id="services">
-    <div class="section-label">What I Do</div>
-    <h2 class="section-title">Services</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
+    <div class="section-label fade-in">What I Do</div>
+    <h2 class="section-title fade-in">Services</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
     <div class="cards">
-      <div class="card">
-        <span class="card-icon">🌐</span>
+      <div class="card fade-in">
+        <span class="card-icon" aria-hidden="true">🌐</span>
         <h3>Landing Pages & Websites</h3>
         <p>Fast, professional sites designed to convert visitors into customers. Mobile-first, clean, and delivered in days — not weeks.</p>
         <span class="card-tag">Most Popular</span>
       </div>
-      <div class="card">
-        <span class="card-icon">⚙️</span>
+      <div class="card fade-in d1">
+        <span class="card-icon" aria-hidden="true">⚙️</span>
         <h3>Business Automation</h3>
         <p>Connect your tools, automate follow-ups, streamline workflows. Simple systems that save you hours every week without complex software.</p>
         <span class="card-tag">High Value</span>
       </div>
-      <div class="card">
-        <span class="card-icon">🔗</span>
+      <div class="card fade-in d2">
+        <span class="card-icon" aria-hidden="true">🔗</span>
         <h3>CRM & System Integrations</h3>
         <p>Get your website, email, calendar, and payment systems talking to each other. Less manual data entry, fewer things falling through the cracks.</p>
       </div>
-      <div class="card">
-        <span class="card-icon">🤖</span>
+      <div class="card fade-in d3">
+        <span class="card-icon" aria-hidden="true">🤖</span>
         <h3>AI-Powered Tools</h3>
         <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more.</p>
         <span class="card-tag">New</span>
@@ -698,19 +749,19 @@
 
   <!-- PORTFOLIO -->
   <section class="portfolio" id="work">
-    <div class="section-label">Portfolio</div>
-    <h2 class="section-title">Example Projects</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
+    <div class="section-label fade-in">Portfolio</div>
+    <h2 class="section-title fade-in">Example Projects</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
     <div class="portfolio-grid">
-      <a class="portfolio-item" href="whisknbloom.html">
+      <a class="portfolio-item fade-in" href="whisknbloom.html">
         <div class="portfolio-thumb thumb-orange">
           <img src="https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Artisan bakery with fresh bread and pastries" />
         </div>
         <div class="portfolio-info">
-          <div class="portfolio-tag">Demo — Bakery</div>
+          <div class="portfolio-tag">Local Bakery · Full Website</div>
           <h3>Whisk &amp; Bloom Bakery</h3>
-          <p>Menu highlights, order options, and custom cake inquiry form.</p>
+          <p>Built a full online presence for an artisan neighborhood bakery — from custom cake inquiries to weekly bread box subscriptions and corporate catering. Mobile-first, scratch-built, and designed to convert foot traffic into repeat online orders.</p>
           <span class="view-link">View Project →</span>
         </div>
       </a>
@@ -719,8 +770,8 @@
 
   <!-- ABOUT -->
   <section class="about" id="about">
-    <div class="about-avatar"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
-    <div class="about-text">
+    <div class="about-avatar fade-in"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
+    <div class="about-text fade-in d1">
       <div class="section-label">About Me</div>
       <h2>Built Different.<br>For Businesses That Work Hard.</h2>
       <p>I help small businesses upgrade their online presence with modern websites and smarter systems.</p>
@@ -732,11 +783,11 @@
 
   <!-- CONTACT -->
   <section class="contact" id="contact">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Let's Build Something</h2>
-    <div class="divider"></div>
-    <p class="section-subtitle" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
-    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+    <div class="section-label fade-in">Contact</div>
+    <h2 class="section-title fade-in">Let's Build Something</h2>
+    <div class="divider fade-in"></div>
+    <p class="section-subtitle fade-in" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
+    <form class="contact-form fade-in" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="df380811-ebc2-4a47-a6b1-389af7d8aadb" />
       <div class="form-row">
         <div class="form-group">
@@ -764,7 +815,7 @@
         <label for="message">Tell me about your business</label>
         <textarea id="message" name="message" placeholder="What does your business do? What problem are you trying to solve?"></textarea>
       </div>
-      <button type="submit" class="btn-submit">Send Message →</button>
+      <button type="submit" class="btn-submit">Send Message <span aria-hidden="true">→</span></button>
     </form>
   </section>
 

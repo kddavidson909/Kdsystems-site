@@ -7,7 +7,7 @@
   <style>
     @font-face {
       font-family: 'BlackberryJam';
-      src: url('Blackberryjamfont.ttf') format('truetype');
+      src: url('blackberryjamfont.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
     }
@@ -46,14 +46,14 @@
 
     /* NAV */
     nav {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: center; align-items: center;
       padding: 0 60px; height: 80px;
       border-bottom: 1px solid var(--border);
       background: #ffffff;
       position: sticky; top: 0; z-index: 200;
       box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     }
-    .nav-logo { display: flex; align-items: center; }
+    .nav-logo { display: none; }
     .nav-links { display: flex; gap: 28px; list-style: none; font-size: 0.88rem; color: var(--muted); align-items: center; }
     .nav-links a:hover { color: var(--text); }
     .nav-trial {
@@ -280,8 +280,9 @@
       display: flex; flex-direction: column; justify-content: center;
     }
     .moto-left h2 {
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 900; letter-spacing: -1px; line-height: 1.1;
+      font-family: 'BlackberryJam', serif;
+      font-size: clamp(3rem, 5.25vw, 4.5rem);
+      font-weight: normal; letter-spacing: -1px; line-height: 1.1;
       color: var(--text); margin-bottom: 20px;
     }
     .moto-left h2 em { color: var(--teal); font-style: normal; }
@@ -315,8 +316,9 @@
       align-items: center;
     }
     .trial-left h2 {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 900; letter-spacing: -1px;
+      font-family: 'BlackberryJam', serif;
+      font-size: clamp(3rem, 5.25vw, 4.5rem);
+      font-weight: normal; letter-spacing: -1px;
       color: var(--text); margin-bottom: 16px;
     }
     .trial-left h2 em { color: var(--teal); font-style: normal; display: block; }
@@ -435,7 +437,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-logo">
-      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:96px; display:block;" />
+      <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:300px; display:block;" />
     </div>
     <div class="hero-content">
       <span class="hero-eyebrow">Open Mon–Sat · 6am to 3pm</span>
@@ -645,7 +647,7 @@
   <section class="motivation">
     <div class="moto-left">
       <div class="section-label">Our Philosophy</div>
-      <h2>Every Loaf.<br><em>From Scratch.</em></h2>
+      <h2>Every Loaf<br><em>From Scratch</em></h2>
       <p>We don't use mixes, shortcuts, or preservatives. Every item on the shelf was made by hand this morning — with local flour, real butter, and time. That's it. That's the whole secret.</p>
       <a href="#order" class="btn-primary" style="display:inline-block; width:fit-content;">Place a Custom Order</a>
     </div>
@@ -719,7 +721,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-brand-name">
-          <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:80px; display:block;" />
+          <img src="Whisk_bloom_bakery_logo.svg" alt="Whisk &amp; Bloom Bakery" style="height:120px; display:block;" />
         </span>
         <p>Scratch-made, locally sourced, open every morning. Mon–Sat, 6am–3pm.</p>
       </div>

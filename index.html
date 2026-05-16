@@ -22,6 +22,7 @@
       --border:    #2a2a2f;
       --red:       #b91c1c;
       --red-dark:  #991b1b;
+      --red-text:  #ef4444;
       --red-glow:  rgba(185, 28, 28, 0.12);
       --red-glow2: rgba(185, 28, 28, 0.05);
       --text:      #f0eff4;
@@ -131,6 +132,25 @@
       background: var(--red-dark) !important;
     }
 
+    /* Mobile hamburger via <details>/<summary> */
+    .nav-menu {
+      position: relative;
+    }
+
+    .nav-hamburger {
+      display: none;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.4rem;
+      padding: 8px;
+      line-height: 1;
+      list-style: none;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+    }
+    .nav-hamburger::-webkit-details-marker { display: none; }
+
     /* ===== HERO ===== */
     .hero {
       display: flex;
@@ -177,7 +197,7 @@
       gap: 8px;
       background: transparent;
       border: 1px solid var(--red);
-      color: var(--red);
+      color: var(--red-text);
       font-size: 0.8rem;
       font-weight: 600;
       padding: 6px 16px;
@@ -211,10 +231,10 @@
     }
 
     .hero h1 .dot {
-      color: var(--red);
+      color: var(--red-text);
     }
 
-    .hero h2 {
+    .hero-sub {
       font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 400;
       color: var(--muted);
@@ -267,7 +287,7 @@
     .section-label {
       font-size: 0.75rem;
       font-weight: 700;
-      color: var(--red);
+      color: var(--red-text);
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 14px;
@@ -352,7 +372,7 @@
       margin-top: 16px;
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--red);
+      color: var(--red-text);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       border: 1px solid var(--red);
@@ -391,7 +411,7 @@
     }
 
     .portfolio-item:hover .portfolio-info h3 {
-      color: var(--red);
+      color: var(--red-text);
     }
 
     .view-link {
@@ -399,7 +419,7 @@
       margin-top: 10px;
       font-size: 0.78rem;
       font-weight: 600;
-      color: var(--red);
+      color: var(--red-text);
       letter-spacing: 0.3px;
     }
 
@@ -442,7 +462,7 @@
     .portfolio-tag {
       font-size: 0.72rem;
       font-weight: 700;
-      color: var(--red);
+      color: var(--red-text);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 8px;
@@ -563,7 +583,7 @@
 
     input, textarea, select {
       padding: 12px 16px;
-      border: 1px solid var(--border);
+      border: 1px solid #3f3f46;
       border-radius: 7px;
       font-size: 0.93rem;
       font-family: inherit;
@@ -610,17 +630,29 @@
       box-shadow: 0 8px 24px rgba(220,38,38,0.3);
     }
 
+    .form-status {
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: none;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 28px 20px;
       font-size: 0.82rem;
-      color: var(--subtle);
+      color: var(--muted);
       border-top: 1px solid var(--border);
     }
 
-    footer span {
-      color: var(--red);
+    footer a {
+      color: var(--red-text);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
 
     /* ===== FADE-IN ON SCROLL ===== */
@@ -646,6 +678,14 @@
       outline-offset: 2px;
     }
 
+    /* White focus ring on red backgrounds so it remains visible */
+    .btn-primary:focus-visible,
+    .btn-submit:focus-visible,
+    .nav-cta:focus-visible {
+      outline-color: #fff;
+      outline-offset: 3px;
+    }
+
     nav a,
     .btn-primary,
     .btn-secondary,
@@ -662,8 +702,47 @@
         padding: 16px 24px;
       }
 
+      .nav-hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+
       .nav-links {
         display: none;
+      }
+
+      .nav-menu[open] .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        gap: 4px;
+        min-width: 180px;
+        z-index: 200;
+      }
+
+      .nav-menu[open] .nav-links a {
+        display: block;
+        padding: 10px 14px;
+        border-radius: 6px;
+      }
+
+      .nav-menu[open] .nav-links a:hover {
+        background: var(--card);
+      }
+
+      .nav-menu[open] .nav-cta {
+        margin-top: 4px;
+        text-align: center;
+        justify-content: center;
       }
 
       .services,
@@ -695,133 +774,141 @@
     <a href="index.html" class="nav-logo">
       <span class="logo-kd">KD</span><span class="logo-sep">/</span><span class="logo-systems">Systems</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
-    </ul>
+    <details class="nav-menu">
+      <summary class="nav-hamburger" aria-label="Navigation menu">&#9776;</summary>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+    </details>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="main-content">
-    <div class="hero-tag">Available for New Projects</div>
-    <h1>Modern Websites<br>Smarter Systems</h1>
-    <h2>Custom websites and simple automation that help small businesses get more customers—without the tech headache.</h2>
-    <div class="hero-buttons">
-      <a href="#contact" class="btn-primary">Get a Free Quote</a>
-      <a href="#work" class="btn-secondary">See My Work</a>
-    </div>
-  </section>
+  <main id="main-content">
 
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="section-label fade-in">What I Do</div>
-    <h2 class="section-title fade-in">Services</h2>
-    <div class="divider fade-in"></div>
-    <p class="section-subtitle fade-in" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
-    <div class="cards">
-      <div class="card fade-in">
-        <span class="card-icon" aria-hidden="true">🌐</span>
-        <h3>Landing Pages & Websites</h3>
-        <p>Fast, professional sites designed to convert visitors into customers. Mobile-first, clean, and delivered in days — not weeks.</p>
-        <span class="card-tag">Most Popular</span>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-tag">Available for New Projects</div>
+      <h1>Modern Websites<br>Smarter Systems</h1>
+      <p class="hero-sub">Custom websites and simple automation that help small businesses get more customers—without the tech headache.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Get a Free Quote</a>
+        <a href="#work" class="btn-secondary">See My Work</a>
       </div>
-      <div class="card fade-in d1">
-        <span class="card-icon" aria-hidden="true">⚙️</span>
-        <h3>Business Automation</h3>
-        <p>Connect your tools, automate follow-ups, streamline workflows. Simple systems that save you hours every week without complex software.</p>
-        <span class="card-tag">High Value</span>
-      </div>
-      <div class="card fade-in d2">
-        <span class="card-icon" aria-hidden="true">🔗</span>
-        <h3>CRM & System Integrations</h3>
-        <p>Get your website, email, calendar, and payment systems talking to each other. Less manual data entry, fewer things falling through the cracks.</p>
-      </div>
-      <div class="card fade-in d3">
-        <span class="card-icon" aria-hidden="true">🤖</span>
-        <h3>AI-Powered Tools</h3>
-        <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more.</p>
-        <span class="card-tag">New</span>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PORTFOLIO -->
-  <section class="portfolio" id="work">
-    <div class="section-label fade-in">Portfolio</div>
-    <h2 class="section-title fade-in">Example Projects</h2>
-    <div class="divider fade-in"></div>
-    <p class="section-subtitle fade-in" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
-    <div class="portfolio-grid">
-      <a class="portfolio-item fade-in" href="whisknbloom.html">
-        <div class="portfolio-thumb thumb-orange">
-          <img src="https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Artisan bakery with fresh bread and pastries" />
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="section-label fade-in">What I Do</div>
+      <h2 class="section-title fade-in">Services</h2>
+      <div class="divider fade-in"></div>
+      <p class="section-subtitle fade-in" style="margin-top:20px;">From a clean landing page to full business automation — I build practical tools that work.</p>
+      <div class="cards">
+        <div class="card fade-in">
+          <span class="card-icon" aria-hidden="true">🌐</span>
+          <h3>Landing Pages &amp; Websites</h3>
+          <p>Fast, professional sites designed to convert visitors into customers. Mobile-first, clean, and delivered in days — not weeks.</p>
+          <span class="card-tag">Most Popular</span>
         </div>
-        <div class="portfolio-info">
-          <div class="portfolio-tag">Local Bakery · Full Website</div>
-          <h3>Whisk &amp; Bloom Bakery</h3>
-          <p>Built a full online presence for an artisan neighborhood bakery — from custom cake inquiries to weekly bread box subscriptions and corporate catering. Mobile-first, scratch-built, and designed to convert foot traffic into repeat online orders.</p>
-          <span class="view-link">View Project →</span>
+        <div class="card fade-in d1">
+          <span class="card-icon" aria-hidden="true">⚙️</span>
+          <h3>Business Automation</h3>
+          <p>Connect your tools, automate follow-ups, streamline workflows. Simple systems that save you hours every week without complex software.</p>
+          <span class="card-tag">High Value</span>
         </div>
-      </a>
-    </div>
-  </section>
+        <div class="card fade-in d2">
+          <span class="card-icon" aria-hidden="true">🔗</span>
+          <h3>CRM &amp; System Integrations</h3>
+          <p>Get your website, email, calendar, and payment systems talking to each other. Less manual data entry, fewer things falling through the cracks.</p>
+        </div>
+        <div class="card fade-in d3">
+          <span class="card-icon" aria-hidden="true">🤖</span>
+          <h3>AI-Powered Tools</h3>
+          <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more.</p>
+          <span class="card-tag">New</span>
+        </div>
+      </div>
+    </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-avatar fade-in"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
-    <div class="about-text fade-in d1">
-      <div class="section-label">About Me</div>
-      <h2>Built Different.<br>For Businesses That Work Hard.</h2>
-      <p>I help small businesses upgrade their online presence with modern websites and smarter systems.</p>
-      <p>Coming from a background in industrial maintenance, I've spent years fixing complex systems, troubleshooting problems, and keeping things running efficiently. That same mindset now goes into the way I build websites and automation — practical, reliable, and built to actually work.</p>
-      <p>I focus on helping small businesses and freelancers compete at a higher level by creating tools that bring in customers, save time, and simplify day-to-day operations. The goal is simple: give you the kind of systems that used to only be available to bigger companies.</p>
-      <a href="#contact" class="btn-primary" style="display:inline-block;">Let's Talk</a>
-    </div>
-  </section>
+    <!-- PORTFOLIO -->
+    <section class="portfolio" id="work">
+      <div class="section-label fade-in">Portfolio</div>
+      <h2 class="section-title fade-in">Example Projects</h2>
+      <div class="divider fade-in"></div>
+      <p class="section-subtitle fade-in" style="margin-top:20px;">Sample landing pages built for different local service businesses.</p>
+      <div class="portfolio-grid">
+        <a class="portfolio-item fade-in" href="whisknbloom.html">
+          <div class="portfolio-thumb thumb-orange">
+            <img src="https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Artisan bakery with fresh bread and pastries" />
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Local Bakery · Full Website</div>
+            <h3>Whisk &amp; Bloom Bakery</h3>
+            <p>Built a full online presence for an artisan neighborhood bakery — from custom cake inquiries to weekly bread box subscriptions and corporate catering. Mobile-first, scratch-built, and designed to convert foot traffic into repeat online orders.</p>
+            <span class="view-link">View Project <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="section-label fade-in">Contact</div>
-    <h2 class="section-title fade-in">Let's Build Something</h2>
-    <div class="divider fade-in"></div>
-    <p class="section-subtitle fade-in" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
-    <form class="contact-form fade-in" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="df380811-ebc2-4a47-a6b1-389af7d8aadb" />
-      <div class="form-row">
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-avatar fade-in"><img src="headshot.jpg" alt="Kevin Davidson" /></div>
+      <div class="about-text fade-in d1">
+        <div class="section-label">About Me</div>
+        <h2>Built Different.<br>For Businesses That Work Hard.</h2>
+        <p>I help small businesses upgrade their online presence with modern websites and smarter systems.</p>
+        <p>Coming from a background in industrial maintenance, I've spent years fixing complex systems, troubleshooting problems, and keeping things running efficiently. That same mindset now goes into the way I build websites and automation — practical, reliable, and built to actually work.</p>
+        <p>I focus on helping small businesses and freelancers compete at a higher level by creating tools that bring in customers, save time, and simplify day-to-day operations. The goal is simple: give you the kind of systems that used to only be available to bigger companies.</p>
+        <a href="#contact" class="btn-primary" style="display:inline-block;">Let's Talk</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="section-label fade-in">Contact</div>
+      <h2 class="section-title fade-in">Let's Build Something</h2>
+      <div class="divider fade-in"></div>
+      <p class="section-subtitle fade-in" style="margin-top:20px;">Tell me what you need and I'll get back to you within 24 hours.</p>
+      <form class="contact-form fade-in" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="df380811-ebc2-4a47-a6b1-389af7d8aadb" />
+        <div id="form-status" class="form-status" aria-live="polite" role="status"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+          </div>
+        </div>
         <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="John Smith" />
+          <label for="service">What do you need?</label>
+          <select id="service" name="service" required>
+            <option value="">Select a service...</option>
+            <option>Landing Page</option>
+            <option>Full Website</option>
+            <option>Business Automation</option>
+            <option>CRM / System Integration</option>
+            <option>AI-Powered Tool</option>
+            <option>Not sure — let's talk</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="john@example.com" />
+          <label for="message">Tell me about your business</label>
+          <textarea id="message" name="message" placeholder="What does your business do? What problem are you trying to solve?" required></textarea>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="service">What do you need?</label>
-        <select id="service" name="service">
-          <option value="">Select a service...</option>
-          <option>Landing Page</option>
-          <option>Full Website</option>
-          <option>Business Automation</option>
-          <option>CRM / System Integration</option>
-          <option>AI-Powered Tool</option>
-          <option>Not sure — let's talk</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="message">Tell me about your business</label>
-        <textarea id="message" name="message" placeholder="What does your business do? What problem are you trying to solve?"></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Send Message <span aria-hidden="true">→</span></button>
-    </form>
-  </section>
+        <button type="submit" class="btn-submit">Send Message <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 KD Systems &nbsp;·&nbsp; <span>kevin@kdsystems.co</span> &nbsp;·&nbsp; Built with intent.</p>
+    <p>© 2026 KD Systems &nbsp;·&nbsp; <a href="mailto:kevin@kdsystems.co">kevin@kdsystems.co</a> &nbsp;·&nbsp; Built with intent.</p>
   </footer>
 
 </body>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered Tools — KD Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&display=swap" rel="stylesheet">
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #0d0d0f;
+      --surface:   #141416;
+      --card:      #1a1a1d;
+      --border:    #2a2a2f;
+      --red:       #b91c1c;
+      --red-dark:  #991b1b;
+      --red-text:  #ef4444;
+      --red-glow:  rgba(185, 28, 28, 0.12);
+      --red-glow2: rgba(185, 28, 28, 0.05);
+      --text:      #f0eff4;
+      --muted:     #9ca3af;
+      --subtle:    #4b5563;
+    }
+
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
+
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 64px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(13,13,15,0.92); backdrop-filter: blur(12px); z-index: 100; }
+    .nav-logo { font-family: 'Manrope', system-ui, sans-serif; font-size: 1.25rem; color: var(--text); display: flex; align-items: baseline; }
+    .logo-kd { font-weight: 800; letter-spacing: -0.5px; color: var(--red); }
+    .logo-sep { font-weight: 300; color: var(--muted); padding: 0 4px; }
+    .logo-systems { font-weight: 300; letter-spacing: 0.5px; }
+    .nav-cta { background: var(--red); color: #fff; padding: 9px 22px; border-radius: 6px; font-weight: 600; font-size: 0.88rem; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--red-dark); }
+
+    .hero { padding: 90px 64px 70px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .breadcrumb { font-size: 0.82rem; color: var(--muted); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { color: var(--subtle); }
+    .service-label { display: inline-block; background: var(--red-glow); border: 1px solid rgba(185,28,28,0.25); color: var(--red-text); font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto 36px; }
+    .hero-cta { display: inline-block; background: var(--red); color: #fff; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: background 0.2s, transform 0.2s; }
+    .hero-cta:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    .section { padding: 80px 64px; max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red-text); margin-bottom: 10px; }
+    .section h2 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 40px; letter-spacing: -0.3px; }
+    .divider { width: 40px; height: 2px; background: var(--red); margin-bottom: 40px; }
+
+    .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .deliverable-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px; }
+    .deliverable-icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--red-text); margin-top: 2px; }
+    .deliverable-item strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+    .deliverable-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step { display: grid; grid-template-columns: 48px 1fr; gap: 24px; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--red-glow); border: 1px solid rgba(185,28,28,0.3); color: var(--red-text); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Manrope', system-ui, sans-serif; }
+    .step-line { width: 1px; flex: 1; background: var(--border); margin: 8px 0; min-height: 32px; }
+    .process-step:last-child .step-line { display: none; }
+    .step-content { padding-bottom: 36px; }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; padding-top: 10px; }
+    .step-content p { font-size: 0.9rem; color: var(--muted); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    details.faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color 0.2s; }
+    details.faq-item[open] { border-color: rgba(185,28,28,0.3); }
+    details.faq-item summary { padding: 18px 24px; cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after { content: '+'; color: var(--red-text); font-size: 1.3rem; font-weight: 300; transition: transform 0.2s; }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-answer { padding: 0 24px 18px; font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    .cta-band { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 64px; text-align: center; }
+    .cta-band h2 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 14px; }
+    .cta-band p { color: var(--muted); margin-bottom: 32px; font-size: 1rem; }
+    .btn-red { display: inline-block; background: var(--red); color: #fff; padding: 14px 36px; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: background 0.2s, transform 0.2s; }
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    footer { padding: 32px 64px; text-align: center; font-size: 0.82rem; color: var(--subtle); border-top: 1px solid var(--border); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 60px 24px 50px; }
+      .section { padding: 60px 24px; }
+      .cta-band { padding: 60px 24px; }
+      footer { padding: 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-kd">KD</span><span class="logo-sep">/</span><span class="logo-systems">Systems</span>
+    </a>
+    <a href="index.html#contact" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <div class="hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Services</span>
+      <span>›</span>
+      <span>AI-Powered Tools</span>
+    </div>
+    <div class="service-label">Service</div>
+    <h1>AI-Powered Tools</h1>
+    <p>Custom automations and lightweight tools built with AI — lead follow-up bots, content pipelines, smart forms, and more. Practical AI that actually fits your business.</p>
+    <a href="index.html#contact" class="hero-cta">Get a Quote →</a>
+  </div>
+
+  <section class="section">
+    <div class="section-label">What You Get</div>
+    <h2>What's Included</h2>
+    <div class="divider"></div>
+    <div class="deliverables-grid">
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Discovery &amp; use-case scoping</strong>
+          <p>We identify exactly where AI will have real impact in your workflow — not just what's trendy, but what will actually save you time or money.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Custom AI tool or automation</strong>
+          <p>Built for your specific use case — lead follow-up bots, content drafting pipelines, smart intake forms, classification tools, internal Q&amp;A assistants, and more.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Integration with your existing tools</strong>
+          <p>The AI layer connects to the apps you already use — your CRM, email platform, forms, or spreadsheets — so it fits into your workflow, not around it.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Testing with real examples</strong>
+          <p>The tool is tested against real inputs from your business — not generic test data — so you can see exactly how it performs before it goes live.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Plain-English documentation</strong>
+          <p>How the tool works, what it's doing under the hood (in plain terms), and how to adjust it if your needs change — no technical knowledge required.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Cost transparency</strong>
+          <p>I'll tell you upfront what the AI API usage will cost to run — most tools cost pennies per use, and I'll show you how to track and manage it yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-label">How It Works</div>
+    <h2>The Process</h2>
+    <div class="divider"></div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Discovery call</h3>
+          <p>We talk through the problem you're trying to solve. I'll ask about your current workflow, what's repetitive or slow, and where you think AI could help — then give you an honest take on what's actually worth building.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Scope &amp; plan</h3>
+          <p>I put together a clear plan: what the tool will do, what it won't do, which AI model fits the use case, how it connects to your other tools, and what it'll cost to run. You approve before I write a line of code.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Build &amp; test</h3>
+          <p>I build the tool and run it against real examples you provide. We iterate on the output quality until it's performing the way you need it to.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Deploy &amp; hand off</h3>
+          <p>The tool goes live, connected to your workflow. You get documentation, a walkthrough, and a clear picture of how to monitor it going forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-label">Questions</div>
+    <h2>FAQ</h2>
+    <div class="divider"></div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What AI tools do you build with?</summary>
+        <div class="faq-answer">Primarily the OpenAI API (GPT-4o) and Anthropic's Claude API, depending on the use case. I also work with Make and Zapier's built-in AI actions for lighter-weight automations that don't need a full custom build.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How much does it cost to run an AI tool after it's built?</summary>
+        <div class="faq-answer">It depends on volume and which model you're using, but most small business tools run for a few dollars a month. A lead follow-up bot processing 100 leads a month, for example, typically costs under $5 in API fees. I'll give you a clear estimate before we start.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Will I need a developer to maintain it?</summary>
+        <div class="faq-answer">For most tools, no. I design them to be maintainable without technical knowledge — adjusting the prompts or rules is usually just editing a text document. If something breaks or needs a bigger change, I'm available for ongoing support.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can AI replace my staff?</summary>
+        <div class="faq-answer">That's not really the goal here. The tools I build handle the repetitive, low-judgment tasks — drafting first-pass emails, categorizing incoming requests, pulling information from documents — so your team can spend their time on work that actually requires a human.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is my business data safe when using AI APIs?</summary>
+        <div class="faq-answer">OpenAI and Anthropic both offer API tiers where your data is not used for model training. I'll walk you through the privacy settings when we set up your account, and I avoid sending sensitive customer data through AI models unless there's a clear reason and you've explicitly agreed to it.</div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Ready to put AI to work for your business?</h2>
+    <p>Tell me what's repetitive and we'll figure out if AI is the right tool for it.</p>
+    <a href="index.html#contact" class="btn-red">Get a Quote →</a>
+  </div>
+
+  <footer>
+    <a href="index.html">← Back to KD Systems</a> &nbsp;·&nbsp; kdsystems.co
+  </footer>
+
+</body>
+</html>

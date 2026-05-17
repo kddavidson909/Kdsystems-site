@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Automation — KD Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&display=swap" rel="stylesheet">
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #0d0d0f;
+      --surface:   #141416;
+      --card:      #1a1a1d;
+      --border:    #2a2a2f;
+      --red:       #b91c1c;
+      --red-dark:  #991b1b;
+      --red-text:  #ef4444;
+      --red-glow:  rgba(185, 28, 28, 0.12);
+      --red-glow2: rgba(185, 28, 28, 0.05);
+      --text:      #f0eff4;
+      --muted:     #9ca3af;
+      --subtle:    #4b5563;
+    }
+
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 64px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(13,13,15,0.92);
+      backdrop-filter: blur(12px); z-index: 100;
+    }
+    .nav-logo { font-family: 'Manrope', system-ui, sans-serif; font-size: 1.25rem; color: var(--text); display: flex; align-items: baseline; }
+    .logo-kd { font-weight: 800; letter-spacing: -0.5px; color: var(--red); }
+    .logo-sep { font-weight: 300; color: var(--muted); padding: 0 4px; }
+    .logo-systems { font-weight: 300; letter-spacing: 0.5px; }
+    .nav-cta { background: var(--red); color: #fff; padding: 9px 22px; border-radius: 6px; font-weight: 600; font-size: 0.88rem; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--red-dark); }
+
+    .hero { padding: 90px 64px 70px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .breadcrumb { font-size: 0.82rem; color: var(--muted); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { color: var(--subtle); }
+    .service-label { display: inline-block; background: var(--red-glow); border: 1px solid rgba(185,28,28,0.25); color: var(--red-text); font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto 36px; }
+    .hero-cta { display: inline-block; background: var(--red); color: #fff; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: background 0.2s, transform 0.2s; }
+    .hero-cta:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    .section { padding: 80px 64px; max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red-text); margin-bottom: 10px; }
+    .section h2 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 40px; letter-spacing: -0.3px; }
+    .divider { width: 40px; height: 2px; background: var(--red); margin-bottom: 40px; }
+
+    .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .deliverable-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px; }
+    .deliverable-icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--red-text); margin-top: 2px; }
+    .deliverable-item strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+    .deliverable-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step { display: grid; grid-template-columns: 48px 1fr; gap: 24px; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--red-glow); border: 1px solid rgba(185,28,28,0.3); color: var(--red-text); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Manrope', system-ui, sans-serif; }
+    .step-line { width: 1px; flex: 1; background: var(--border); margin: 8px 0; min-height: 32px; }
+    .process-step:last-child .step-line { display: none; }
+    .step-content { padding-bottom: 36px; }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; padding-top: 10px; }
+    .step-content p { font-size: 0.9rem; color: var(--muted); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    details.faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color 0.2s; }
+    details.faq-item[open] { border-color: rgba(185,28,28,0.3); }
+    details.faq-item summary { padding: 18px 24px; cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after { content: '+'; color: var(--red-text); font-size: 1.3rem; font-weight: 300; transition: transform 0.2s; }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-answer { padding: 0 24px 18px; font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    .cta-band { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 64px; text-align: center; }
+    .cta-band h2 { font-family: 'Manrope', system-ui, sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 14px; }
+    .cta-band p { color: var(--muted); margin-bottom: 32px; font-size: 1rem; }
+    .btn-red { display: inline-block; background: var(--red); color: #fff; padding: 14px 36px; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: background 0.2s, transform 0.2s; }
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    footer { padding: 32px 64px; text-align: center; font-size: 0.82rem; color: var(--subtle); border-top: 1px solid var(--border); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 60px 24px 50px; }
+      .section { padding: 60px 24px; }
+      .cta-band { padding: 60px 24px; }
+      footer { padding: 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-kd">KD</span><span class="logo-sep">/</span><span class="logo-systems">Systems</span>
+    </a>
+    <a href="index.html#contact" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <div class="hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Services</span>
+      <span>›</span>
+      <span>Business Automation</span>
+    </div>
+    <div class="service-label">Service</div>
+    <h1>Business Automation</h1>
+    <p>Connect your tools, automate follow-ups, and streamline workflows. Simple systems that save you hours every week — without complex software.</p>
+    <a href="index.html#contact" class="hero-cta">Get a Quote →</a>
+  </div>
+
+  <section class="section">
+    <div class="section-label">What You Get</div>
+    <h2>What's Included</h2>
+    <div class="divider"></div>
+    <div class="deliverables-grid">
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Workflow audit</strong>
+          <p>We map out your current manual processes to find what's costing you the most time and where automation will have the biggest impact.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Automated follow-up sequences</strong>
+          <p>Leads, bookings, and client onboarding handled automatically — emails go out the moment a trigger fires, without you lifting a finger.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Tool integrations (Zapier / Make)</strong>
+          <p>Your apps — forms, email, calendar, spreadsheets, CRM — connected so data flows between them automatically with no copy-paste.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Testing &amp; QA</strong>
+          <p>Every automation is tested end-to-end before handoff. No silent failures, no half-working flows.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>Plain-English documentation</strong>
+          <p>A simple write-up of how each automation works and what to do if something ever needs changing — no technical knowledge required to follow it.</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <svg class="deliverable-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+        <div>
+          <strong>30-day check-in</strong>
+          <p>A follow-up a month after launch to catch any edge cases, answer questions, and make minor adjustments if needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-label">How It Works</div>
+    <h2>The Process</h2>
+    <div class="divider"></div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Discovery &amp; audit</h3>
+          <p>We walk through your day-to-day operations together. I ask questions about what tools you use, where things fall through the cracks, and what tasks eat up the most time.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Plan the automations</h3>
+          <p>I put together a clear plan — what gets automated, in what order, using which tools. You review and approve before I build anything.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Build &amp; test</h3>
+          <p>I set up the automations, run them through real scenarios, and iron out any issues. You'll be able to see everything working before we call it done.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-left"><div class="step-number">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Hand off &amp; support</h3>
+          <p>You get documentation, a walkthrough of how everything works, and a 30-day window to reach out if anything needs tweaking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-label">Questions</div>
+    <h2>FAQ</h2>
+    <div class="divider"></div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What tools do you work with?</summary>
+        <div class="faq-answer">Zapier, Make (formerly Integromat), GoHighLevel, Notion, Airtable, Google Workspace, Calendly, Typeform, and most tools with a Zapier integration. If you're using something specific, just ask — chances are I can connect it.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need any technical knowledge?</summary>
+        <div class="faq-answer">None. I handle all the setup and configuration. After handoff, you don't need to touch anything — the automations just run in the background.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What does it cost to run automations after they're set up?</summary>
+        <div class="faq-answer">Most automation platforms (Zapier, Make) have free tiers that cover small volumes. Depending on how much you automate, you may need a paid plan — typically $20–$50/month. I'll factor this into the plan so there are no surprises.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What if something breaks after you hand it off?</summary>
+        <div class="faq-answer">The 30-day check-in is there specifically for this. After that window, I offer maintenance packages for ongoing support if you want a longer safety net.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How long does a typical automation project take?</summary>
+        <div class="faq-answer">Simple automations (one or two connected tools) are usually done in 2–4 days. More complex multi-step workflows can take 1–2 weeks depending on the number of systems involved.</div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Ready to stop doing things manually?</h2>
+    <p>Tell me what's eating your time and we'll figure out what to automate first.</p>
+    <a href="index.html#contact" class="btn-red">Get a Quote →</a>
+  </div>
+
+  <footer>
+    <a href="index.html">← Back to KD Systems</a> &nbsp;·&nbsp; kdsystems.co
+  </footer>
+
+</body>
+</html>

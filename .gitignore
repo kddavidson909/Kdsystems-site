@@ -1,0 +1,18 @@
+# Local Netlify folder
+.netlify
+
+# Spreadsheets
+*.xlsx
+*.xlsx.lock
+~$*.xlsx
+
+# Temp lock files
+.~lock.*
+
+# Internal notes / docs
+memory.md
+ACCESSIBILITY_FIXES.md
+BAKERY_CASESTUDY.md
+
+# Claude / Cowork internals
+.claude/

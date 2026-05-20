@@ -13,6 +13,7 @@
 memory.md
 ACCESSIBILITY_FIXES.md
 BAKERY_CASESTUDY.md
+*.docx
 
 # Claude / Cowork internals
 .claude/

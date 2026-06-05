@@ -17,3 +17,16 @@ BAKERY_CASESTUDY.md
 
 # Claude / Cowork internals
 .claude/
+
+# Accidental / temp files
+it
+
+# Backend workflows (internal — not for deployment)
+n8n-workflows/
+
+# Logo design dev file
+KD_sys_logo.html
+
+# Personal images not used by any page
+kd_cover_photo.png
+kd_profile_pic.png

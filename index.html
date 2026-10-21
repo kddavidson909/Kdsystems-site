@@ -39,7 +39,7 @@
       --red-glow2: rgba(185, 28, 28, 0.05);
       --text:      #f0eff4;
       --muted:     #9ca3af;
-      --subtle:    #4b5563;
+      --subtle:    #808896;
     }
 
     body {
@@ -851,6 +851,8 @@
       }
     }
 
+    /* Links inside text are underlined so they never rely on color alone */
+    p a, footer a { text-decoration: underline; text-underline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -961,11 +963,11 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="John Smith" required />
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="John Smith" required />
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="john@example.com" required />
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="john@example.com" required />
             </div>
           </div>
           <div class="form-group">

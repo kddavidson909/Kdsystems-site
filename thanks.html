@@ -23,7 +23,7 @@
       --red-glow:  rgba(185, 28, 28, 0.12);
       --text:      #f0eff4;
       --muted:     #9ca3af;
-      --subtle:    #4b5563;
+      --subtle:    #808896;
     }
 
     body {
@@ -257,6 +257,8 @@
         gap: 14px;
       }
     }
+    /* Links inside text are underlined so they never rely on color alone */
+    p a, footer a { text-decoration: underline; text-underline-offset: 3px; }
   </style>
 </head>
 <body>

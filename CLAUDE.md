@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, a thank-you page, and one demo project page used as a portfolio sample. Pure HTML and CSS. No frameworks, no build step, no JavaScript libraries.
+Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, and a thank-you page. The portfolio section is a "coming soon" placeholder until a new demo project is built. Pure HTML and CSS. No frameworks, no build step, no JavaScript libraries.
 
 ## Hosting and Deployment
 
@@ -43,11 +43,10 @@ Each page is self-contained. All CSS lives in an inline `<style>` block in the `
 | `landing-pages.html` | Websites and Landing Pages service page |
 | `crm-integrations.html` | Redirect to `automation.html` (CRM work was folded into automation) |
 | `thanks.html` | Thank-you page the contact form redirects to |
-| `whisknbloom.html` | Whisk & Bloom Bakery demo (light theme, teal `#5dbfa0`, Deerhouse display font) |
 | `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
 | `favicon.svg`, `kd_systems_logo.png` | Favicon and social share image |
 
-Assets live in `assets/images/` and `assets/fonts/`. The bakery display font is `assets/fonts/deerhouse.ttf`, loaded with `@font-face` in `whisknbloom.html`.
+Images live in `assets/images/`.
 
 `KD_sys_logo.html` is a logo design file, not a page. It is listed in `.gitignore` but is still tracked, so it is publicly reachable until it is removed with `git rm --cached KD_sys_logo.html`.
 
@@ -82,7 +81,7 @@ The form does not currently send anything to n8n. If the n8n lead intake pipelin
 
 ## Brand and Style Rules
 
-- **Typography:** `'Segoe UI', system-ui, sans-serif` on KD Systems pages. The bakery demo uses the Deerhouse display font for headlines.
+- **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages, with the Manrope wordmark for the logo.
 - **Interactive elements:** CSS `transition` on hover. No JavaScript event listeners.
 - **Accordions:** native `<details>` and `<summary>`.
 - **Scroll animations:** CSS scroll-driven animations inside `@supports (animation-timeline: view())`, so content stays visible in browsers without support.

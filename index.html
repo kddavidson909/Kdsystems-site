@@ -544,6 +544,12 @@
       overflow: hidden;
     }
 
+    .about-avatar picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     .about-avatar img {
       width: 100%;
       height: 100%;
@@ -939,7 +945,7 @@
 
     <!-- ABOUT — no section header pattern, avatar + headline lead directly -->
     <section class="about" id="about">
-      <div class="about-avatar fade-in"><img src="assets/images/headshot.jpg" alt="Kevin Davidson" /></div>
+      <div class="about-avatar fade-in"><picture><source srcset="assets/images/headshot.webp" type="image/webp" /><img src="assets/images/headshot.jpg" alt="Kevin Davidson" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
       <div class="about-text fade-in d1">
         <h2>Built Different.<br>For Businesses That Work Hard.</h2>
         <p>I help small businesses cut out busywork with automation and smarter systems.</p>

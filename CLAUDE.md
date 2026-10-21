@@ -4,70 +4,94 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kevin Davidson's personal freelance landing page (`kdsystems.co`) plus 3 demo project pages used as portfolio samples. Built with pure HTML + CSS — no frameworks, no build step, no JavaScript libraries.
+Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, a thank-you page, and one demo project page used as a portfolio sample. Pure HTML and CSS. No frameworks, no build step, no JavaScript libraries.
 
-## Development Workflow
+## Hosting and Deployment
 
-There is no build step. To preview changes, open the HTML file directly in a browser. Deployment is automatic:
+The site is hosted on **GitHub Pages** from the `main` branch of `kddavidson909/Kdsystems-site`, with the custom domain set by the `CNAME` file. It is no longer on Netlify, so nothing in a `netlify/` folder or `netlify.toml` will run.
+
+There is no build step. To preview, open the HTML file in a browser. To deploy:
 
 ```
-git add . && git commit -m "..." && git push
+git pull
+git add .
+git commit -m "..."
+git push
 ```
 
-Netlify auto-deploys from `main` within ~30 seconds. If push is rejected with "non-fast-forward," `git push origin main --force` is safe (personal repo).
+GitHub Pages usually updates within a minute or two.
 
-## File Structure & Architecture
+Kevin edits this site from more than one computer. Always `git pull` before starting work. **Never force push** (`git push --force`). If a push is rejected as non-fast-forward, run `git pull`, resolve any conflicts, and push again. A force push would erase commits made from the other computer.
 
-Each page is fully self-contained — all CSS lives in an inline `<style>` block in the `<head>`. There are no shared stylesheets.
+## Editing Rules (important)
 
-| File | Purpose | Theme |
-|---|---|---|
-| `index.html` | Main portfolio/landing page | Dark, red `#dc2626` accent |
-| `greencut.html` | Green Haven Landscaping demo | Dark green, Georgia serif font |
-| `fastflow.html` | Prairie Plumbing demo | Light, blue `#1a56db` accent |
-| `whisknbloom.html` | Whisk & Bloom Bakery demo | Light, teal `#5dbfa0`, custom BlackberryJam font |
+Several pages have been published with their endings cut off, losing FAQ items, the CTA band, the footer, and the closing tags. To keep that from happening again:
 
-Logo SVG files in the repo: `green_haven_logo_landscape.svg`, `Prarie_Plumbing_logo.svg`, `Whisk_bloom_bakery_logo.svg`, `KD_sys_logo.html`. The custom font is `Blackberryjamfont.ttf` (loaded via `@font-face` in `whisknbloom.html`).
+- Make targeted edits to the part of the file that changes. Do not rewrite or regenerate a whole HTML file.
+- After editing any HTML file, confirm it still ends with `</footer>`, `</body>`, and `</html>` before committing.
+- Before committing, review `git diff --stat`. A large number of deleted lines from a small change is a sign something was truncated.
+
+## File Structure
+
+Each page is self-contained. All CSS lives in an inline `<style>` block in the `<head>`. There are no shared stylesheets.
+
+| File | Purpose |
+|---|---|
+| `index.html` | Main landing page (dark theme, red `#dc2626` accent) |
+| `automation.html` | Business Automation service page |
+| `ai-tools.html` | AI-Powered Tools service page |
+| `landing-pages.html` | Websites and Landing Pages service page |
+| `crm-integrations.html` | Redirect to `automation.html` (CRM work was folded into automation) |
+| `thanks.html` | Thank-you page the contact form redirects to |
+| `whisknbloom.html` | Whisk & Bloom Bakery demo (light theme, teal `#5dbfa0`, Deerhouse display font) |
+| `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
+| `favicon.svg`, `kd_systems_logo.png` | Favicon and social share image |
+
+Assets live in `assets/images/` and `assets/fonts/`. The bakery display font is `assets/fonts/deerhouse.ttf`, loaded with `@font-face` in `whisknbloom.html`.
+
+`KD_sys_logo.html` is a logo design file, not a page. It is listed in `.gitignore` but is still tracked, so it is publicly reachable until it is removed with `git rm --cached KD_sys_logo.html`.
 
 ### CSS Variable Convention
 
-Every file opens with a `:root` block defining the full color palette for that page. All colors are referenced via `var(--name)` throughout — never hardcoded inline. Standard variable names used across all files:
+Every page opens with a `:root` block defining its color palette. Colors are referenced with `var(--name)` rather than hardcoded. Standard names:
 
 ```css
 :root {
   --bg, --surface, --card, --border   /* background layers */
-  --[accent], --[accent]-d            /* primary accent + darker shade */
-  --[accent]-g, --[accent]-gg         /* glow/alpha versions for shadows */
+  --[accent], --[accent]-d            /* primary accent and a darker shade */
+  --[accent]-g, --[accent]-gg         /* glow and alpha versions for shadows */
   --text, --muted, --subtle           /* text hierarchy */
 }
 ```
 
-Note: `fastflow.html` and `whisknbloom.html` use **light themes** (white/off-white backgrounds); `index.html` and `greencut.html` use dark themes.
-
 ### Section Structure
 
-`index.html` sections (in order): nav → hero → services → portfolio → about → contact → footer
+`index.html` sections in order: nav, hero, services, portfolio (currently a "coming soon" placeholder), about, contact, footer.
 
-Demo pages follow a similar pattern but add industry-specific elements (offer bar, credential bar, emergency CTA bar). `fastflow.html` hero uses a 2-column grid with a form panel on the right.
+Service pages follow the same pattern: nav, hero, content sections, FAQ (native `<details>`), CTA band linking to `index.html#contact`, footer.
 
 ### Responsive Design
 
-Mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile: nav links hide, section padding drops, multi-column layouts stack vertically.
+The mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile, nav links hide, section padding drops, and multi-column layouts stack.
 
 ## Contact Form
 
-The form in `index.html` posts to Web3Forms (`https://api.web3forms.com/submit`). The access key is stored in a `<input type="hidden" name="access_key">` field. All form fields **must** have `name` attributes or Web3Forms rejects the submission.
+The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com/submit`) and redirects to `https://kdsystems.co/thanks.html`. The access key is in a hidden `access_key` input. Every field needs a `name` attribute or Web3Forms rejects the submission.
 
-## Brand & Style Rules
+The form does not currently send anything to n8n. If the n8n lead intake pipeline is connected later, do it in a way that reports real failures to the visitor (a `no-cors` fetch always looks successful, even when the webhook is down).
 
-- **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages except `greencut.html` (Georgia serif) and `whisknbloom.html` (BlackberryJam display font for headlines)
-- **Interactive elements:** use CSS `transition` on hover; no JavaScript event listeners
-- **Accordions/disclosure:** use native `<details>`/`<summary>` — no JS toggles
-- **No JS** — if a feature needs interactivity, use native HTML elements or suggest a free third-party service
+## Brand and Style Rules
+
+- **Typography:** `'Segoe UI', system-ui, sans-serif` on KD Systems pages. The bakery demo uses the Deerhouse display font for headlines.
+- **Interactive elements:** CSS `transition` on hover. No JavaScript event listeners.
+- **Accordions:** native `<details>` and `<summary>`.
+- **Scroll animations:** CSS scroll-driven animations inside `@supports (animation-timeline: view())`, so content stays visible in browsers without support.
+- **No JS.** If a feature needs interactivity, use native HTML elements or a free third-party service.
+- **Writing:** no em dashes, no emoji, and no other common AI writing tells in page copy or comments.
 
 ## Owner Preferences
 
-- Ship working code fast; skip theory explanations unless asked
-- No backend — static HTML only; for form/email needs use free services (Web3Forms, ImprovMX)
-- When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure
-- Commands should be Windows/PowerShell-friendly
+- Ship working code fast. Skip theory explanations unless asked.
+- No backend. Static HTML only. For form and email needs, use free services (Web3Forms, ImprovMX).
+- When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure.
+- Commands should be Windows and PowerShell friendly.

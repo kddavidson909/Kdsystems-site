@@ -44,9 +44,9 @@ Each page is self-contained. All CSS lives in an inline `<style>` block in the `
 | `crm-integrations.html` | Redirect to `automation.html` (CRM work was folded into automation) |
 | `thanks.html` | Thank-you page the contact form redirects to |
 | `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
-| `favicon.svg`, `kd_systems_logo.png` | Favicon and social share image |
+| `favicon.svg`, `kd_systems_logo.png` | Favicon (SVG, with the PNG as fallback) |
 
-Images live in `assets/images/`.
+Images live in `assets/images/`. `og-image.jpg` there is the 1200x630 link preview image used by the `og:image` and `twitter:image` tags on every public page.
 
 `KD_sys_logo.html` is a logo design file, not a page. It is listed in `.gitignore` but is still tracked, so it is publicly reachable until it is removed with `git rm --cached KD_sys_logo.html`.
 

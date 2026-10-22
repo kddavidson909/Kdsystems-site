@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, and a thank-you page. The portfolio section is a "coming soon" placeholder until a new demo project is built. Pure HTML and CSS. No frameworks, no build step, no JavaScript libraries.
+Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, and a thank-you page. The portfolio section is a "coming soon" placeholder until a new demo project is built. Plain HTML and CSS, with JavaScript only where it earns its place (see the JavaScript Rule below). No frameworks and no build step.
 
 ## Hosting and Deployment
 
@@ -76,22 +76,32 @@ The mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile, n
 
 ## Contact Form
 
-The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com/submit`) and redirects to `https://kdsystems.co/thanks.html`. The access key is in a hidden `access_key` input. Every field needs a `name` attribute or Web3Forms rejects the submission.
+The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com/submit`) and redirects to `https://kdsystems.co/thanks.html`. The access key is in a hidden `access_key` input. Every field needs a `name` attribute or Web3Forms rejects the submission. Hidden `subject` and `from_name` inputs make the notification email arrive as "New lead from kdsystems.co" from "KD Systems website". Notifications go to Kevin's personal Gmail, not to kevin@kdsystems.co.
 
 The form does not currently send anything to n8n. If the n8n lead intake pipeline is connected later, do it in a way that reports real failures to the visitor (a `no-cors` fetch always looks successful, even when the webhook is down).
 
 ## Brand and Style Rules
 
 - **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages, with the Manrope wordmark for the logo.
-- **Interactive elements:** CSS `transition` on hover. No JavaScript event listeners.
+- **Hover effects:** CSS `transition`.
 - **Accordions:** native `<details>` and `<summary>`.
 - **Scroll animations:** CSS scroll-driven animations inside `@supports (animation-timeline: view())`, so content stays visible in browsers without support.
-- **No JS.** If a feature needs interactivity, use native HTML elements or a free third-party service.
 - **Writing:** no em dashes, no emoji, and no other common AI writing tells in page copy or comments.
+
+## JavaScript Rule
+
+Plain HTML and CSS is the default. JavaScript is allowed only when it clearly earns its place, for example a form that confirms it sent without leaving the page, spam protection such as hCaptcha, or a live demo of an automation responding. When adding it:
+
+- **The page must still work without it.** Build the plain HTML version first and let the script improve it. The contact form, for example, must still submit and land on `thanks.html` if the script fails to load.
+- **Try native HTML and CSS first.** Use `<details>`, built-in form validation, and CSS before reaching for a script.
+- **Vanilla JavaScript only.** No frameworks or libraries (React, Vue, jQuery) and no build step.
+- **Keep it small and close to where it's used.** A `<script>` block at the end of the page that needs it, or one file in `assets/js/` if several pages share it.
+- **Third-party scripts only when the feature needs them.** Load them with `defer` and pin an exact version. Never use `@latest`.
+- **No tracking or analytics scripts without Kevin's approval,** since they affect privacy and page speed.
 
 ## Owner Preferences
 
 - Ship working code fast. Skip theory explanations unless asked.
-- No backend. Static HTML only. For form and email needs, use free services (Web3Forms, ImprovMX).
+- No backend of our own. The site stays static files on GitHub Pages. Forms and automations use outside services (Web3Forms for the contact form, n8n for automations).
 - When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure.
 - Commands should be Windows and PowerShell friendly.

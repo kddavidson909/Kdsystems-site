@@ -43,6 +43,7 @@ Each page is self-contained. All CSS lives in an inline `<style>` block in the `
 | `landing-pages.html` | Websites and Landing Pages service page |
 | `crm-integrations.html` | Redirect to `automation.html` (CRM work was folded into automation) |
 | `thanks.html` | Thank-you page the contact form redirects to |
+| `404.html` | Custom "page not found" page. GitHub Pages serves it for any missing URL, so every link and asset in it must use root-relative paths (`/automation.html`, not `automation.html`) |
 | `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
 | `favicon.svg`, `kd_systems_logo.png` | Favicon (SVG, with the PNG as fallback) |
 

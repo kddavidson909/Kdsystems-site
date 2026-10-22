@@ -80,6 +80,10 @@ The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com
 
 The form does not currently send anything to n8n. If the n8n lead intake pipeline is connected later, do it in a way that reports real failures to the visitor (a `no-cors` fetch always looks successful, even when the webhook is down).
 
+## Email
+
+`kevin@kdsystems.co` forwards to Kevin's personal Gmail through Namecheap's free email forwarding (Namecheap is the domain registrar), with a catch-all for any other address at the domain. In Namecheap, the domain's Mail Settings must stay on "Email Forwarding", and the SPF record Namecheap adds must not be deleted, or mail to the domain will bounce. ImprovMX is no longer used.
+
 ## Brand and Style Rules
 
 - **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages, with the Manrope wordmark for the logo.

@@ -75,6 +75,10 @@ Service pages follow the same pattern: nav, hero, content sections, FAQ (native 
 
 The mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile, nav links hide, section padding drops, and multi-column layouts stack.
 
+## Service Area
+
+Kevin is based in Los Angeles County and serves Los Angeles, Orange County, and the Inland Empire (Riverside and San Bernardino counties) in person, and clients anywhere else remotely. This appears in the About section and footer of `index.html`, the footers of the three service pages, the homepage descriptions, and a `ProfessionalService` JSON-LD block in the homepage `<head>` (structured data for search engines, not executable JavaScript). Don't publish his home city or street address.
+
 ## Contact Form
 
 The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com/submit`) and redirects to `https://kdsystems.co/thanks.html`. The access key is in a hidden `access_key` input. Every field needs a `name` attribute or Web3Forms rejects the submission. Hidden `subject` and `from_name` inputs make the notification email arrive as "New lead from kdsystems.co" from "KD Systems website". Notifications go to Kevin's personal Gmail, not to kevin@kdsystems.co.

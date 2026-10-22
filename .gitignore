@@ -21,7 +21,7 @@ BAKERY_CASESTUDY.md
 # Accidental / temp files
 it
 
-# Backend workflows (internal — not for deployment)
+# Backend workflows (internal, not for deployment)
 n8n-workflows/
 
 # Logo design dev file

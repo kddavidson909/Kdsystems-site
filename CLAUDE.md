@@ -46,10 +46,11 @@ Each page is self-contained. All CSS lives in an inline `<style>` block in the `
 | `404.html` | Custom "page not found" page. GitHub Pages serves it for any missing URL, so every link and asset in it must use root-relative paths (`/automation.html`, not `automation.html`) |
 | `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
 | `favicon.svg`, `kd_systems_logo.png` | Favicon (SVG, with the PNG as fallback) |
+| `_config.yml` | Tells GitHub Pages which repo files to leave off the live site (`CLAUDE.md`, `README.md`, `KD_sys_logo.html`). Add any new internal file there too. |
 
 Images live in `assets/images/`. `og-image.jpg` there is the 1200x630 link preview image used by the `og:image` and `twitter:image` tags on every public page.
 
-`KD_sys_logo.html` is a logo design file, not a page. It is listed in `.gitignore` but is still tracked, so it is publicly reachable until it is removed with `git rm --cached KD_sys_logo.html`.
+`KD_sys_logo.html` is a logo design file, not a page. It stays in the repo but is kept off the live site by `_config.yml`.
 
 ### CSS Variable Convention
 

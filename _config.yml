@@ -1,0 +1,7 @@
+# GitHub Pages builds this site with Jekyll. Files listed under "exclude"
+# stay in the repo (and on Kevin's computers) but are not published to
+# kdsystems.co.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - KD_sys_logo.html

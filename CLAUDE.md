@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, and a thank-you page. The portfolio section is a "coming soon" placeholder until a new demo project is built. Plain HTML and CSS, with JavaScript only where it earns its place (see the JavaScript Rule below). No frameworks and no build step.
+Kevin Davidson's freelance site for KD Systems (`kdsystems.co`): a main landing page, three service pages, and a thank-you page. The homepage has no portfolio section until a new demo project is built. Plain HTML and CSS, with JavaScript only where it earns its place (see the JavaScript Rule below). No frameworks and no build step.
 
 ## Hosting and Deployment
 
@@ -67,7 +67,7 @@ Every page opens with a `:root` block defining its color palette. Colors are ref
 
 ### Section Structure
 
-`index.html` sections in order: nav, hero, services, portfolio (currently a "coming soon" placeholder), about, contact, footer.
+`index.html` sections in order: nav, hero, services, about, contact, footer. The portfolio section (`id="work"`) and its "Work" nav links were removed until the new demo exists; the `.portfolio` CSS is still in the file. When it comes back between services and about, give `.about` back its `var(--surface)` background and top border so the section colors keep alternating, and point the hero's second button back at it.
 
 Service pages follow the same pattern: nav, hero, content sections, FAQ (native `<details>`), CTA band linking to `index.html#contact`, footer.
 

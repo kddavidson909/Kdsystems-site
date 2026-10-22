@@ -716,6 +716,18 @@
       display: none;
     }
 
+    .form-status.error {
+      display: block;
+      background: var(--red-glow);
+      border: 1px solid var(--red);
+      color: var(--text);
+    }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -959,7 +971,6 @@
           <input type="hidden" name="redirect" value="https://kdsystems.co/thanks.html" />
           <input type="hidden" name="subject" value="New lead from kdsystems.co" />
           <input type="hidden" name="from_name" value="KD Systems website" />
-          <div id="form-status" class="form-status" aria-live="polite" role="status"></div>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
@@ -984,6 +995,9 @@
             <label for="message">Tell me about your business</label>
             <textarea id="message" name="message" placeholder="What does your business do? What problem are you trying to solve?" required></textarea>
           </div>
+          <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+          <noscript><p class="form-note">Spam protection on this form needs JavaScript. If it won't send, email me at <a href="mailto:kevin@kdsystems.co">kevin@kdsystems.co</a>.</p></noscript>
+          <div id="form-status" class="form-status" aria-live="polite" role="status"></div>
           <button type="submit" class="btn-submit">Send Message &#8594;</button>
         </form>
       </div>
@@ -996,6 +1010,22 @@
     <p>&copy; 2026 KD Systems &nbsp;&middot;&nbsp; <a href="mailto:kevin@kdsystems.co">kevin@kdsystems.co</a></p>
     <p style="margin-top:8px; color:var(--subtle); font-size:0.76rem;">Accessibility-first &nbsp;&middot;&nbsp; WCAG 2.1 AA Compliant</p>
   </footer>
+
+  <!-- Spam protection: Web3Forms' free hCaptcha (no account or keys needed).
+       The form won't send until the "I am human" box is checked. If the
+       captcha script fails to load, the form still submits normally. -->
+  <script src="https://web3forms.com/client/script.js" async defer></script>
+  <script>
+    document.querySelector('.contact-form').addEventListener('submit', function (e) {
+      var token = this.querySelector('textarea[name="h-captcha-response"]');
+      var status = document.getElementById('form-status');
+      if (token && !token.value) {
+        e.preventDefault();
+        status.textContent = 'Please check the "I am human" box before sending.';
+        status.className = 'form-status error';
+      }
+    });
+  </script>
 
 </body>
 </html>

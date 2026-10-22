@@ -79,6 +79,8 @@ The mobile breakpoint is `@media (max-width: 768px)` in every file. At mobile, n
 
 The form in `index.html` posts directly to Web3Forms (`https://api.web3forms.com/submit`) and redirects to `https://kdsystems.co/thanks.html`. The access key is in a hidden `access_key` input. Every field needs a `name` attribute or Web3Forms rejects the submission. Hidden `subject` and `from_name` inputs make the notification email arrive as "New lead from kdsystems.co" from "KD Systems website". Notifications go to Kevin's personal Gmail, not to kevin@kdsystems.co.
 
+Spam protection is Web3Forms' free hCaptcha: a `<div class="h-captcha" data-captcha="true">` above the Send button, rendered by `https://web3forms.com/client/script.js` (no hCaptcha account or keys needed). A small inline script at the end of `index.html` stops the form from sending until the box is checked, and does nothing if the captcha never loads, so the form still works. A `<noscript>` note points people with JavaScript off to the email address. Web3Forms only publishes that client script at one unversioned URL, so it is the one allowed exception to the "pin an exact version" rule.
+
 The form does not currently send anything to n8n. If the n8n lead intake pipeline is connected later, do it in a way that reports real failures to the visitor (a `no-cors` fetch always looks successful, even when the webhook is down).
 
 ## Email

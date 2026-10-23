@@ -94,6 +94,10 @@ The form does not currently send anything to n8n. If the n8n lead intake pipelin
 
 `kevin@kdsystems.co` forwards to Kevin's personal Gmail through Namecheap's free email forwarding (Namecheap is the domain registrar), with a catch-all for any other address at the domain. In Namecheap, the domain's Mail Settings must stay on "Email Forwarding", and the SPF record Namecheap adds must not be deleted, or mail to the domain will bounce. ImprovMX is no longer used.
 
+## Visit Counting
+
+Every public page, plus `thanks.html` (counts form submissions) and `404.html` (shows broken links people hit), loads GoatCounter's pinned script `https://gc.zgo.at/count.v5.js` just before `</body>`, with a `<noscript>` image as a fallback for visitors with JavaScript off. GoatCounter uses no cookies and stores no IP addresses, and the privacy policy describes it. Kevin's dashboard is at his GoatCounter site address. To stop counting his own visits on a device, he opens `kdsystems.co/#toggle-goatcounter` once in that browser. Any new page needs the same snippet.
+
 ## Brand and Style Rules
 
 - **Typography:** `'Segoe UI', system-ui, sans-serif` on all pages, with the Manrope wordmark for the logo.

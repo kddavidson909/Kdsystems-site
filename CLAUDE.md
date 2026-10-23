@@ -53,6 +53,8 @@ Images live in `assets/images/`. `og-image.jpg` there is the 1200x630 link previ
 
 `KD_sys_logo.html` is a logo design file, not a page. It stays in the repo but is kept off the live site by `_config.yml`.
 
+Every public page has a `<link rel="canonical">` tag right after its `<title>`, pointing to its full address (`https://kdsystems.co/` for the homepage, `https://kdsystems.co/automation.html` and so on). This tells Google which address is the real one, since GitHub Pages also serves the same pages at `/index.html` and at addresses without `.html`. Add one to any new public page. The noindex pages (`thanks.html`, `404.html`) don't need one.
+
 ### CSS Variable Convention
 
 Every page opens with a `:root` block defining its color palette. Colors are referenced with `var(--name)` rather than hardcoded. Standard names:

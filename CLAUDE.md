@@ -96,6 +96,8 @@ The form does not currently send anything to n8n. If the n8n lead intake pipelin
 
 The business phone is (213) 640-9416, a Google Voice number (link it as `tel:+12136409416`). It appears in every footer, next to the contact form with the hours "weekdays 3:30 to 10 PM", in the privacy policy contact card, and as `telephone` in the homepage JSON-LD. Keep it identical everywhere, including the Google Business Profile.
 
+KD Systems has a Google Business Profile (service-area business, verified October 2026). Its share link, https://share.google/9TEwxsdvTI4Pp9AnZ, appears as "Find us on Google" in the footers of the homepage and service pages and as `sameAs` in the homepage JSON-LD.
+
 ## Visit Counting
 
 Every public page, plus `thanks.html` (counts form submissions) and `404.html` (shows broken links people hit), loads GoatCounter's pinned script `https://gc.zgo.at/count.v5.js` just before `</body>`, with a `<noscript>` image as a fallback for visitors with JavaScript off. GoatCounter uses no cookies and stores no IP addresses, and the privacy policy describes it. Kevin's dashboard is at his GoatCounter site address. To stop counting his own visits on a device, he opens `kdsystems.co/#toggle-goatcounter` once in that browser. Any new page needs the same snippet.

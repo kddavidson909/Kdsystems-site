@@ -94,6 +94,8 @@ The form does not currently send anything to n8n. If the n8n lead intake pipelin
 
 `kevin@kdsystems.co` forwards to Kevin's personal Gmail through Namecheap's free email forwarding (Namecheap is the domain registrar), with a catch-all for any other address at the domain. In Namecheap, the domain's Mail Settings must stay on "Email Forwarding", and the SPF record Namecheap adds must not be deleted, or mail to the domain will bounce. ImprovMX is no longer used.
 
+The business phone is (213) 640-9416, a Google Voice number (link it as `tel:+12136409416`). It appears in every footer, next to the contact form with the hours "weekdays 3:30 to 10 PM", in the privacy policy contact card, and as `telephone` in the homepage JSON-LD. Keep it identical everywhere, including the Google Business Profile.
+
 ## Visit Counting
 
 Every public page, plus `thanks.html` (counts form submissions) and `404.html` (shows broken links people hit), loads GoatCounter's pinned script `https://gc.zgo.at/count.v5.js` just before `</body>`, with a `<noscript>` image as a fallback for visitors with JavaScript off. GoatCounter uses no cookies and stores no IP addresses, and the privacy policy describes it. Kevin's dashboard is at his GoatCounter site address. To stop counting his own visits on a device, he opens `kdsystems.co/#toggle-goatcounter` once in that browser. Any new page needs the same snippet.

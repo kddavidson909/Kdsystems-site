@@ -46,7 +46,8 @@ Each page is self-contained. All CSS lives in an inline `<style>` block in the `
 | `privacy.html` | Privacy policy (effective October 22, 2026), linked from every footer and under the contact form. Update it, including the effective date, before adding anything that collects or shares visitor data, such as analytics, a newsletter, or sending form leads to n8n or an AI service |
 | `404.html` | Custom "page not found" page. GitHub Pages serves it for any missing URL, so every link and asset in it must use root-relative paths (`/automation.html`, not `automation.html`) |
 | `sitemap.xml`, `robots.txt`, `googleb2b4515427ab4fed.html` | SEO and Google Search Console verification |
-| `favicon.svg`, `kd_systems_logo.png` | Favicon (SVG, with the PNG as fallback) |
+| `favicon.svg`, `favicon-192.png`, `favicon.ico` | Site icon (red K, white D on a dark square). Every page links the SVG and the 192x192 PNG; `favicon.ico` sits at the root for browsers and crawlers that look there by default. Google Search shows this icon next to the site in results and only accepts square icons, so every `rel="icon"` link must point to a square file |
+| `kd_systems_logo.png` | 400x120 wordmark on white, used as `logo` in the homepage JSON-LD. Not square, so never use it as a `rel="icon"` |
 | `_config.yml` | Tells GitHub Pages which repo files to leave off the live site (`CLAUDE.md`, `README.md`, `KD_sys_logo.html`). Add any new internal file there too. |
 
 Images live in `assets/images/`. `og-image.jpg` there is the 1200x630 link preview image used by the `og:image` and `twitter:image` tags on every public page.

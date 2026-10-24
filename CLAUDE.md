@@ -126,5 +126,4 @@ Plain HTML and CSS is the default. JavaScript is allowed only when it clearly ea
 
 - Ship working code fast. Skip theory explanations unless asked.
 - No backend of our own. The site stays static files on GitHub Pages. Forms and automations use outside services (Web3Forms for the contact form, n8n for automations).
-- When designing new demo pages, reference real competitor sites for layout ideas rather than inventing structure.
 - Commands should be Windows and PowerShell friendly.
